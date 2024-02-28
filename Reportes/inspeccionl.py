@@ -226,10 +226,20 @@ class InspeccionL(FPDF):
         for esp in lista_espacios_construcciones:
             ex = esp["existe"]
             idif=esp["idif"]
-            
-            pdf.cell(w=55, h=4, txt=idif, border='LTB', align='L')
-            pdf.cell(w=7.5, h=4, txt='', border='LBT', align='C')
-            pdf.multi_cell(w=7.5, h=4, txt='', border='TBR', align='C')
+            yt=pdf.get_y()
+            pdf.multi_cell(w=55, h=4, txt=idif, border='LTB', align='L')
+            yy=pdf.get_y()
+            xt=pdf.get_x()
+            pdf.set_xy(65, yt)
+                        
+            if yy > yt + 4:
+                pdf.multi_cell(w=7.5, h=8, txt='', border='LBT', align='C')
+                pdf.set_xy(72.5, yt)
+                pdf.multi_cell(w=7.5, h=8, txt='', border='TBR', align='C')
+            else: 
+                pdf.multi_cell(w=7.5, h=4, txt='', border='LBT', align='C')
+                pdf.set_xy(72.5, yt)
+                pdf.multi_cell(w=7.5, h=4, txt='', border='TBR', align='C')
             
 
             if (ex=='Si'):
@@ -287,7 +297,7 @@ class InspeccionL(FPDF):
 
         #para hacer el for y que las rueditas se vayan moviendo de posicion tiene que crear una variable y=80.5 e irle sumando 4 cada vez que recorra el for
 
-        pdf.ln(2)
+        pdf.ln(5)
 
         pdf.set_font('Arial','B',size=7)
         pdf.set_fill_color(207,188,188) # 1 
@@ -469,18 +479,18 @@ class InspeccionL(FPDF):
         pdf.multi_cell(w=0, h=4, txt='9. DESCRIPCIÓN DELPROYECTO', border=1, align='C', fill=True)
         pdf.set_fill_color(232,221,221) # 2
         pdf.cell(w=60, h=4, txt='MODELO DE VIVIENDA A CONSTRUIR', border=1, align='C', fill=True)
-        pdf.multi_cell(w=0, h=4, txt=descripcion_proyecto.ModeloViviCon if hasattr(descripcion_proyecto, 'ModeloViviCon') else '', border=1, align='C')
+        pdf.multi_cell(w=0, h=4, txt=descripcion_proyecto.ModeloViviCon if hasattr(descripcion_proyecto, 'ModeloViviCon') else '', border=1, align='L')
         pdf.cell(w=60, h=4, txt='SOLUCION SANITARIA PROPUESTA', border=1, align='C', fill=True)
-        pdf.multi_cell(w=0, h=4, txt=descripcion_proyecto.SolucionSaniPro if hasattr(descripcion_proyecto, 'SolucionSaniPro') else '', border=1, align='C')
+        pdf.multi_cell(w=0, h=4, txt=descripcion_proyecto.SolucionSaniPro if hasattr(descripcion_proyecto, 'SolucionSaniPro') else '', border=1, align='L')
         pdf.cell(w=60, h=4, txt='OBRAS ADICIONALES A CONSTRUIR', border=1, align='C', fill=True)
         x=pdf.get_x()
-        pdf.multi_cell(w=0, h=4, txt=descripcion_proyecto.ObrasAdicCon if hasattr(descripcion_proyecto, 'ObrasAdicCon') else '', border=1, align='C')
+        pdf.multi_cell(w=0, h=4, txt=descripcion_proyecto.ObrasAdicCon if hasattr(descripcion_proyecto, 'ObrasAdicCon') else '', border=1, align='L')
         y=pdf.get_y()
         pdf.multi_cell(w=60, h=4, txt='OBSERVACIONES TECNICAS GENERALES Y/O CONDICIONAMIENTOS', border=1, align='C', fill=True)
         pdf.set_xy(x, y)
-        pdf.multi_cell(w=0, h=8, txt=descripcion_proyecto.ObservacionesTecn if hasattr(descripcion_proyecto, 'ObservacionesTecn') else '', border=1, align='C')
+        pdf.multi_cell(w=0, h=8, txt=descripcion_proyecto.ObservacionesTecn if hasattr(descripcion_proyecto, 'ObservacionesTecn') else '', border=1, align='L')
         pdf.multi_cell(w=0, h=4, txt='DESCRIPCION DE ACTIVIDADES BAJO LA RESPONSABILIDAD DEL FUTURO PROPIETARIO ANTES DE INICIAR LA CONSTRUCCION:', border=1, align='C', fill=True)
-        pdf.multi_cell(w=0, h=4, txt=descripcion_proyecto.ActividadRespFia if hasattr(descripcion_proyecto, 'ActividadRespFia') else '', border=1, align='C', fill=False)
+        pdf.multi_cell(w=0, h=4, txt=descripcion_proyecto.ActividadRespFia if hasattr(descripcion_proyecto, 'ActividadRespFia') else '', border=1, align='L', fill=False)
         pdf.set_fill_color(207,188,188) # 1 
         pdf.multi_cell(w=0, h=4, txt='10. RESPONSABILIDADES DEL SOLICITANTE (EL O LA SOLICITANTE SE COMPROMETE A FACILITAR):', border=1, align='C', fill=True)
         pdf.set_fill_color(0,0,0) # color negro 

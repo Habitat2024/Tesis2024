@@ -780,7 +780,7 @@ function consultaTipoSolicitud() {
 }
 
 function aprobada(estado){
-    if( estado == 3){
+    if( estado == 4){
         progresoSolicitud.ariaValueNow = (100) + ""
         progresoSolicitud.style.width = (100) + "%"
 
@@ -890,13 +890,13 @@ function obtenerHistorial() {
                 let tipo=""
                 let historial = JSON.parse(response);
                 for (i = 0; i < historial.length; i++) {
-                    if(historial[i].Estado==4) {estado="Aprobado"}
-                    if(historial[i].Estado==6) {estado="Negado"}
-                    if(historial[i].Estado==7) {estado="Vencido"}
-                    if(historial[i].Tipo=="micro") {tipo="Microempresa"}else{ tipo="Personal" }
+                    if(historial[i].estado==4) {estado="Aprobado"}
+                    if(historial[i].estado==6) {estado="Negado"}
+                    if(historial[i].estado==7) {estado="Vencido"}
+                    if(historial[i].tipo=="micro") {tipo="Microempresa"}else{ tipo="Personal" }
 
-                    let filamo = '<tr id="' + historial[i].Id + '"><td>' + (i+1)+ '</td><td>' +historial[i].Monto+ '</td><td>' +
-                    historial[i].Fecha + '</td><td>' + tipo + '</td><td>' + historial[i].TipoObra + '</td><td>' + estado+ '</td></tr>'; //esto seria lo que contendria la fila
+                    let filamo = '<tr id="' + historial[i].id + '"><td>' + (i+1)+ '</td><td>' +historial[i].monto+ '</td><td>' +
+                    historial[i].fecha + '</td><td>' + tipo + '</td><td>' + historial[i].tipoObra + '</td><td>' + estado+ '</td></tr>'; //esto seria lo que contendria la fila
                     $('#tablaHistorial tbody').append(filamo);
                 }
             }

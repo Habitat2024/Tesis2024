@@ -115,7 +115,7 @@ class hojaP(FPDF):
         pdf.cell(w=0,h=5,txt='', border='',  align='C', fill=False, ln=1)
         pdf.set_text_color(0,0,0)
         pdf.set_font('Arial', 'B', 10)
-        if s.tipoobra =='mejora':
+        if s.TipoObra =='mejora':
             pdf.cell(w=45,h=5,txt='', border='',  align='C', fill=False)
             pdf.cell(w=100,h=5,txt='Mejoramiento de Vivienda', border=1,  align='C', fill=False)
             pdf.cell(w=0,h=5,txt='', border='',  align='C', fill=False, ln=1)
@@ -156,7 +156,7 @@ class hojaP(FPDF):
 
         pdf.set_text_color(0,0,0)
         pdf.set_font('Arial', 'B', 10)
-        if s.tipoobra =='vivienda':
+        if s.TipoObra =='vivienda':
             pdf.cell(w=45,h=5,txt='', border='',  align='C', fill=False)
             pdf.cell(w=100,h=5,txt='Vivienda', border=1,  align='C', fill=False)
             pdf.cell(w=0,h=5,txt='', border='',  align='C', fill=False, ln=1)

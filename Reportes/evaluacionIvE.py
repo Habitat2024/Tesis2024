@@ -44,7 +44,7 @@ class evaluacionIvEF(FPDF):
         #pdf.multi_cell(w=0, h=40, txt='', border=1)
         
         pdf.set_font('Arial', 'B', 12)
-        pdf.image('TesisApp\static\TesisApp\images\logohabib.png', x=8, y=7, w=45, h=30)#, link=url) 
+        pdf.image('TesisApp\static\TesisApp\images\logohabib.png', x=8, y=5, w=45, h=30)#, link=url) 
         pdf.set_font('Arial', 'B', 12)
         pdf.set_y(30)
         pdf.set_left_margin(10)       

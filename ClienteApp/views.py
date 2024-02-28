@@ -131,8 +131,9 @@ def registrarPerfil(request):
             break
         else:
             des=""
+    print(des)
     try:
-        vDist=Distrito.objects.get(Id=distrito,Estado=2).exists()
+        vDist=Distrito.objects.filter(Id=distrito,Estado=2).exists()
     except Distrito.DoesNotExist:
         vDist =""
     
@@ -172,19 +173,19 @@ def registrarPerfil(request):
 
     elif des=="" :
         observacion="Salario fuera de los rangos establecidos"
-        perfilna=PerfilNoApl.objects.create(Nombres=nombres,Apellidos=apellidos,Dui=dui,Telefono=telefono,Nacionalidad=nacionalidad,Fecha=fecha,Edad=edad,Salario=sal,IdAgencia=zo,Observaciones=observacion)
+        perfilna=PerfilNoApl.objects.create(Nombres=nombres,Apellidos=apellidos,Dui=dui,Telefono=telefono,Nacionalidad=nacionalidad,Fecha=fecha,Edad=edad,Salario=sal,Direccion=direccion,IdAgencia=zo,Observaciones=observacion)
         mensaje="Lo sentimos, su solicitud no puede ser aceptada ya que no cumple los requisitos de salario"
         messages.error(request, mensaje)
         return redirect('perfil')
     elif nacionalidad!="salvadoreño" :
         observacion="Nacionalidad no aceptada"
-        perfilna=PerfilNoApl.objects.create(Nombres=nombres,Apellidos=apellidos,Dui=dui,Telefono=telefono,Nacionalidad=nacionalidad,Fecha=fecha,Edad=edad,Salario=sal,IdAgencia=zo,Observaciones=observacion)
+        perfilna=PerfilNoApl.objects.create(Nombres=nombres,Apellidos=apellidos,Dui=dui,Telefono=telefono,Nacionalidad=nacionalidad,Fecha=fecha,Edad=edad,Salario=sal,Direccion=direccion,IdAgencia=zo,Observaciones=observacion)
         mensaje="Lo sentimos, su solicitud no puede ser aceptada ya que la nacionalidad no es aceptada"
         messages.error(request, mensaje)
         return redirect('perfil')
     elif edad< 18 or edad > 65:
         observacion="Edad fuera del rango establecido"
-        perfilna=PerfilNoApl.objects.create(Nombres=nombres,Apellidos=apellidos,Dui=dui,Telefono=telefono,Nacionalidad=nacionalidad,Fecha=fecha,Edad=edad,Salario=sal,IdAgencia=zo,Observaciones=observacion)
+        perfilna=PerfilNoApl.objects.create(Nombres=nombres,Apellidos=apellidos,Dui=dui,Telefono=telefono,Nacionalidad=nacionalidad,Fecha=fecha,Edad=edad,Salario=sal,Direccion=direccion,IdAgencia=zo,Observaciones=observacion)
         mensaje="Lo sentimos, su solicitud no puede ser aceptada ya que la edad no es aceptada"
         messages.error(request, mensaje)
         return redirect('perfil')
@@ -206,7 +207,7 @@ def registrarPerfil(request):
         mensaje="Datos guardados"
         messages.success(request, mensaje)
 
-        return redirect('perfil')
+        return redirect('listaClientes')
 
 
 def eliminar(request, id):
@@ -380,8 +381,23 @@ def solicitudmMicroempresa(request, id):
 
 #########################################################
 def listaClienets(request): 
-    listper=Perfil.objects.filter(Estado="activo")
-    return render(request, "ClienteApp/listaClientes.html", {"perfil":listper})
+    listaAg=Agencia.objects.all()
+    return render(request, "ClienteApp/listaClientes.html", {"agencia":listaAg})
+
+def agenc(request):
+    id=request.GET['id']
+    lista_agenciaC=[]
+    clien=""
+    if request.is_ajax():
+        try:
+            clien=Perfil.objects.filter(IdAgencia=id,Estado="activo")
+            for item in clien:
+                lista_agenciaC.append({"id":item.Id,"dui":item.Dui, "nombre":item.Nombres, "apellido":item.Apellidos,"telefono":item.Telefono, "agencia":item.IdAgencia.Nombre})
+        except Exception:
+            None
+        serialized_data = json.dumps(lista_agenciaC,default=str)
+        return HttpResponse(serialized_data, content_type="application/json")
+
 
 def administrarPerfil(request, id):
     perfil = Perfil.objects.get(Id=id)    
@@ -670,6 +686,7 @@ def obtener_historial(request):
             datos.append({'id': item.Id, 'monto': monto, 'fecha': item.Fecha, 'estado': item.EstadoSoli, 'tipo': item.Tipo, 
                           'tipoObra': item.TipoObra, 'numero': item.Numero})
         historial = json.dumps(datos, default=str)
+        print(historial)
         if(historial=="[]"):
             historial="-0"
     except Exception:
@@ -681,8 +698,9 @@ def obtener_historial(request):
 def completar_solicitud(request):
     id_cliente = request.GET['idCliente']
     completa = 'si'
+    
     try:
-        solicitud = sol.objects.filter(Q(IdPerfil=id_cliente) & (Q(EstadoSoli=4) | Q(EstadoSoli=6) | Q(EstadoSoli=3)) ).latest('Fecha') #obtengo la ultima solicitud por fecha    
+        solicitud = sol.objects.filter(Q(IdPerfil=id_cliente) & ( Q(EstadoSoli=2)) ).latest('Fecha') #obtengo la ultima solicitud por fecha    
         if(solicitud.Tipo=="micro"):
             try:            
                 balance = BalanceSituMic.objects.get(Estado="1",IdPerfil=id_cliente)           
@@ -696,8 +714,7 @@ def completar_solicitud(request):
                        
             except Exception:           
                 ompleta = completa+"evaluacion,"
-
-        
+      
         try:
             conosca_cliente=ClienteDatoGen.objects.get(IdSolicitud=solicitud.Id)
         except Exception:
@@ -746,11 +763,10 @@ def completar_solicitud(request):
 
         if (solicitud.EstadoSoli == 3):
             completa = "Completada"
-
+        print(completa)
     except Exception:
         completa="-0"
- 
-    
+    print(completa)
    
     serialized_data = json.dumps(completa, default=str)
     return HttpResponse(serialized_data, content_type="application/json")
@@ -826,7 +842,8 @@ def completar_solicitud_base(request):
         perfil.EstadoSoli=11
         perfil.save()
 
-        solicitud = sol.objects.filter(Q(IdPerfil=id) & (Q(EstadoSoli=4) | Q(EstadoSoli=6) | Q(EstadoSoli=3)) ).latest('Fecha') #obtengo la ultima solicitud por fecha  
+        #solicitud = sol.objects.filter(Q(IdPerfil=id) & (Q(EstadoSoli=4) | Q(EstadoSoli=6) | Q(EstadoSoli=3)) ).latest('Fecha') 
+        solicitud = sol.objects.filter(Q(IdPerfil=id) & ( Q(EstadoSoli=2)) ).latest('Fecha') #obtengo la ultima solicitud por fecha  
         solicitud.EstadoSoli=3
         solicitud.save()
     except Exception: 

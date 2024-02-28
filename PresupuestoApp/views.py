@@ -124,7 +124,7 @@ def registrarP(request):
                 print(preciouni)
                 print(subtotal)
 
-                PreMo = PresupuestoManoObr.objects.filter(IdPresupuestoDatoGen=idpdg).exists()
+                PreMo = PresupuestoManoObr.objects.filter(IdPresupuestoDatoGen=idpdg,Descripcion=descripcion, Unidad=unidad).exists()
                 print(PreMo)
 
                 if PreMo == True:
@@ -154,9 +154,8 @@ def registrarP(request):
                 print(preciouni)
                 print(subtotal)
 
-                PreOtr = PresupuestoOtro.objects.filter(IdPresupuestoDatoGen=idpdg).exists()
-                # print(PreMate)
-                # PresupuestoMateriales()
+                PreOtr = PresupuestoOtro.objects.filter(IdPresupuestoDatoGen=idpdg,Descripcion=descripcion, Unidad=unidad).exists()
+
                 if PreOtr == True:
                     presupuestoOtros = PresupuestoOtro.objects.get(IdPresupuestoDatoGen=idpdg)
 

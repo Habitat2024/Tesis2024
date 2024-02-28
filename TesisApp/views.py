@@ -85,7 +85,7 @@ def insertar(request):
     usuario=Usuario.objects.create(username=username, nombre=nombre,apellido=apellido, cargo=cargo, email=correo, password=cont, agencia=agencia)
     
     mensaje="Usuario registrado"
-    registroBit(request, Actividad=mensaje, Nivel="Registro")
+    #registroBit(request, Actividad=mensaje, Nivel="Registro")
     messages.success(request, mensaje)
     return redirect('/')
 

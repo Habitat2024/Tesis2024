@@ -166,8 +166,8 @@ class InspeccionMV(FPDF):
         if ipm.UsoActu=='Habitado':
             pdf.ellipse(155,54,3,3, 'F') # habitado
             pdf.ellipse(155,58.5,3,3, '') # bodega
-            pdf.ellipse(185,54,3,3, 'F') # no habitado
-            pdf.ellipse(185,58.5,3,3, 'F') # otro
+            pdf.ellipse(185,54,3,3, '') # no habitado
+            pdf.ellipse(185,58.5,3,3, '') # otro
         if ipm.UsoActu=='Bodega':
             pdf.ellipse(155,54,3,3, '') # habitado
             pdf.ellipse(155,58.5,3,3, 'F') # bodega
@@ -178,11 +178,16 @@ class InspeccionMV(FPDF):
             pdf.ellipse(155,58.5,3,3, '') # bodega
             pdf.ellipse(185,54,3,3, 'F') # no habitado
             pdf.ellipse(185,58.5,3,3, '') # otro
-        else:
+        elif ipm.UsoActu=='Otro':
             pdf.ellipse(155,54,3,3, '') # habitado
             pdf.ellipse(155,58.5,3,3, '') # bodega
             pdf.ellipse(185,54,3,3, '') # no habitado
             pdf.ellipse(185,58.5,3,3, 'F') # otro
+        else:
+            pdf.ellipse(155,54,3,3, '') # habitado
+            pdf.ellipse(155,58.5,3,3, '') # bodega
+            pdf.ellipse(185,54,3,3, '') # no habitado
+            pdf.ellipse(185,58.5,3,3, '') # otro
 
         pdf.set_fill_color(232,221,221) # 2
         pdf.cell(w=22, h=5, txt='LONGITUD', border=1, fill=True)
@@ -286,7 +291,7 @@ class InspeccionMV(FPDF):
                 pdf.ellipse(75,y,3,3, '')
                 pdf.ellipse(84,y,3,3, 'F')
             y=y+4
-
+        yt=pdf.get_y()
         #Espacios encontrados
         pdf.set_xy(155, 80)
         y=80.5
@@ -307,7 +312,8 @@ class InspeccionMV(FPDF):
             y=y+4
 
         
-        pdf.ln(4)
+        pdf.set_y(yt)
+        pdf.ln(2)
         pdf.set_font('Arial','B',size=7)
         pdf.set_fill_color(207,188,188) # 1
         pdf.cell(w=27, h=5, txt='4. VIAS DE ACCESO', border=1, fill=True)
@@ -342,7 +348,7 @@ class InspeccionMV(FPDF):
             pdf.ellipse(128,ty,3,3, '') # servidumbre
             pdf.ellipse(158,ty,3,3, '') # pasaje peatonal
         pdf.cell(w=0, h=5, txt='', border=0, ln=1)
-        pdf.ln(2)
+        pdf.ln(1)
         pdf.set_font('Arial','B',size=7)
         pdf.set_fill_color(207,188,188) # 1  
         pdf.cell(w=67, h=4, txt='5. SERVICIOS BÁSICOS                                SI       NO  ', border=1,  align='L', fill=True)
@@ -399,7 +405,7 @@ class InspeccionMV(FPDF):
         pdf.cell(w=11, h=4, txt=str(riesgo_distancia.DistanciaTorrCer) or '0', border=1,  align='C')
         pdf.multi_cell(w=0, h=4, txt='', border='LR',  align='C')
         pdf.set_x(tx)
-        pdf.multi_cell(w=64, h=4, txt='', border='LRB',  align='L')
+        pdf.multi_cell(w=64, h=2, txt='', border='LRB',  align='L')
         pdf.set_y(ty+4)
         y=ty+4.5
         for ser in lista_servicios_basicos_datos:
@@ -415,6 +421,7 @@ class InspeccionMV(FPDF):
                 pdf.ellipse(69,y,3,3, 'F') #no
             y=y+4
             x=82
+        yt=pdf.get_y()
         pdf.set_xy(82,ty+4)  #ubicar la tabla en xy 
         y=ty+4.5  
         for inf in lista_infraetructura_datos:
@@ -430,8 +437,8 @@ class InspeccionMV(FPDF):
                 pdf.ellipse(130,y,3,3, 'F') # no
             y=y+4
         
-
-        pdf.ln(2)
+        pdf.set_y(yt)
+        pdf.ln(1)
         pdf.set_fill_color(207,188,188) # 1  
         pdf.multi_cell(w=127, h=4, txt='COMENTARIOS DE RELEVANCIA:', border=1, align='L', fill=True)
         pdf.set_fill_color(0,0,0) # color negro  
@@ -439,7 +446,7 @@ class InspeccionMV(FPDF):
         #pdf.cell(w=64, h=4, txt='7. RIESGOS                                                            SI         NO  ', border=1,  align='L', ln=1)
         
         pdf.cell(w=127, h=6, txt='', border=1, align='L')
-        pdf.ln(4)
+        pdf.ln(6)
         y=pdf.get_y()
         pdf.set_y(y+4.5)
 
@@ -450,20 +457,20 @@ class InspeccionMV(FPDF):
         i=1
         if (lista_plan):
             for plan in lista_plan:
-                pdf.cell(w=15, h=5, txt='ETAPA '+ plan.Etapas if hasattr(plan, 'Etapas') else 'ETAPA '+ i, border=1, align='L', fill=True)
-                pdf.multi_cell(w=0, h=5, txt=plan.Descripcion if hasattr(plan, 'Descripcion') else '', border=1, align='C')
+                pdf.cell(w=17, h=5, txt='ETAPA '+ plan.Etapas if hasattr(plan, 'Etapas') else 'ETAPA '+ i, border=1, align='L', fill=True)
+                pdf.multi_cell(w=0, h=5, txt=plan.Descripcion if hasattr(plan, 'Descripcion') else '', border=1, align='L')
                 i=i+1
         else:
             for i in range(1,4):
-                pdf.cell(w=15, h=5, txt= 'ETAPA '+ str(i), border=1, align='L', fill=True)
-                pdf.multi_cell(w=0, h=5, txt='', border=1, align='C')
+                pdf.cell(w=17, h=5, txt= 'ETAPA '+ str(i), border=1, align='L', fill=True)
+                pdf.multi_cell(w=0, h=5, txt='', border=1, align='L')
                 i=i+1
         
-        pdf.ln(2)
+        pdf.ln(1)
         pdf.set_fill_color(207,188,188) # 1  
         pdf.multi_cell(w=0, h=4, txt='9.FACTIBILIDAD TECNICA DEL PROYECTO', border=1, align='C', fill=True)
         pdf.set_fill_color(0,0,0) # color negro
-        pdf.ln(2)
+        pdf.ln(1)
         y=pdf.get_y()
         pdf.cell(w=32, h=4, txt='PROCEDE', border=0, align='C')
         pdf.cell(w=60, h=4, txt='PROCEDE CON CONDICIONAMIENTO', border=0, align='C')
@@ -495,9 +502,9 @@ class InspeccionMV(FPDF):
             pdf.ellipse(48.5,y,3,3, '') # Procede con Condicionamiento
             pdf.ellipse(107,y,3,3, '') #  No Procede
             pdf.ellipse(143.5,y,3,3, '') # Para Caso Especial
-        pdf.ln(4)
+        pdf.ln(1)
         pdf.set_fill_color(207,188,188) # 1  
-        pdf.cell(w=175, h=4, txt='10. DESCRIPCIÓN DE MEJORAMIENTO ACORDADO CON EL CLIENTE', border=1, align='C', fill=True)   
+        pdf.cell(w=175, h=3, txt='10. DESCRIPCIÓN DE MEJORAMIENTO ACORDADO CON EL CLIENTE', border=1, align='C', fill=True)   
         y=pdf.get_y()
         pdf.multi_cell(w=0, h=3, txt='DÍAS DE CONSTRUCCIÓN ESTIMADOS', border=1, align='C', fill=True)
         pdf.set_fill_color(0,0,0) # color negro
@@ -507,7 +514,7 @@ class InspeccionMV(FPDF):
         y=pdf.get_y()
         pdf.set_xy(185, y-5)
         pdf.multi_cell(w=0, h=5, txt=str(descripcion_mejora.DiasEsti) if hasattr(descripcion_mejora, 'DiasEsti') else '', border=1, align='C')
-        pdf.ln(3)
+        pdf.ln(1)
         pdf.cell(w=70, h=3, txt='REALIZO LA INSPECCION', border='TLR')
         pdf.cell(w=25, h=3, txt='', border=0)
         pdf.cell(w=70, h=3, txt='ATENCIO LA VISITA', border=1)

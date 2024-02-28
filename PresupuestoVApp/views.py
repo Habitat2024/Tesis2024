@@ -128,7 +128,7 @@ def registrarPV(request):
                 print(preciouni)
                 print(subtotal)
             
-                PreMo = PresupuestoViviManObr.objects.filter(IdPresupuestoViviDatGen=idpdg ).exists()
+                PreMo = PresupuestoViviManObr.objects.filter(IdPresupuestoViviDatGen=idpdg,Descripcion=descripcion, Unidad=unidad).exists()
                 print(PreMo)
 
                 if PreMo== True:
@@ -502,7 +502,7 @@ def registrarPVObra(request):
                 print(preciouni)
                 print(subtotal)
             
-                PreMoo = PresupuestoViviManObrObr.objects.filter(IdPresupuestoViviDatGenObr=idpdg ).exists()
+                PreMoo = PresupuestoViviManObrObr.objects.filter(IdPresupuestoViviDatGenObr=idpdg,Descripcion=descripcion,Unidad=unidad).exists()
                 print(PreMoo)
 
                 if PreMoo== True:

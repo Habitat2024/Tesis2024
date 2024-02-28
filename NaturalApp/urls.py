@@ -47,11 +47,14 @@ urlpatterns = [
     path('listaSolicitudesObs/', views.listaSolicitudesObs, name="listaSolicitudesObsN"),
     # reporte de solicitudes observadas
     path('listaSolicitudesObs/solObs/<id>', viewsnat.solicObs, name="solObs"), 
+    path('listaSolicitudesObs/evaluarSolObs/<id>', viewsS.evaluarSolObs),
+    path('modificarEvaluacion/', viewsS.modificarEvaluacion),
 
     # para  solicitudes denegadas
     path('listaSolicitudesDen/', views.listaSolicitudesDen, name="listaSolicitudesDenN"),
     # reporte de solicitudes denegadas
     path('listaSolicitudesDen/solDen/<id>', viewsnat.solicDen, name="solDen"), 
+    path('listaSolicitudesDen/evaluarSolDen/<id>', viewsS.evaluarSolDen),
 
     path('obtenerRango/' ,views.obtenerRango, name='obtenerRango'),
      

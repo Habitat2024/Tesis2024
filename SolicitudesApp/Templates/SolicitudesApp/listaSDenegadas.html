@@ -15,6 +15,7 @@
                           <th>Teléfono</th>
                           <th>Agencia</th>
                           <th > Opción </th>
+                          <th > Opción </th>
                         </tr>
                       </thead>
 
@@ -27,6 +28,8 @@
                           <td>{{s.IdPerfil.Telefono}}</td>
                           <td>{{s.IdPerfil.IdAgencia.Nombre}}</td> 
                           <td><a href="solDen/{{s.Id}}" class="btn btn-info">Reporte</a></td>
+                          <td><a href="evaluarSolDen/{{s.Id}}" class="btn btn-info">Evaluar</a></td>
+                        </tr>
                         </tr>
                         {% endfor %}
                       </tbody>

@@ -193,13 +193,13 @@ var rangos = JSON.parse('{{ ran_json|escapejs }}');
       
       var rango = rangos[i];
       var phis;
-      //alert("si"+ {{"rango.tipo"}})
+      //alert("si"+ rango.Minimo)
       if (puntaje >= rango.Minimo && puntaje <= rango.Maximo) {
         
         // El puntaje se encuentra dentro del rango
         //alert('El puntaje está dentro del rango: ' + rango.id);
         document.getElementById('idh').value=rango.Id;
-        phis=rango.id;
+        phis=rango.Id;
         // Realiza las acciones que deseas cuando el puntaje esté dentro del rango
         break; // Si deseas salir del bucle cuando se encuentra el rango, puedes utilizar break
       }else {

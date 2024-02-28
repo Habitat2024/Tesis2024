@@ -2,14 +2,14 @@
 {% extends "TesisApp/base.html" %}
 {% load static %}
 <!-- /carga lo que esta en la carpeta static para linkear-->
-{% block titulo %}Registrar Evaluación de Solicitud{% endblock titulo %}
+{% block titulo %}Modificar Evaluación de Solicitud{% endblock titulo %}
 <!-- /el titulo del formulario-->
 
 
 {% block content %}
 <!-- /abrir el bloque de contenido-->
 
-<form id="regEvaluacion" name="regEvaluacion" action="/SolicitudesApp/registrarEvaluacion/" method="POST" 
+<form id="regEvaluacion" name="regEvaluacion" action="/SolicitudesApp/modificarEvaluacion/" method="POST" 
 autocomplete="off">{%  csrf_token %}
     <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">
@@ -80,7 +80,7 @@ autocomplete="off">{%  csrf_token %}
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="form-group form-animate-text " style="margin-top:5px !important;">
                 <h4>Observaciones</h4>
-                <input type="text" class="form-text" id="observacion" name="observacion" onkeyup="LetraM(this)"  disabled>
+                <input type="text" class="form-text" id="observacion" name="observacion" onkeyup="LetraM(this)" value="{{s.Observaciones}}"  disabled>
                 <span class="bar"></span>
             </div>
         </div>
@@ -102,6 +102,7 @@ autocomplete="off">{%  csrf_token %}
     {% block js %}<!-- bloque para validaciones de input-->
     <script type="text/javascript">
         $(document).ready(function(){
+            $("input[type='radio'][name='evaluacion'][value='{{s.EstadoSoli}}']").prop('checked',true);
     
     $.validator.addMethod("letras", function(value, element) {
     return /^(?!.*(.)\1{2})[ a-zA-Záéíóúüñ0-9,ºª#@&%-.]*$/i.test(value);

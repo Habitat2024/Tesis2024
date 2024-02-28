@@ -31,7 +31,18 @@
             </select>
         </div>
     </div>
-    <div class="col-md-6 col-sm-12 col-xs-12">
+    <div class="col-md-4 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+            <h4>Selecciona un año:</h4>
+            <select class="form-text" id="anio" name="anio">
+                <option selected disabled>Seleccione</option>
+                {% for year in years %}  <!-- Asume que years es una lista de años disponibles -->
+                    <option value="{{ year }}">{{ year }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+    <div class="col-md-5 col-sm-12 col-xs-12">
         <div class="form-group form-animate-text " style="margin-top:20px !important;">
         <button type="submit" class="btn btn-success" style="width:200px; height:40px;">Generar Gráfico</button>
     </div> 

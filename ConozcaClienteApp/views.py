@@ -616,14 +616,17 @@ def editarD(request):
 
         try:
             pparentesco= request.POST['pparentesco']
-            sparentesco= request.POST['sparentesco']
         except :
             pparentesco=""
+
+        try:
+            sparentesco= request.POST['sparentesco']
+        except :
             sparentesco=""
 
-        if pparentesco != "":
+        if grado=="Primero" and pparentesco != "":
             parentesco= pparentesco
-        elif sparentesco != "":
+        elif grado=="Segundo" and  sparentesco != "":
             parentesco= sparentesco
         else:
             parentesco=""

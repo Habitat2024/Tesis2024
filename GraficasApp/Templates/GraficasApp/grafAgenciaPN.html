@@ -1,7 +1,7 @@
 {% extends "TesisApp/base.html" %}
 {% load static %}<!-- /carga lo que esta en la carpeta static para linkear-->
 
-{% block titulo %}Grafica de Perfiles por Agencia{% endblock titulo %}<!-- /el titulo del formulario-->
+{% block titulo %}Grafica de Perfiles que no Aplican por Agencia{% endblock titulo %}<!-- /el titulo del formulario-->
 
 {% block content %}<!-- /abrir el bloque de contenido-->
 <form method="post" action="../../../GraficasApp/grafAgenciaPN">
@@ -18,6 +18,17 @@
             {% endfor %}
         </select>
     </div>
+    </div>
+    <div class="col-md-4 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+            <h4>Selecciona un año:</h4>
+            <select class="form-text" id="anio" name="anio">
+                <option selected disabled>Seleccione</option>
+                {% for year in years %}  <!-- Asume que years es una lista de años disponibles -->
+                    <option value="{{ year }}">{{ year }}</option>
+                {% endfor %}
+            </select>
+        </div>
     </div>
     <div class="col-md-6 col-sm-12 col-xs-12">
         <div class="form-group form-animate-text " style="margin-top:20px !important;">

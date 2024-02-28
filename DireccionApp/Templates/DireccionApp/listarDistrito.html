@@ -120,7 +120,7 @@
       type: "get",
       headers: { "X-CSRFToken": '{{ csrf_token }}' },
       dataType: "json",
-      success: function (listaDepa) {
+      success: function (listaDepa) { // lista de didtritos
         
         for (i = 0; i < listaDepa.length; i++) {
           $('#table-distritos').dataTable().fnAddData([

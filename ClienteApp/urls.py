@@ -32,6 +32,7 @@ urlpatterns = [
     
     # para administracion de perfil
     path('listaClientes/', views.listaClienets, name="listaClientes"),
+    path('agenc/',views.agenc),
     path('listaClientes/administrarPerfil/<id>', views.administrarPerfil, name='administrarPerfil'),
 
     #para solicitud micro

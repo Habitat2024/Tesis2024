@@ -31,7 +31,7 @@ class solDen(FPDF):
             dt=""
         
         try:
-            rh=  RegistroHist.objects.get(Idsolicitud=id)
+            rh=  RegistroHist.objects.get(IdSolicitud=id)
         except RegistroHist.DoesNotExist:
             rh=""
         

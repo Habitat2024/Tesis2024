@@ -266,44 +266,36 @@ $("#perfil").validate({
       minlength:10,
       required: true,
       validardui:true,
-      maxlength:10,
-      
+      maxlength:10,     
     },
     telefono:{
       minlength:9,
       required: true,
       validartelefono:true,
-      maxlength:9,
-      
+      maxlength:9,      
     },
     fecha:{
       required:true,
-
     },
     ocupacion:{
       required:true,
-
     },  
    
     salario:{
       required:true,
       minlength:3,
       maxlength:10,
-      numero:true,
-      
+      numero:true,     
     },
     departamento:{
       required:true,
-
     },
     municipio:{
       required:true,
-
     },
 
     distrito:{
       required:true,
-
     },
  
     direccion:{
@@ -311,26 +303,22 @@ $("#perfil").validate({
       required: true,
       dire:true,
       maxlength:100
-
     },
     correo:{
       minlength:3,
       required: true,
       validaemail:true,
       maxlength:30
-
     },
     contrasena:{
       minlength:8,
       required: true,
       maxlength:30
-
     },
     rcontrasena:{
       minlength:8,
       required: true,
       maxlength:30
-
     },
   },
   messages: {
@@ -389,12 +377,12 @@ $("#perfil").validate({
     },
     contrasena:{
         required : "<h2>Debe ingresar una Contraseña</h2>",
-        minlength : "<h2>La contraseña debe tener un minimo de 5 caracteres</h2>",
+        minlength : "<h2>La contraseña debe tener un minimo de 8 caracteres</h2>",
         maxlength : "<h2>La contraseña debe tener un numero, una mayuscula y minimo de 8 caracteres</h2>"
     },
     rcontrasena:{
         required : "<h2>Debe ingresar una Contraseña</h2>",
-        minlength : "<h2>La contraseña debe tener un minimo de 5 caracteres</h2>",
+        minlength : "<h2>La contraseña debe tener un minimo de 8 caracteres</h2>",
         maxlength : "<h2>La contraseña debe tener un maximo de 30 caracteres</h2>"
     },
   }

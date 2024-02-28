@@ -1,5 +1,4 @@
 
-#from tkinter import CASCADE
 from email.policy import default
 from tabnanny import verbose
 from django.db import models

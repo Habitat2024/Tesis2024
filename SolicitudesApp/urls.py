@@ -70,16 +70,18 @@ urlpatterns = [
     path('listaSolicitudesPA/solP/<id>', viewsnat.solicPA, name="solP"), 
     path('listaSolicitudesPA/evaluarSol/<id>', views.evaluarSol),
     path('registrarEvaluacion/', views.registrarEvaluacion),
-
+    path('modificarEvaluacion/', views.modificarEvaluacion),
     # para  solicitudes observadas
     path('listaSolicitudesObs/', views.listaSolicitudesObs, name="listaSolicitudesObs"),
     # reporte de solicitudes observadas
     path('listaSolicitudesObs/solObs/<id>', viewsnat.solicObs, name="solObs"), 
+    path('listaSolicitudesObs/evaluarSolObs/<id>', views.evaluarSolObs),
 
     # para  solicitudes denegadas
     path('listaSolicitudesDen/', views.listaSolicitudesDen, name="listaSolicitudesDen"),
     # reporte de solicitudes denegadas
     path('listaSolicitudesDen/solDen/<id>', viewsnat.solicDen, name="solDen"), 
+    path('listaSolicitudesDen/evaluarSolDen/<id>', views.evaluarSolDen),
 
     path('obtenerRango/' ,views.obtenerRango, name='obtenerRango'),
    

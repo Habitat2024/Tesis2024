@@ -301,12 +301,12 @@ def registroSolicitud(request):
        PresupuestoME =request.POST['PresupuestoME']
        if(PresupuestoME==""):
             PresupuestoME='0'
-
-       detalleObra=Alternativa.objects.get(Id=destinoME)
-       modeloVivienda= ModeloVivi.objects.get(Id=detalleObra.Id)
-       modeloVivienda.Id=detalleObra.Id
+       #print(destinoME)
+       alternativa=Alternativa.objects.get(Id=destinoME)
+       modeloVivienda= ModeloVivi.objects.get(Id=detalleObra)
+       modeloVivienda.Id=detalleObra
        
-       dor = DatosObra.objects.create(IdAlternativa=detalleObra, Dueno= duenoME, Parentesco=parentescoME,DireccionExac=direExacta ,
+       dor = DatosObra.objects.create(IdAlternativa=alternativa, Dueno= duenoME, Parentesco=parentescoME,DireccionExac=direExacta ,
       IdModeloVivi=modeloVivienda,DetalleAdic=detalleadic, Presupuesto=PresupuestoME, IdSolicitud=idSoli) 
     #fin datos de la obra a realizar
 
@@ -655,7 +655,7 @@ def modSoli(request):
                 'Tipo':tipo,
                 'IdSolicitud':soli}) 
 
-#Inicia modificar datos de la obre a realiar
+#Inicia modificar datos de la obra a realiar
     bandera= request.POST['passDOR'] 
     if(bandera == '1'):
         destinoME =request.POST['destinoME']
@@ -870,6 +870,30 @@ def evaluarSol(request, id):
 
     return render(request, "SolicitudesApp/evaluarSolicitud.html", {"s":s,"dt":dt})
 
+def evaluarSolObs(request, id): 
+    try:
+        s = Solicitud.objects.get(Id=id)
+    except Solicitud.DoesNotExist:
+        s=""
+    try:
+        dt=Detalle.objects.get(IdSolicitud=s.Id)
+    except Detalle.DoesNotExist:
+        dt=""
+
+    return render(request, "SolicitudesApp/modificarEvaluarSolicitud.html", {"s":s,"dt":dt})
+
+def evaluarSolDen(request, id): 
+    try:
+        s = Solicitud.objects.get(Id=id)
+    except Solicitud.DoesNotExist:
+        s=""
+    try:
+        dt=Detalle.objects.get(IdSolicitud=s.Id)
+    except Detalle.DoesNotExist:
+        dt=""
+
+    return render(request, "SolicitudesApp/modificarEvaluarSolicitud.html", {"s":s,"dt":dt})
+
 
 def registrarEvaluacion(request):
     id=request.POST['ids']
@@ -892,6 +916,32 @@ def registrarEvaluacion(request):
     msol.save()
 
     mensaje="Datos guardados"
+    registroBit(request, "Se "+ evaluar +" la solicitud " + msol.IdPerfil.Dui, "Evaluacion")
+    messages.success(request, mensaje)
+
+    return redirect('listaSolicitudesPA')
+
+def modificarEvaluacion(request):
+    id=request.POST['ids']
+    eval=request.POST['evaluacion'] # si es 4 = aprobado, 5 = observado, 6= denegado
+    try:
+        obs=request.POST['observacion']
+    except :
+        obs=""
+    #print(id)
+    evaluar=""
+    if eval==4:
+        evaluar="Aprobo"
+    elif eval==5:
+        evaluar="Observo"
+    else:
+        evaluar="Denego"
+    msol=Solicitud.objects.get(Id=id)
+    msol.EstadoSoli=eval
+    msol.Observaciones=obs
+    msol.save()
+
+    mensaje="Datos actualizados"
     registroBit(request, "Se "+ evaluar +" la solicitud " + msol.IdPerfil.Dui, "Evaluacion")
     messages.success(request, mensaje)
 

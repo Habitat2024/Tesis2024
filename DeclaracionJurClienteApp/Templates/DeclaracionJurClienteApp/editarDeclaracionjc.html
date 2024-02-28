@@ -63,9 +63,9 @@
 <div class="col-md-6 col-sm-12 col-xs-12">
   <div class="form-group form-animate-text " style="margin-top:5px !important;">
     <h4>Tipo de operación</h4>
-      <div class="col-md-10 col-sm-10 ">
+      <div class="col-md-12 col-sm-12 ">
           <select class="form-text" id="tipoop" name="tipoop"  required >
-              <option selected ></option>
+              <option disabled>Seleccione un Tipo</option>
               {% for op in operaciones %}
               {% if op.Nombre == dj.IdTipoOper.Nombre %}
               <option value="{{op.Id}}" selected >{{op.Nombre}}</option> 
@@ -113,7 +113,7 @@
   <div class="col-md-6 col-sm-12 col-xs-12">
     <div class="form-group form-animate-text " style="margin-top:5px !important;">
         <h4>Forma de Pago</h4>
-        <div class="col-md-10 col-sm-10 ">
+        <div class="col-md-12 col-sm-12 ">
             <select class="form-text" id="fpago" name="fpago"  required >
                 <option  selected disabled>Seleccione</option>
                 <option value="Efectivo" >Efectivo</option>

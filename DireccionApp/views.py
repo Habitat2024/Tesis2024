@@ -182,7 +182,9 @@ def mun(request):
 
 def modiDistri(request, iddistri):
     distri=Distrito.objects.get(Id=iddistri)
-    muni = Municipio.objects.all()
+    idD=distri.IdMunicipio.IdDepartamento.Id
+    #print(idD)
+    muni = Municipio.objects.filter(IdDepartamento=idD)
     listarde=Departamento.objects.all()
     ran_json = json.dumps(list(muni.values()))
     return render(request, "DireccionApp/distritoedit.html", {"Muni":muni,"Departamento":listarde, "ran_json": ran_json, "distrito":distri})
@@ -226,6 +228,6 @@ def editDistri(request):
 
             print(id)
             mensaje="Distrito actualizado"
-            registroBit(request, "Se actualizó Distrito " + distri, "Actualización")
+            registroBit(request, "Se actualizó Distrito " + distri.Distrito, "Actualización")
             messages.success(request, mensaje)
     return redirect('/DireccionApp/listarDistrito')

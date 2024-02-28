@@ -25,7 +25,7 @@
             <div class="form-group form-animate-text " style="margin-top:5px !important;">
                 <h4>Tipo</h4>                
                   <select class="form-text" id="tipoifm" name="tipoifm"  required >
-                      <option  selected disabled>SELECCIONE UN TIPO</option>
+                      <option  selected disabled>Seleccione un Tipo</option>
                       <option value="2" >Infraestructura del Inmueble</option>
                       <option value="3"> Espacios Encontrados</option>
                       <option value="5">Servicios Básicos</option>
@@ -55,7 +55,7 @@
     $(document).ready(function(){
 
 $.validator.addMethod("letras", function(value, element) {
-return /^(?!.*(.)\1{2})[  a-zA-Záéíóúüñ, / .]*$/i.test(value);
+return /^(?!.*(.)\1{2})[  a-zA-Záéíóúüñ,/ .]*$/i.test(value);
 }, "<h2>Ingrese sólo letras sin repetir más de 2 veces o espacios..</h2>");
 
 $("#minfraestructuram").validate({

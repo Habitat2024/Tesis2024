@@ -26,10 +26,10 @@
       <div class="form-group form-animate-text " style="margin-top:5px !important;">
           <h4>Municipio</h4>
           <select name="municipio" id="municipio" class="form-text" required>
-            <option value="{{m.Id}}" selected>{{distrito.IdMunicipio.NombreMuni}}</option> 
-            <!--{% for m in Muni %}
-            <option value="{{m.idmuni}}" {% if m.idmuni == distrito.muni.idmuni %}selected{% endif %}>{{distrito.muni.nombre_muni}}</option>
-            {% endfor %}-->
+            <!--<option value="{{m.Id}}" selected>{{distrito.IdMunicipio.NombreMuni}}</option> -->
+            {% for m in Muni %}
+            <option value="{{m.Id}}" {% if m.Id == distrito.IdMunicipio.Id %}selected{% endif %}>{{m.NombreMuni}}</option>
+            {% endfor %}
               </select> 
           
           <span class="bar"></span>
@@ -118,9 +118,9 @@ $("#contact").validate({
         required : "<h2>Debe seleccionar un departamento</h2>"
     },
     municipio:{
-      required : "<h2>Debe seleccionar un departamento</h2>"
+      required : "<h2>Debe seleccionar un municipio</h2>"
     },
-  }
+  },
 });
 
 $("#btnguardar").click(function(){

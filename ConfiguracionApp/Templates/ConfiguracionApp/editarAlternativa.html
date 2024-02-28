@@ -1,7 +1,7 @@
 <!-- /con la linea del extends se hereda lo que tiene el index -->
 {% extends "TesisApp/base.html" %}
 {% load static %}<!-- /carga lo que esta en la carpeta static para linkear-->
-{% block titulo %}Modificar Linea de Financiamiento de Crèdito{% endblock titulo %}<!-- /el titulo del formulario-->
+{% block titulo %}Modificar Alternativa{% endblock titulo %}<!-- /el titulo del formulario-->
 
 {% block content %}<!-- /abrir el bloque de contenido-->
 <form id="malternativa" name="malternativa" action="/ConfiguracionApp/ModificarAlternativa/ " method="post" autocomplete="off">{% csrf_token %}
@@ -59,7 +59,7 @@
           <h4>Tasa de Interes</h4>
           <div class="col-md-12 col-sm-12 ">
               <select class="form-text" id="interes" name="interes" required >
-                  <option value="0">SELECCIONE LA TASA DE INTERES</option>
+                  <option value="0">Seleccione la tasa de interes</option>
                   {% for d in TasaInteres %}            
                   {% if d.Id == alternativa.IdTasaInte.Id %}
                     <option value="{{d.Id}}" selected>{{d.NumeroCred}} - {{d.Interes}}% anual/saldo</option>

@@ -44,7 +44,7 @@ class formularioC(FPDF):
             dt=""
 
         try:
-            rh=  RegistroHist.objects.get(Idsolicitud=s.Id)
+            rh=  RegistroHist.objects.get(IdSolicitud=s.Id)
         except RegistroHist.DoesNotExist:
             rh=""
         ##############################################3

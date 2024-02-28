@@ -13,12 +13,13 @@ from django.http import JsonResponse
 from django.db.models.functions import TruncDate
 from django.views.generic import TemplateView
 from django.db.models import Count
-from django.db.models.functions import ExtractMonth
+from django.db.models.functions import ExtractMonth,ExtractYear
 
 from django.db.models import Sum
 from django.http import JsonResponse
 
 from SolicitudesApp.models import *
+from ConfiguracionApp.models import Agencia
 
 # Create your views here.
 def per(request):
@@ -250,12 +251,16 @@ def graf2(request):
     return render(request, "GraficasApp/graf2.html",{'en': en,'fe':fe,'mar':mar,
     'abri':abri,'may':may,'jun':jun,'jul':jul,'ago':ago,'sep':sep,'oct':oct,'nov':nov,'dic':dic})
 
-def graficaAT(request):    # grafica de solicitudes por agencia y tipo de solicitud(mejora,vivienda)
+
+def graficaAT(request):# grafica de solicitudes por agencia y tipo de solicitud(mejora,vivienda)
     agencia_seleccionada = None
     tipo_obra_seleccionado = None
 
     agencias = Agencia.objects.all()
     tipos_obra = list(Solicitud.objects.values('TipoObra').distinct())
+
+    # Obtén la lista de años disponibles
+    years = list(Solicitud.objects.annotate(year=ExtractYear('Fecha')).values_list('year', flat=True).distinct())
 
     # Definir las variables con valores predeterminados
     solicitudes_por_mes_json = []
@@ -263,12 +268,19 @@ def graficaAT(request):    # grafica de solicitudes por agencia y tipo de solici
     if request.method == 'POST':
         agencia_id = request.POST.get('agencia')
         tipo_obra = request.POST.get('tipo_obra')
+        anio = request.POST.get('anio')  # Nuevo parámetro de año
 
-        if agencia_id and tipo_obra:
+        # Asegúrate de que agencia, tipo de obra y año estén seleccionados
+        if agencia_id and tipo_obra and anio:
             tipo_obra_seleccionado = tipo_obra           
             agencia_seleccionada = Agencia.objects.get(pk=agencia_id)
 
-            solicitudes = Solicitud.objects.filter(TipoObra=tipo_obra_seleccionado,IdPerfil__IdAgencia=agencia_seleccionada)
+            solicitudes = Solicitud.objects.filter(
+                TipoObra=tipo_obra_seleccionado,
+                IdPerfil__IdAgencia=agencia_seleccionada,
+                Fecha__year=anio
+            )
+
             perfiles = Perfil.objects.filter(IdAgencia=agencia_seleccionada)
             
             # Anota las solicitudes por mes
@@ -276,19 +288,21 @@ def graficaAT(request):    # grafica de solicitudes por agencia y tipo de solici
             solicitudes_por_mes_json = json.dumps(list(solicitudes_por_mes))
             # Esto te dará una lista de diccionarios, donde cada diccionario tiene 'mes' y 'cantidad'
             print(solicitudes_por_mes)
-        
 
     return render(request, "GraficasApp/grafAgenciaTipo.html", {
         'agencias': agencias,
         'tipos_obra': tipos_obra,
-        'solicitudes_por_mes': solicitudes_por_mes_json  # Datos de gráfico para tipo de obra
+        'years': years,
+        'solicitudes_por_mes': solicitudes_por_mes_json,
     })
+
 
 def graficaATS(request):    # grafica de solicitudes por agencia y tipo de solicitud(micro,personal)
     agencia_seleccionada = None
     tipo_sol_seleccionado = None
 
     agencias = Agencia.objects.all()
+    years = list(Solicitud.objects.annotate(year=ExtractYear('Fecha')).values_list('year', flat=True).distinct())
 
     # Definir las variables con valores predeterminados
     solicitudes_por_mes_json = []
@@ -296,12 +310,13 @@ def graficaATS(request):    # grafica de solicitudes por agencia y tipo de solic
     if request.method == 'POST':
         agencia_id = request.POST.get('agencia')
         tipo_sol = request.POST.get('tipo_sol')
+        anio = request.POST.get('anio') 
 
-        if agencia_id and tipo_sol:
+        if agencia_id and tipo_sol and anio:
             tipo_sol_seleccionado = tipo_sol           
             agencia_seleccionada = Agencia.objects.get(pk=agencia_id)
 
-            solicitudes = Solicitud.objects.filter(Tipo=tipo_sol_seleccionado,IdPerfil__IdAgencia=agencia_seleccionada)
+            solicitudes = Solicitud.objects.filter(Tipo=tipo_sol_seleccionado,IdPerfil__IdAgencia=agencia_seleccionada,Fecha__year=anio)
             perfiles = Perfil.objects.filter(IdAgencia=agencia_seleccionada)
             
             # Anota las solicitudes por mes
@@ -313,6 +328,7 @@ def graficaATS(request):    # grafica de solicitudes por agencia y tipo de solic
 
     return render(request, "GraficasApp/grafAgenciaTipoSol.html", {
         'agencias': agencias,
+        'years': years,
         'solicitudes_por_mes': solicitudes_por_mes_json  # Datos de gráfico para tipo de obra
     })
 
@@ -321,6 +337,8 @@ def graficaASolic(request):    # grafica de solicitudes aprobadas, denegadas, ob
     tipo_sol_seleccionado = None
 
     agencias = Agencia.objects.all()
+    # Obtén la lista de años disponibles
+    years = list(Solicitud.objects.annotate(year=ExtractYear('Fecha')).values_list('year', flat=True).distinct())
 
     # Definir las variables con valores predeterminados
     solicitudes_por_mes_json = []
@@ -328,12 +346,13 @@ def graficaASolic(request):    # grafica de solicitudes aprobadas, denegadas, ob
     if request.method == 'POST':
         agencia_id = request.POST.get('agencia')
         tipo_sol = request.POST.get('tipo_sol')
+        anio = request.POST.get('anio')
 
-        if agencia_id and tipo_sol:
+        if agencia_id and tipo_sol and anio:
             tipo_sol_seleccionado = tipo_sol           
             agencia_seleccionada = Agencia.objects.get(pk=agencia_id)
 
-            solicitudes = Solicitud.objects.filter(EstadoSoli=tipo_sol_seleccionado,IdPerfil__IdAgencia=agencia_seleccionada)
+            solicitudes = Solicitud.objects.filter(EstadoSoli=tipo_sol_seleccionado,IdPerfil__IdAgencia=agencia_seleccionada,Fecha__year=anio)
             perfiles = Perfil.objects.filter(IdAgencia=agencia_seleccionada)
             
             # Anota las solicitudes por mes
@@ -345,6 +364,7 @@ def graficaASolic(request):    # grafica de solicitudes aprobadas, denegadas, ob
 
     return render(request, "GraficasApp/grafAgenciaSolic.html", {
         'agencias': agencias,
+        'years': years,
         'solicitudes_por_mes': solicitudes_por_mes_json  # Datos de gráfico para tipo de obra
     })
 
@@ -369,16 +389,18 @@ def graficaM1(request):
 
 
 def grafTipoSol(request):
-
+    solicitudes_por_mes_json =[]
     # Realiza una consulta para obtener los distintos valores de tipoobra
     tipos_obra = Solicitud.objects.values('TipoObra').distinct()
+    years = list(Solicitud.objects.annotate(year=ExtractYear('Fecha')).values_list('year', flat=True).distinct())
 
     if request.method == 'POST':
         tipo_obra = request.POST.get('tipo_obra')
+        anio = request.POST.get('anio') 
 
-        if tipo_obra:
+        if tipo_obra and anio:
             # Filtra las solicitudes por el tipo de obra seleccionado
-            solicitudes = Solicitud.objects.filter(TipoObra=tipo_obra)
+            solicitudes = Solicitud.objects.filter(TipoObra=tipo_obra,Fecha__year=anio)
 
             # Anota las solicitudes por mes
             solicitudes_por_mes = solicitudes.annotate(mes=ExtractMonth('Fecha')).values('mes').annotate(cantidad=Count('Id'))
@@ -386,51 +408,57 @@ def grafTipoSol(request):
             solicitudes_por_mes_json = json.dumps(list(solicitudes_por_mes))
             # Esto te dará una lista de diccionarios, donde cada diccionario tiene 'mes' y 'cantidad'
             print(solicitudes_por_mes_json)
-        return render(request, "GraficasApp/grafTipoSol.html", {'solicitudes_por_mes': solicitudes_por_mes_json, 'tipos_obra': tipos_obra})
-    return render(request, "GraficasApp/grafTipoSol.html", {'tipos_obra': tipos_obra})
+        return render(request, "GraficasApp/grafTipoSol.html", {'solicitudes_por_mes': solicitudes_por_mes_json,'years': years, 'tipos_obra': tipos_obra})
+    return render(request, "GraficasApp/grafTipoSol.html", {'tipos_obra': tipos_obra,'years': years})
 
 
 def grafAgenciaP(request): # grafica de perfiles por agencias     
         agencia_seleccionada = None
         agencias = Agencia.objects.all()  # Obtén todas las agencias disponibles
-
+         # Obtén la lista de años disponibles
+        years = list(Perfil.objects.annotate(year=ExtractYear('FechaRegi')).values_list('year', flat=True).distinct())
+        perfiles_por_mes_json = []
+        
         if request.method == 'POST':
             agencia_id = request.POST.get('agencia')
-            if agencia_id:
+            anio = request.POST.get('anio')  # Nuevo parámetro de año
+            if agencia_id and anio:
                 agencia_seleccionada = Agencia.objects.get(pk=agencia_id)
-                perfiles = Perfil.objects.filter(IdAgencia=agencia_seleccionada)
+                perfiles = Perfil.objects.filter(IdAgencia=agencia_seleccionada,FechaRegi__year=anio)
 
-        # Obtén todos los perfiles de la agencia seleccionada
-        perfiles = Perfil.objects.filter(Agencia=agencia_seleccionada)
+                # Anota los perfiles por mes
+                perfiles_por_mes = perfiles.annotate(mes=ExtractMonth('FechaRegi')).values('mes').annotate(cantidad=Count('Id'))
+                        
+                # Convierte perfiles_por_mes a JSON
+                perfiles_por_mes_json = json.dumps(list(perfiles_por_mes))
+                    # Esto te dará una lista de diccionarios, donde cada diccionario tiene 'mes' y 'cantidad'
+                print(perfiles_por_mes_json)
 
-        # Anota los perfiles por mes
-        perfiles_por_mes = perfiles.annotate(mes=ExtractMonth('FechaRegi')).values('mes').annotate(cantidad=Count('Id'))
-        # Convierte perfiles_por_mes a JSON
-        perfiles_por_mes_json = json.dumps(list(perfiles_por_mes))
-        # Esto te dará una lista de diccionarios, donde cada diccionario tiene 'mes' y 'cantidad'
-        print(perfiles_por_mes_json)
-
-        return render(request, "GraficasApp/grafAgenciaP.html", {'agencias': agencias, 'perfiles_por_mes':perfiles_por_mes_json})
+        return render(request, "GraficasApp/grafAgenciaP.html", {
+                'agencias': agencias,
+                'years': years,
+                'perfiles_por_mes':perfiles_por_mes_json})
 
 
-def grafAgenciaPN(request): # grafica de perfiles por agencias     
+def grafAgenciaPN(request): # grafica de perfiles q no aplican por agencias     
         agencia_seleccionada = None
         agencias = Agencia.objects.all()  # Obtén todas las agencias disponibles
+        years = list(PerfilNoApl.objects.annotate(year=ExtractYear('FechaRegi')).values_list('year', flat=True).distinct())
+        perfiles_por_mes_json = []
 
         if request.method == 'POST':
             agencia_id = request.POST.get('agencia')
-            if agencia_id:
+            anio = request.POST.get('anio')
+
+            if agencia_id and anio:
                 agencia_seleccionada = Agencia.objects.get(pk=agencia_id)
-                perfiles = PerfilNoApl.objects.filter(IdAgencia=agencia_seleccionada)
+                perfiles = PerfilNoApl.objects.filter(IdAgencia=agencia_seleccionada,FechaRegi__year=anio)
 
-        # Obtén todos los perfiles de la agencia seleccionada
-        perfiles = PerfilNoApl.objects.filter(IdAgencia=agencia_seleccionada)
+                # Anota los perfiles por mes
+                perfiles_por_mes = perfiles.annotate(mes=ExtractMonth('FechaRegi')).values('mes').annotate(cantidad=Count('Id'))
+                # Convierte perfiles_por_mes a JSON
+                perfiles_por_mes_json = json.dumps(list(perfiles_por_mes))
+                # Esto te dará una lista de diccionarios, donde cada diccionario tiene 'mes' y 'cantidad'
+                print(perfiles_por_mes_json)
 
-        # Anota los perfiles por mes
-        perfiles_por_mes = perfiles.annotate(mes=ExtractMonth('FechaRegi')).values('mes').annotate(cantidad=Count('Id'))
-        # Convierte perfiles_por_mes a JSON
-        perfiles_por_mes_json = json.dumps(list(perfiles_por_mes))
-        # Esto te dará una lista de diccionarios, donde cada diccionario tiene 'mes' y 'cantidad'
-        print(perfiles_por_mes_json)
-
-        return render(request, "GraficasApp/grafAgenciaPN.html", {'agencias': agencias, 'perfiles_por_mes':perfiles_por_mes_json})
+        return render(request, "GraficasApp/grafAgenciaPN.html", {'agencias': agencias,'years': years, 'perfiles_por_mes':perfiles_por_mes_json})

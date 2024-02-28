@@ -1,5 +1,4 @@
 
-#from tkinter import CASCADE
 from django.db import models
 from tabnanny import verbose
 
@@ -34,7 +33,7 @@ class Perfil(models.Model):
         db_table= 'Perfil'
 
     def __str__(self) :
-        return self.nombres
+        return self.Nombres
 
 class PerfilNoApl(models.Model):
     Id= models.AutoField(primary_key=True)
