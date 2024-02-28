@@ -1122,6 +1122,6 @@ def Registrar_documento(request):
 # Listado de perfil que no aplican
 def listaPerfilNA(request): 
     listper=PerfilNoApl.objects.all()
-    return render(request, "ClienteApp/listaPerfilNA.html", {"perfil":listper})
+    return render(request, "ClienteApp/listaperfilNA.html", {"perfil":listper})
     
    
