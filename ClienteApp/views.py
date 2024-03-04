@@ -542,10 +542,15 @@ def consulta_evaliacion_natural(request):
         except Exception:
            listaId.append("-0") 
         try:
-            conosca_cliente=ClienteDatoGen.objects.get(IdSolicitud=solicitud.Id)
+            conosca_cliente=ClienteDatoGen.objects.get(IdSolicitud=solicitud.Id,CalidadActu="Cliente")
             listaId.append(conosca_cliente.Id)
         except Exception:
            listaId.append("-0") 
+        try:
+            conosca_cliente=ClienteDatoGen.objects.get(IdSolicitud=solicitud.Id,CalidadActu="Fiador")
+            listaId.append(conosca_cliente.Id)
+        except Exception:
+           listaId.append("-0")
         try:
             declaracion=DeclaracionJuraCli.objects.get(IdSolicitud=solicitud.Id)
             listaId.append(declaracion.Id)

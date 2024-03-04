@@ -3,6 +3,7 @@ let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
 let btnEvaluacion = document.getElementById("btnEvaliacionMicro")
 let btnSolicitudCredito = document.getElementById("btnSolicitudCredito")
 let btnConozCliente = document.getElementById("btnConozCliente")
+let btnConozClienteFiador = document.getElementById("btnConozClienteFiador")
 let btnDeclaracionJurada = document.getElementById("btnDeclaracionJurada")
 let btnInscripcionSeguro = document.getElementById("btnInscripcionSeguro")
 let btnInspeccionLote = document.getElementById("btnInspeccionLote")
@@ -16,6 +17,7 @@ let btnObrasAdicionales = document.getElementById("btnObrasAdicionales")
 
 //botones para reportes
 let btnConozClienteRepo = document.getElementById("btnConozClienteRepo")
+let btnConozClienteFiadorRepo = document.getElementById("btnConozClienteFiadorRepo")
 let btnDeclaracionJuradaRepo = document.getElementById("btnDeclaracionJuradaRepo") 
 let btnInscripcionSeguroRepo = document.getElementById("btnInscripcionSeguroRepo")
 let btnInspeccionLoteRepo = document.getElementById("btnInspeccionLoteRepo")
@@ -63,6 +65,7 @@ let progresoEvaluacionMicro = document.getElementById("rogresoEvaluacionMicro")
 let progresoEvaluacionNatural= document.getElementById("rogresoEvaluacionNatural")
 let progresoSoliMicro = document.getElementById("progresoSoliMicro")
 let progresoConozcaCliente = document.getElementById("progresoConozcaCliente")
+let progresoConozcaClienteFiador = document.getElementById("progresoConozcaClienteFiador")
 let progresoDeclaracion = document.getElementById("progresoDeclaracion")
 let progresoSeguro = document.getElementById("progresoSeguro")
 let progresoInspeccion = document.getElementById("progresoInspeccion")
@@ -74,6 +77,7 @@ let progresoObrasAdd = document.getElementById("progresoObrasAdd")
 
 //barra de progreso reportes
 let progresoConozcaClienteRepo = document.getElementById("progresoConozcaClienteRepo") 
+let progresoConozcaClienteFiadorRepo = document.getElementById("progresoConozcaClienteFiadorRepo") 
 let progresoDeclaracionRepo = document.getElementById("progresoDeclaracionRepo")
 let progresoSeguroRepo = document.getElementById("progresoSeguroRepo")
 let progresoInspeccionRepo = document.getElementById("progresoInspeccionRepo")
@@ -187,13 +191,29 @@ function cambiarUrlMicro(estado) {
                     }
 
                     if (response[3] == "-0") {
+                        btnConozClienteFiador.href = "../../../NaturalApp/listarSNC/ccliente/" + response[1]
+
+                    } else {
+                        btnConozClienteFiador.href = "../../../ConozcaClienteApp/listaCC/editarCliente/" + response[3]
+                        descipcion.textContent = "Progreso: formulario conozca a su cliente-fiador"
+                        btnConozClienteFiadorRepo.onclick = ""
+                        btnConozClienteFiadorRepo.href = "../../../ConozcaClienteApp/listaCC/conozcaC/" + response[3]
+
+                        progresoConozcaClienteFiador.classList.remove("progress-bar-dange")
+                        progresoConozcaClienteFiador.classList.add("progress-bar-success")
+                        progresoConozcaClienteFiadorRepo.classList.remove("progress-bar-dange")
+                        progresoConozcaClienteFiadorRepo.classList.add("progress-bar-success")
+                        progreso=progreso+0.83
+                    }
+
+                    if (response[4] == "-0") {
                         btnDeclaracionJurada.href = "../../../SolicitudesApp/listaSC/declaracionjc/" + response[1]
 
                     } else {
-                        btnDeclaracionJurada.href = "../../../DeclaracionJurClienteApp/listaDJ/editarDJ/" + response[3]
+                        btnDeclaracionJurada.href = "../../../DeclaracionJurClienteApp/listaDJ/editarDJ/" + response[4]
                         descipcion.textContent = "Progreso: Declaracion jurada cliente"
                         btnDeclaracionJuradaRepo.onclick = ""
-                        btnDeclaracionJuradaRepo.href = "../../../DeclaracionJurClienteApp/listaDJ/declaracionjc/" + response[3] + "/" + idCliente
+                        btnDeclaracionJuradaRepo.href = "../../../DeclaracionJurClienteApp/listaDJ/declaracionjc/" + response[4] + "/" + idCliente
 
                         progresoDeclaracion.classList.remove("progress-bar-dange")
                         progresoDeclaracion.classList.add("progress-bar-success")
@@ -203,11 +223,11 @@ function cambiarUrlMicro(estado) {
                         progreso=progreso+1.66
                     }
 
-                    if (response[4] == "-0") {
+                    if (response[5] == "-0") {
                         btnInscripcionSeguro.href = "../../../SolicitudesApp/listaSC/solicitudI/" + response[1]
 
                     } else {
-                        btnInscripcionSeguro.href = "../../../SolicitudInscripcionSApp/listaIS/editarSIS/" + response[4]
+                        btnInscripcionSeguro.href = "../../../SolicitudInscripcionSApp/listaIS/editarSIS/" + response[5]
                         descipcion.textContent = "Progreso: Inscripción de seguro"
                         btnInscripcionSeguroRepo.onclick = ""
                         btnInscripcionSeguroRepo.href = "../../../SolicitudInscripcionSApp/listaIS/seguro/" + response[1]
@@ -220,16 +240,16 @@ function cambiarUrlMicro(estado) {
                     }
                     if (tipoObra != "vivienda") { // **  mejora de vivienda
                         btnInspeccionLote.textContent = "Inspección vivienda"
-                        if (response[5] == "-0") {
+                        if (response[6] == "-0") {
                             btnInspeccionLote.href = "../../../SolicitudesApp/listaSC/inspeccion/" + response[1]
 
                         } else {
-                            btnInspeccionLote.href = "../../../InspeccionMejViviendaApp/listaIM/editarIM/" + response[5]
+                            btnInspeccionLote.href = "../../../InspeccionMejViviendaApp/listaIM/editarIM/" + response[6]
                             descipcion.textContent = "Progreso: Inspección vivienda"
                             progresoInspeccion.classList.remove("progress-bar-dange")
                             progresoInspeccion.classList.add("progress-bar-success")
 // ***************************************************************  agregar link del reporte inspeccion mejora de vivienda ******************
-                            btnInspeccionLoteRepo.href = "../../../InspeccionMejViviendaApp/listaIM/inspeccionM/" + response[5]
+                            btnInspeccionLoteRepo.href = "../../../InspeccionMejViviendaApp/listaIM/inspeccionM/" + response[6]
                             btnInspeccionLoteRepo.onclick = "" ; 
                             progresoInspeccionRepo.classList.remove("progress-bar-dange")
                             progresoInspeccionRepo.classList.add("progress-bar-success")
@@ -240,33 +260,33 @@ function cambiarUrlMicro(estado) {
                             $('#divubicacion3').fadeOut();
                             $('#divEsquema2').fadeOut();
                             $('#divEsquema3').fadeOut();
-                            if(response[7] == "-0"){
-                                btnPrimeraInspeccion.href = "../../../InspeccionMejViviendaApp/listaIM/pinspeccion/" +response[5] +"/PRIMERA"
+                            if(response[8] == "-0"){
+                                btnPrimeraInspeccion.href = "../../../InspeccionMejViviendaApp/listaIM/pinspeccion/" +response[6] +"/PRIMERA"
                             }else{
                                 btnSegundaInspeccion.onclick = ""
-                                btnPrimeraInspeccion.href = "../../../InspeccionMejViviendaApp/listaPIM/editarPIM/" + response[7] 
+                                btnPrimeraInspeccion.href = "../../../InspeccionMejViviendaApp/listaPIM/editarPIM/" + response[8] 
                              
 
-                                btnesquema1Repo.href = "../../../InspeccionMejViviendaApp/listaPIM/pinspmU/"+ response[7] 
+                                btnesquema1Repo.href = "../../../InspeccionMejViviendaApp/listaPIM/pinspmU/"+ response[8] 
                                 $('#divubicacion1').fadeOut();
-                                btnPFotografico1Repo.href = "../../../InspeccionMejViviendaApp/listaPIM/pinspmR/"+ response[7] 
+                                btnPFotografico1Repo.href = "../../../InspeccionMejViviendaApp/listaPIM/pinspmR/"+ response[8] 
 
-                                if(response[8] == "-0"){
-                                    btnSegundaInspeccion.href = "../../../InspeccionMejViviendaApp/listaIM/pinspeccion/" +response[5] +"/SEGUNDA"
+                                if(response[9] == "-0"){
+                                    btnSegundaInspeccion.href = "../../../InspeccionMejViviendaApp/listaIM/pinspeccion/" +response[6] +"/SEGUNDA"
                                 }else{
-                                    btnSegundaInspeccion.href = "../../../InspeccionMejViviendaApp/listaPIM/editarPIM/" + response[8] 
-                                    btnesquema2Repo.href = "../../../InspeccionMejViviendaApp/listaPIM/pinspmU/"+ response[8] 
+                                    btnSegundaInspeccion.href = "../../../InspeccionMejViviendaApp/listaPIM/editarPIM/" + response[9] 
+                                    btnesquema2Repo.href = "../../../InspeccionMejViviendaApp/listaPIM/pinspmU/"+ response[9] 
                                     $('#divubicacion2').fadeOut();
-                                    btnPFotografico2Repo.href = "../../../InspeccionMejViviendaApp/listaPIM/pinspmR/"+ response[8] 
+                                    btnPFotografico2Repo.href = "../../../InspeccionMejViviendaApp/listaPIM/pinspmR/"+ response[9] 
                                     btnTerceraInspeccion.onclick=""
-                                    if(response[9] == "-0"){
-                                        btnTerceraInspeccion.href = "../../../InspeccionMejViviendaApp/listaIM/pinspeccion/" +response[5] +"/TERCERA"
+                                    if(response[10] == "-0"){
+                                        btnTerceraInspeccion.href = "../../../InspeccionMejViviendaApp/listaIM/pinspeccion/" +response[6] +"/TERCERA"
                                     }else{
                                         
-                                        btnTerceraInspeccion.href ="../../../InspeccionMejViviendaApp/listaPIM/editarPIM/" + response[9] 
-                                        btnesquema3Repo.href = "../../../InspeccionMejViviendaApp/listaPIM/pinspmU/"+ response[9] 
+                                        btnTerceraInspeccion.href ="../../../InspeccionMejViviendaApp/listaPIM/editarPIM/" + response[10] 
+                                        btnesquema3Repo.href = "../../../InspeccionMejViviendaApp/listaPIM/pinspmU/"+ response[10] 
                                 $('#divubicacion3').fadeOut();
-                                btnPFotografico3Repo.href = "../../../InspeccionMejViviendaApp/listaPIM/pinspmR/"+ response[9] 
+                                btnPFotografico3Repo.href = "../../../InspeccionMejViviendaApp/listaPIM/pinspmR/"+ response[10] 
                                         
                                     }
                                 }
@@ -274,13 +294,13 @@ function cambiarUrlMicro(estado) {
                             progreso=progreso+1.66
                         }
                         //presupuesto
-                        if (response[6] == "-0") {
+                        if (response[7] == "-0") {
                             btnPresupuestoVivienda.href = "../../../SolicitudesApp/listaSC/presupuesto/" + response[1]
                         } else {
-                            btnPresupuestoVivienda.href = "../../../PresupuestoApp/listaPM/modPresupuesto/" + response[6]
+                            btnPresupuestoVivienda.href = "../../../PresupuestoApp/listaPM/modPresupuesto/" + response[7]
                             descipcion.textContent = "Progreso: Presupuesto "
                             btnPresupuestoViviendaRepo.onclick = ""
-                            btnPresupuestoViviendaRepo.href = "../../../PresupuestoApp/listaPM/presupuestoMj/" + response[6] //**** agregar aqui el link del reporte */
+                            btnPresupuestoViviendaRepo.href = "../../../PresupuestoApp/listaPM/presupuestoMj/" + response[7] //**** agregar aqui el link del reporte */
 
                             progresoPresupuesto.classList.remove("progress-bar-danger")
                             progresoPresupuesto.classList.add("progress-bar-success")
@@ -293,17 +313,17 @@ function cambiarUrlMicro(estado) {
                         
 
                     } else {                     // *** para lote mas vivienda
-                        if (response[5] == "-0") {
+                        if (response[6] == "-0") {
                             btnInspeccionLote.href = "../../../SolicitudesApp/listaSC/inspeccionl/" + response[1]
 
                         } else {
-                            btnInspeccionLote.href = "../../../InspeccionLoteApp/listaI/editarIL/" + response[5]
+                            btnInspeccionLote.href = "../../../InspeccionLoteApp/listaI/editarIL/" + response[6]
                             descipcion.textContent = "Progreso: Inspección lote"
                             progresoInspeccion.classList.remove("progress-bar-dange")
                             progresoInspeccion.classList.add("progress-bar-success")
 
 
-                            btnInspeccionLoteRepo.href = "../../../InspeccionLoteApp/listaI/inspeccionL/" + response[5]
+                            btnInspeccionLoteRepo.href = "../../../InspeccionLoteApp/listaI/inspeccionL/" + response[6]
                             btnInspeccionLoteRepo.onclick = "" ; 
                             progresoInspeccionRepo.classList.remove("progress-bar-dange")
                             progresoInspeccionRepo.classList.add("progress-bar-success")
@@ -313,34 +333,34 @@ function cambiarUrlMicro(estado) {
                             $('#divubicacion3').fadeOut();
                             $('#divEsquema2').fadeOut();
                             $('#divEsquema3').fadeOut();
-                            if(response[7] == "-0"){
-                                btnPrimeraInspeccion.href = "../../../InspeccionLoteApp/listaI/pinspeccionl/" +response[5] +"/PRIMERA"
+                            if(response[8] == "-0"){
+                                btnPrimeraInspeccion.href = "../../../InspeccionLoteApp/listaI/pinspeccionl/" +response[6] +"/PRIMERA"
                             }else{
                                 btnSegundaInspeccion.onclick = ""
-                                btnPrimeraInspeccion.href = "../../../InspeccionLoteApp/listaPIL/editarPIL/" + response[7] 
+                                btnPrimeraInspeccion.href = "../../../InspeccionLoteApp/listaPIL/editarPIL/" + response[8] 
                                 
 
-                                btnesquema1Repo.href = "../../../InspeccionLoteApp/listaPIL/pinspl/"+ response[7] 
-                                btnUbicacion1Repo.href = "../../../InspeccionLoteApp/listaPIL/pinsplU/"+ response[7] 
-                                btnPFotografico1Repo.href = "../../../InspeccionLoteApp/listaPIL/pinsplR/"+ response[7] 
+                                btnesquema1Repo.href = "../../../InspeccionLoteApp/listaPIL/pinspl/"+ response[8] 
+                                btnUbicacion1Repo.href = "../../../InspeccionLoteApp/listaPIL/pinsplU/"+ response[8] 
+                                btnPFotografico1Repo.href = "../../../InspeccionLoteApp/listaPIL/pinsplR/"+ response[8] 
 
-                                if(response[8] == "-0"){
-                                    btnSegundaInspeccion.href = "../../../InspeccionLoteApp/listaI/pinspeccionl/" +response[5] +"/SEGUNDA"
+                                if(response[9] == "-0"){
+                                    btnSegundaInspeccion.href = "../../../InspeccionLoteApp/listaI/pinspeccionl/" +response[6] +"/SEGUNDA"
                                 }else{
-                                    btnSegundaInspeccion.href = "../../../InspeccionLoteApp/listaPIL/editarPIL/" + response[8] 
-                                   btnesquema2Repo.href = "../../../InspeccionLoteApp/listaPIL/pinspl/"+ response[8] 
-                                btnUbicacion2Repo.href = "../../../InspeccionLoteApp/listaPIL/pinsplU/"+ response[8] 
-                                btnPFotografico2Repo.href = "../../../InspeccionLoteApp/listaPIL/pinsplR/"+ response[8] 
+                                    btnSegundaInspeccion.href = "../../../InspeccionLoteApp/listaPIL/editarPIL/" + response[9] 
+                                   btnesquema2Repo.href = "../../../InspeccionLoteApp/listaPIL/pinspl/"+ response[9] 
+                                btnUbicacion2Repo.href = "../../../InspeccionLoteApp/listaPIL/pinsplU/"+ response[9] 
+                                btnPFotografico2Repo.href = "../../../InspeccionLoteApp/listaPIL/pinsplR/"+ response[9] 
 
                                     btnTerceraInspeccion.onclick=""
-                                    if(response[9] == "-0"){
-                                        btnTerceraInspeccion.href = "../../../InspeccionLoteApp/listaI/pinspeccionl/" +response[5] +"/TERCERA"
+                                    if(response[10] == "-0"){
+                                        btnTerceraInspeccion.href = "../../../InspeccionLoteApp/listaI/pinspeccionl/" +response[6] +"/TERCERA"
                                     }else{
                                         
-                                        btnTerceraInspeccion.href ="../../../InspeccionLoteApp/listaPIL/editarPIL/" + response[9] 
-                                       btnesquema3Repo.href = "../../../InspeccionLoteApp/listaPIL/pinspl/"+ response[9] 
-                                btnUbicacion3Repo.href = "../../../InspeccionLoteApp/listaPIL/pinsplU/"+ response[9] 
-                                btnPFotografico3Repo.href = "../../../InspeccionLoteApp/listaPIL/pinsplR/"+ response[9] 
+                                        btnTerceraInspeccion.href ="../../../InspeccionLoteApp/listaPIL/editarPIL/" + response[10] 
+                                       btnesquema3Repo.href = "../../../InspeccionLoteApp/listaPIL/pinspl/"+ response[10] 
+                                btnUbicacion3Repo.href = "../../../InspeccionLoteApp/listaPIL/pinsplU/"+ response[10] 
+                                btnPFotografico3Repo.href = "../../../InspeccionLoteApp/listaPIL/pinsplR/"+ response[10] 
 
                                         
                                     }
@@ -350,13 +370,13 @@ function cambiarUrlMicro(estado) {
                         }
 
                         //presupuesto
-                        if (response[6] == "-0") { 
+                        if (response[7] == "-0") { 
                             btnPresupuestoVivienda.href = "../../../SolicitudesApp/listaSC/presupuestov/" + response[1]
                         } else {
-                            btnPresupuestoVivienda.href = "../../../PresupuestoVApp/listaPV/editarPV/" + response[6]
+                            btnPresupuestoVivienda.href = "../../../PresupuestoVApp/listaPV/editarPV/" + response[7]
                             descipcion.textContent = "Progreso: Presupuesto "
                             btnPresupuestoViviendaRepo.onclick = ""
-                            btnPresupuestoViviendaRepo.href = "../../../PresupuestoVApp/listaPV/presupuestoVv/" + response[6]
+                            btnPresupuestoViviendaRepo.href = "../../../PresupuestoVApp/listaPV/presupuestoVv/" + response[7]
 
                             progresoPresupuesto.classList.remove("progress-bar-danger")
                             progresoPresupuesto.classList.add("progress-bar-success")
@@ -365,15 +385,15 @@ function cambiarUrlMicro(estado) {
                             $('#trObras').fadeIn();
                             $('#trObrasRepo').fadeIn();
                             btnObrasAdicionales.onclick = ""
-                            if(response[12] == "-0"){
-                                btnObrasAdicionales.href="../../../PresupuestoVApp/listaPV/presupuestovoa/" + response[6]
+                            if(response[11] == "-0"){
+                                btnObrasAdicionales.href="../../../PresupuestoVApp/listaPV/presupuestovoa/" + response[7]
                             }else{
-                                btnObrasAdicionales.href="../../../PresupuestoVApp/listaPVO/editarPVO/"  + response[12]
+                                btnObrasAdicionales.href="../../../PresupuestoVApp/listaPVO/editarPVO/"  + response[11]
                                 progresoObrasAdd.classList.remove("progress-bar-danger")
                                 progresoObrasAdd.classList.add("progress-bar-success")
 
                                 btnObrasAdicionalesRepo.onclick = ""
-                                btnObrasAdicionalesRepo.href = "../../../PresupuestoVApp/listaPVO/presupuestoVvO/" + response[12]
+                                btnObrasAdicionalesRepo.href = "../../../PresupuestoVApp/listaPVO/presupuestoVvO/" + response[11]
                                 progresoObrasAdicionalesRepo.classList.remove("progress-bar-danger")                                
                                 progresoObrasAdicionalesRepo.classList.add("progress-bar-success")
                             }
@@ -381,9 +401,9 @@ function cambiarUrlMicro(estado) {
                             progreso=progreso+1.66
                         }               
                     }
-                    if(response[10] != "-0"){
-                        btnlistaChequeo.href = "../../../ListaChequeoApp/listaC/editarCheq/" + response[10]
-                        btnListaChequeoRepo.href = "../../../ListaChequeoApp/listaC/listaCheq/" + response[10]
+                    if(response[11] != "-0"){
+                        btnlistaChequeo.href = "../../../ListaChequeoApp/listaC/editarCheq/" + response[11]
+                        btnListaChequeoRepo.href = "../../../ListaChequeoApp/listaC/listaCheq/" + response[11]
                         $('#divlistaChequeoRepo').fadeIn();
                     }else{
                         btnlistaChequeo.disabled="true"
@@ -472,17 +492,33 @@ function cambiarUrlNatural(estado) {
                         progresoConozcaCliente.classList.add("progress-bar-success")
                         progresoConozcaClienteRepo.classList.remove("progress-bar-dange")
                         progresoConozcaClienteRepo.classList.add("progress-bar-success")
-                        progreso=progreso+1.66
+                        progreso=progreso+0.83
                     }
 
                     if (response[3] == "-0") {
+                        btnConozClienteFiador.href = "../../../NaturalApp/listarSNC/ccliente/" + response[1]
+
+                    } else {
+                        btnConozClienteFiador.href = "../../../ConozcaClienteApp/listaCC/editarCliente/" + response[3]
+                        descipcion.textContent = "Progreso: formulario conozca a su cliente-fiador"
+                        btnConozClienteFiadorRepo.onclick = ""
+                        btnConozClienteFiadorRepo.href = "../../../ConozcaClienteApp/listaCC/conozcaC/" + response[3]
+
+                        progresoConozcaClienteFiador.classList.remove("progress-bar-dange")
+                        progresoConozcaClienteFiador.classList.add("progress-bar-success")
+                        progresoConozcaClienteFiadorRepo.classList.remove("progress-bar-dange")
+                        progresoConozcaClienteFiadorRepo.classList.add("progress-bar-success")
+                        progreso=progreso+0.83
+                    }
+
+                    if (response[4] == "-0") {
                         btnDeclaracionJurada.href = "../../../NaturalApp/listarSNC/declaracionjc/" + response[1]
 
                     } else {
-                        btnDeclaracionJurada.href = "../../../DeclaracionJurClienteApp/listaDJ/editarDJ/" + response[3]
+                        btnDeclaracionJurada.href = "../../../DeclaracionJurClienteApp/listaDJ/editarDJ/" + response[4]
                         descipcion.textContent = "Progreso: Declaración jurada cliente"
                         btnDeclaracionJuradaRepo.onclick = ""
-                        btnDeclaracionJuradaRepo.href = "../../../DeclaracionJurClienteApp/listaDJ/declaracionjc/" + response[3] + "/" + idCliente
+                        btnDeclaracionJuradaRepo.href = "../../../DeclaracionJurClienteApp/listaDJ/declaracionjc/" + response[4] + "/" + idCliente
 
                         progresoDeclaracion.classList.remove("progress-bar-dange")
                         progresoDeclaracion.classList.add("progress-bar-success")
@@ -491,11 +527,11 @@ function cambiarUrlNatural(estado) {
                         progreso=progreso+1.66
                     }
 
-                    if (response[4] == "-0") {
+                    if (response[5] == "-0") {
                         btnInscripcionSeguro.href = "../../../NaturalApp/listarSNC/solicitudI/" + response[1]
 
                     } else {
-                        btnInscripcionSeguro.href = "../../../SolicitudInscripcionSApp/listaIS/editarSIS/" + response[4]
+                        btnInscripcionSeguro.href = "../../../SolicitudInscripcionSApp/listaIS/editarSIS/" + response[5]
                         descipcion.textContent = "Progreso: Inscripción de seguro"
                         btnInscripcionSeguroRepo.onclick = ""
                         btnInscripcionSeguroRepo.href = "../../../SolicitudInscripcionSApp/listaIS/seguro/" + response[1]
@@ -508,18 +544,18 @@ function cambiarUrlNatural(estado) {
                     }
                     if (tipoObra != "vivienda") { //  mejora de vivienda
                         btnInspeccionLote.textContent = "Inspección vivienda"
-                        if (response[5] == "-0") {
+                        if (response[6] == "-0") {
                             btnInspeccionLote.href = "../../../SolicitudesApp/listaSC/inspeccion/" + response[1]
 
                         } else {
-                            btnInspeccionLote.href = "../../../InspeccionMejViviendaApp/listaIM/editarIM/" + response[5]
+                            btnInspeccionLote.href = "../../../InspeccionMejViviendaApp/listaIM/editarIM/" + response[6]
                            descipcion.textContent = "Progreso: Inspección vivienda"
                             progresoInspeccion.classList.remove("progress-bar-dange")
                             progresoInspeccion.classList.add("progress-bar-success")
 
                             // ***************************************************************  agregar link del reporte inspeccion mejora de vivienda ******************
                             
-                            btnInspeccionLoteRepo.href = "../../../InspeccionMejViviendaApp/listaIM/inspeccionM/" + response[5]
+                            btnInspeccionLoteRepo.href = "../../../InspeccionMejViviendaApp/listaIM/inspeccionM/" + response[6]
                             btnInspeccionLoteRepo.onclick = "" ; 
                             progresoInspeccionRepo.classList.remove("progress-bar-dange")
                             progresoInspeccionRepo.classList.add("progress-bar-success")
@@ -530,33 +566,33 @@ function cambiarUrlNatural(estado) {
                             $('#divubicacion3').fadeOut();
                             $('#divEsquema2').fadeOut();
                             $('#divEsquema3').fadeOut();
-                            if(response[7] == "-0"){
-                                btnPrimeraInspeccion.href = "../../../InspeccionMejViviendaApp/listaIM/pinspeccion/" +response[5] +"/PRIMERA"
+                            if(response[8] == "-0"){
+                                btnPrimeraInspeccion.href = "../../../InspeccionMejViviendaApp/listaIM/pinspeccion/" +response[6] +"/PRIMERA"
                             }else{
                                 btnSegundaInspeccion.onclick = ""
-                                btnPrimeraInspeccion.href = "../../../InspeccionMejViviendaApp/listaPIM/editarPIM/" + response[7] 
+                                btnPrimeraInspeccion.href = "../../../InspeccionMejViviendaApp/listaPIM/editarPIM/" + response[8] 
                                
 
-                                btnesquema1Repo.href = "../../../InspeccionMejViviendaApp/listaPIM/pinspmU/" + response[7] 
+                                btnesquema1Repo.href = "../../../InspeccionMejViviendaApp/listaPIM/pinspmU/" + response[8] 
                                
-                                btnPFotografico1Repo.href = "../../../InspeccionMejViviendaApp/listaPIM/pinspmR/" + response[7] 
+                                btnPFotografico1Repo.href = "../../../InspeccionMejViviendaApp/listaPIM/pinspmR/" + response[8] 
 
 
                                 if(response[8] == "-0"){
-                                    btnSegundaInspeccion.href = "../../../InspeccionMejViviendaApp/listaIM/pinspeccion/" +response[5] +"/SEGUNDA"
+                                    btnSegundaInspeccion.href = "../../../InspeccionMejViviendaApp/listaIM/pinspeccion/" +response[6] +"/SEGUNDA"
                                 }else{
-                                    btnSegundaInspeccion.href = "../../../InspeccionMejViviendaApp/listaPIM/editarPIM/" + response[8] 
-                                    btnesquema2Repo.href = "../../../InspeccionMejViviendaApp/listaPIM/pinspmU/"+ response[8] 
+                                    btnSegundaInspeccion.href = "../../../InspeccionMejViviendaApp/listaPIM/editarPIM/" + response[9] 
+                                    btnesquema2Repo.href = "../../../InspeccionMejViviendaApp/listaPIM/pinspmU/"+ response[9] 
                                    
-                                    btnPFotografico2Repo.href = "../../../InspeccionMejViviendaApp/listaPIM/pinspmR/"+ response[8] 
+                                    btnPFotografico2Repo.href = "../../../InspeccionMejViviendaApp/listaPIM/pinspmR/"+ response[9] 
                                     
                                     btnTerceraInspeccion.onclick=""
                                     if(response[9] == "-0"){
-                                        btnTerceraInspeccion.href = "../../../InspeccionMejViviendaApp/listaIM/pinspeccion/" +response[5] +"/TERCERA"
+                                        btnTerceraInspeccion.href = "../../../InspeccionMejViviendaApp/listaIM/pinspeccion/" +response[6] +"/TERCERA"
                                     }else{
                                         
-                                        btnTerceraInspeccion.href ="../../../InspeccionMejViviendaApp/listaPIM/editarPIM/" + response[9] 
-                                    btnesquema3Repo.href = "../../../InspeccionMejViviendaApp/listaPIM/pinspmU/"+ response[9] 
+                                        btnTerceraInspeccion.href ="../../../InspeccionMejViviendaApp/listaPIM/editarPIM/" + response[10] 
+                                    btnesquema3Repo.href = "../../../InspeccionMejViviendaApp/listaPIM/pinspmU/"+ response[10] 
                                
                                 
                                         
@@ -565,13 +601,13 @@ function cambiarUrlNatural(estado) {
                             }
                             progreso=progreso+1.66
                         //presupuesto
-                        if (response[6] == "-0") {
+                        if (response[7] == "-0") {
                             btnPresupuestoVivienda.href = "../../../SolicitudesApp/listaSC/presupuesto/" + response[1]
                         } else {
-                            btnPresupuestoVivienda.href = "../../../PresupuestoApp/listaPM/modPresupuesto/" + response[6]
+                            btnPresupuestoVivienda.href = "../../../PresupuestoApp/listaPM/modPresupuesto/" + response[7]
                             descipcion.textContent = "Progreso: Presupuesto "
                             btnPresupuestoViviendaRepo.onclick = ""
-                            btnPresupuestoViviendaRepo.href = "../../../PresupuestoApp/listaPM/presupuestoMj/" + response[6] //**** agregar aqui el link del reporte */
+                            btnPresupuestoViviendaRepo.href = "../../../PresupuestoApp/listaPM/presupuestoMj/" + response[7] //**** agregar aqui el link del reporte */
 
                             progresoPresupuesto.classList.remove("progress-bar-dange")
                             progresoPresupuesto.classList.add("progress-bar-success")
@@ -582,17 +618,17 @@ function cambiarUrlNatural(estado) {
                         }
                         }
                     } else {
-                        if (response[5] == "-0") {// inspeccion lote 
+                        if (response[6] == "-0") {// inspeccion lote 
                             btnInspeccionLote.href = "../../../SolicitudesApp/listaSC/inspeccionl/" + response[1]
 
                         } else {
-                            btnInspeccionLote.href = "../../../InspeccionLoteApp/listaI/editarIL/" + response[5]
+                            btnInspeccionLote.href = "../../../InspeccionLoteApp/listaI/editarIL/" + response[6]
                             descipcion.textContent = "Progreso: Inspección lote"
                             progresoInspeccion.classList.remove("progress-bar-dange")
                             progresoInspeccion.classList.add("progress-bar-success")
 
                             // ***************************************************************  agregar link del reporte inspeccion mejora de vivienda ******************
-                            btnInspeccionLoteRepo.href = "../../../InspeccionLoteApp/listaI/inspeccionL/" + response[5]
+                            btnInspeccionLoteRepo.href = "../../../InspeccionLoteApp/listaI/inspeccionL/" + response[6]
                             btnInspeccionLoteRepo.onclick = "" ; 
                             progresoInspeccionRepo.classList.remove("progress-bar-dange")
                             progresoInspeccionRepo.classList.add("progress-bar-success")
@@ -603,34 +639,34 @@ function cambiarUrlNatural(estado) {
                             $('#divEsquema2').fadeOut();
                             $('#divEsquema3').fadeOut();
                             if(response[7] == "-0"){
-                                btnPrimeraInspeccion.href = "../../../InspeccionLoteApp/listaI/pinspeccionl/" +response[5] +"/PRIMERA"
+                                btnPrimeraInspeccion.href = "../../../InspeccionLoteApp/listaI/pinspeccionl/" +response[6] +"/PRIMERA"
                             }else{
                                 btnSegundaInspeccion.onclick = ""
-                                btnPrimeraInspeccion.href = "../../../InspeccionLoteApp/listaPIL/editarPIL/" + response[7] 
+                                btnPrimeraInspeccion.href = "../../../InspeccionLoteApp/listaPIL/editarPIL/" + response[8] 
                                 
 
-                                btnesquema1Reposquema1Repo.href = "../../../InspeccionLoteApp/listaPIL/pinspl/" + response[7] 
-                                btnUbicacion1Repo.href = "../../../InspeccionLoteApp/listaPIL/pinsplU/" + response[7] 
-                                btnPFotografico1Repo.href = "../../../InspeccionLoteApp/listaPIL/pinsplR/" + response[7] 
+                                btnesquema1Reposquema1Repo.href = "../../../InspeccionLoteApp/listaPIL/pinspl/" + response[8] 
+                                btnUbicacion1Repo.href = "../../../InspeccionLoteApp/listaPIL/pinsplU/" + response[8] 
+                                btnPFotografico1Repo.href = "../../../InspeccionLoteApp/listaPIL/pinsplR/" + response[8] 
 
 
                                 if(response[8] == "-0"){
-                                    btnSegundaInspeccion.href = "../../../InspeccionLoteApp/listaI/pinspeccionl/" +response[5] +"/SEGUNDA"
+                                    btnSegundaInspeccion.href = "../../../InspeccionLoteApp/listaI/pinspeccionl/" +response[6] +"/SEGUNDA"
                                 }else{
-                                    btnSegundaInspeccion.href = "../../../InspeccionLoteApp/listaPIL/editarPIL/" + response[8] 
-                                    btnesquema2Repo.href = "../../../InspeccionLoteApp/listaPIL/pinspl/"+ response[8] 
-                                btnUbicacion2Repo.href = "../../../InspeccionLoteApp/listaPIL/pinsplU/"+ response[8] 
-                                btnPFotografico2Repo.href = "../../../InspeccionLoteApp/listaPIL/pinsplR/"+ response[8] 
+                                    btnSegundaInspeccion.href = "../../../InspeccionLoteApp/listaPIL/editarPIL/" + response[9] 
+                                    btnesquema2Repo.href = "../../../InspeccionLoteApp/listaPIL/pinspl/"+ response[9] 
+                                btnUbicacion2Repo.href = "../../../InspeccionLoteApp/listaPIL/pinsplU/"+ response[9] 
+                                btnPFotografico2Repo.href = "../../../InspeccionLoteApp/listaPIL/pinsplR/"+ response[9] 
 
                                     btnTerceraInspeccion.onclick=""
                                     if(response[9] == "-0"){
-                                        btnTerceraInspeccion.href = "../../../InspeccionLoteApp/listaI/pinspeccionl/" +response[5] +"/TERCERA"
+                                        btnTerceraInspeccion.href = "../../../InspeccionLoteApp/listaI/pinspeccionl/" +response[6] +"/TERCERA"
                                     }else{
                                         
-                                        btnTerceraInspeccion.href ="../../../InspeccionLoteApp/listaPIL/editarPIL/" + response[9] 
-                                       btnesquema3Repo.href = "../../../InspeccionLoteApp/listaPIL/pinspl/"+ response[9] 
-                                btnUbicacion3Repo.href = "../../../InspeccionLoteApp/listaPIL/pinsplU/"+ response[9] 
-                                btnPFotografico3Repo.href = "../../../InspeccionLoteApp/listaPIL/pinsplR/"+ response[9] 
+                                        btnTerceraInspeccion.href ="../../../InspeccionLoteApp/listaPIL/editarPIL/" + response[10] 
+                                       btnesquema3Repo.href = "../../../InspeccionLoteApp/listaPIL/pinspl/"+ response[10] 
+                                btnUbicacion3Repo.href = "../../../InspeccionLoteApp/listaPIL/pinsplU/"+ response[10] 
+                                btnPFotografico3Repo.href = "../../../InspeccionLoteApp/listaPIL/pinsplR/"+ response[10] 
 
                                     }
                                 }
@@ -639,13 +675,13 @@ function cambiarUrlNatural(estado) {
                         }
 
                         //presupuesto
-                        if (response[6] == "-0") {
+                        if (response[7] == "-0") {
                             btnPresupuestoVivienda.href = "../../../SolicitudesApp/listaSC/presupuestov/" + response[1]
                         } else {
-                            btnPresupuestoVivienda.href = "../../../PresupuestoVApp/listaPV/editarPV/" + response[6]
+                            btnPresupuestoVivienda.href = "../../../PresupuestoVApp/listaPV/editarPV/" + response[7]
                             descipcion.textContent = "Progreso: Presupuesto Vivienda"
                             btnPresupuestoViviendaRepo.onclick = ""
-                            btnPresupuestoViviendaRepo.href = "../../../PresupuestoVApp/listaPV/presupuestoVv/" + response[6] //**** agregar aqui el link del reporte */
+                            btnPresupuestoViviendaRepo.href = "../../../PresupuestoVApp/listaPV/presupuestoVv/" + response[7] //**** agregar aqui el link del reporte */
 
                             progresoPresupuesto.classList.remove("progress-bar-dange")
                             progresoPresupuesto.classList.add("progress-bar-success")
@@ -655,15 +691,15 @@ function cambiarUrlNatural(estado) {
                             $('#trObras').fadeIn();
                             $('#trObrasRepo').fadeIn();
                             btnObrasAdicionales.onclick = ""
-                            if(response[12] == "-0"){
-                                btnObrasAdicionales.href="../../../PresupuestoVApp/listaPV/presupuestovoa/" + response[6]
+                            if(response[13] == "-0"){
+                                btnObrasAdicionales.href="../../../PresupuestoVApp/listaPV/presupuestovoa/" + response[7]
                             }else{
-                                btnObrasAdicionales.href="../../../PresupuestoVApp/listaPVO/editarPVO/"  + response[12]
+                                btnObrasAdicionales.href="../../../PresupuestoVApp/listaPVO/editarPVO/"  + response[13]
                                 progresoObrasAdd.classList.remove("progress-bar-danger")
                                 progresoObrasAdd.classList.add("progress-bar-success")
 
                                 btnObrasAdicionalesRepo.onclick = ""
-                                btnObrasAdicionalesRepo.href = "../../../PresupuestoVApp/listaPVO/presupuestoVvO/" + response[12]
+                                btnObrasAdicionalesRepo.href = "../../../PresupuestoVApp/listaPVO/presupuestoVvO/" + response[13]
                                 btnObrasAdicionalesRepo.classList.remove("progress-bar-danger")                                
                                 btnObrasAdicionalesRepo.classList.add("progress-bar-success")
                             }
@@ -674,9 +710,9 @@ function cambiarUrlNatural(estado) {
                        
                     }
 
-                    if(response[10] != "-0"){
-                        btnlistaChequeo.href = "../../../ListaChequeoApp/listaC/editarCheq/" + response[10]
-                        btnListaChequeoRepo.href = "../../../ListaChequeoApp/listaC/listaCheq/" + response[10]
+                    if(response[11] != "-0"){
+                        btnlistaChequeo.href = "../../../ListaChequeoApp/listaC/editarCheq/" + response[11]
+                        btnListaChequeoRepo.href = "../../../ListaChequeoApp/listaC/listaCheq/" + response[11]
                         $('#divlistaChequeoRepo').fadeIn();
                     }else{
                         btnlistaChequeo.disabled="true"
@@ -800,6 +836,7 @@ function aprobada(estado){
 
 function desactivarAlerta() {
     btnConozCliente.onclick = ""
+    btnConozClienteFiador.onclick = ""
     btnDeclaracionJurada.onclick = ""
     btnInscripcionSeguro.onclick = ""
     btnInspeccionLote.onclick = ""
