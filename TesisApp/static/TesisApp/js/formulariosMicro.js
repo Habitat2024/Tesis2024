@@ -148,10 +148,10 @@ function cambiarUrlMicro(estado) {
                     
 
                     $('#btnDicom').fadeIn();
-                    if(response[11] == "-0"){
+                    if(response[12] == "-0"){
                         btnDicom.href = "../../../HistorialApp/listaHis/registroHistCli/" + response[1]
                     }else{
-                        btnDicom.href = "../../../HistorialApp/editHistCli/" + response[11]
+                        btnDicom.href = "../../../HistorialApp/editHistCli/" + response[12]
                     }
                     $('#btnlistaChequeo').fadeIn();  
                     desactivarAlerta()
@@ -458,10 +458,10 @@ function cambiarUrlNatural(estado) {
                     
                     $('#btnDicom').fadeIn();
                     $('#btnlistaChequeo').fadeIn();  
-                    if(response[11] == "-0"){
+                    if(response[12] == "-0"){
                         btnDicom.href = "../../../HistorialApp/listaHis/registroHistCli/" + response[1]
                     }else{
-                        btnDicom.href = "../../../HistorialApp/editHistCli/" + response[11]
+                        btnDicom.href = "../../../HistorialApp/editHistCli/" + response[12]
                     }
                     desactivarAlerta()
                     btnEvaluacion.href = "../../../EvaluacionIvEFApp/listaEvaluacion/editarEvaluacion/" + response[0]
