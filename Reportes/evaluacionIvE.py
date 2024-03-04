@@ -9,7 +9,7 @@ from EvaluacionIvEFApp.models import *
 class evaluacionIvEF(FPDF):
     
     def evaluacionIvE(request, id ):
-        #locale.setlocale(locale.LC_TIME, 'es_ES')
+        locale.setlocale(locale.LC_TIME, 'es_ES.UTF-8')
         fecha=date.today()
 
         ide=int(id)
