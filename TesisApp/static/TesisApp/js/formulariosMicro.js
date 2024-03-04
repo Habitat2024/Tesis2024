@@ -645,7 +645,7 @@ function cambiarUrlNatural(estado) {
                                 btnPrimeraInspeccion.href = "../../../InspeccionLoteApp/listaPIL/editarPIL/" + response[8] 
                                 
 
-                                btnesquema1Reposquema1Repo.href = "../../../InspeccionLoteApp/listaPIL/pinspl/" + response[8] 
+                                btnesquema1Repo.href = "../../../InspeccionLoteApp/listaPIL/pinspl/" + response[8] 
                                 btnUbicacion1Repo.href = "../../../InspeccionLoteApp/listaPIL/pinsplU/" + response[8] 
                                 btnPFotografico1Repo.href = "../../../InspeccionLoteApp/listaPIL/pinsplR/" + response[8] 
 
