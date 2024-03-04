@@ -547,8 +547,8 @@ def consulta_evaliacion_natural(request):
         except Exception:
            listaId.append("-0") 
         try:
-            conosca_cliente=ClienteDatoGen.objects.get(IdSolicitud=solicitud.Id,CalidadActu="Fiador")
-            listaId.append(conosca_cliente.Id)
+            conosca_cliente_fiador=ClienteDatoGen.objects.get(IdSolicitud=solicitud.Id,CalidadActu="Fiador")
+            listaId.append(conosca_cliente_fiador.Id)
         except Exception:
            listaId.append("-0")
         try:
