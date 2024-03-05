@@ -419,7 +419,7 @@ def consulta_evaliacion_micro(request):
             listaId.append("-0") 
 
         try:
-            solicitud=sol.objects.filter(Q(IdPerfil=id) & (Q(EstadoSoli=1)  | Q(EstadoSoli=2) | Q(EstadoSoli=3)  | Q(EstadoSoli=4)) ).latest('Fecha') #obtengo la ultima solicitud por fecha 
+            solicitud=sol.objects.filter(Q(IdPerfil=id) & (Q(EstadoSoli=1)  | Q(EstadoSoli=2) | Q(EstadoSoli=3)  | Q(EstadoSoli=4) | Q(EstadoSoli=5)) ).latest('Fecha') #obtengo la ultima solicitud por fecha 
             listaId.append(solicitud.Id)
         except Exception:
            listaId.append("-0") 
@@ -537,7 +537,7 @@ def consulta_evaliacion_natural(request):
             listaId.append("-0") 
 
         try:
-            solicitud=sol.objects.filter(Q(IdPerfil=id) & (Q(EstadoSoli=1)  | Q(EstadoSoli=2) | Q(EstadoSoli=3)  | Q(EstadoSoli=4)) ).latest('Fecha') #obtengo la ultima solicitud por fecha 
+            solicitud=sol.objects.filter(Q(IdPerfil=id) & (Q(EstadoSoli=1)  | Q(EstadoSoli=2) | Q(EstadoSoli=3)  | Q(EstadoSoli=4) | Q(EstadoSoli=5)) ).latest('Fecha') #obtengo la ultima solicitud por fecha 
             listaId.append(solicitud.Id)
         except Exception:
            listaId.append("-0") 
@@ -663,7 +663,7 @@ def consulta_tipo_solicitud(request):
                 solicitud.Tipo="natural" 
                 print("natural")
             if(cliente.EstadoSoli >3):                        
-                solicitud = sol.objects.filter(Q(IdPerfil=id) & (Q(EstadoSoli=1) | Q(EstadoSoli=2) | Q(EstadoSoli=3) | Q(EstadoSoli=4) | Q(EstadoSoli=6)) ).latest('Fecha') #obtengo la ultima solicitud por fecha    
+                solicitud = sol.objects.filter(Q(IdPerfil=id) & (Q(EstadoSoli=1) | Q(EstadoSoli=2) | Q(EstadoSoli=3) | Q(EstadoSoli=4) | Q(EstadoSoli=6)| Q(EstadoSoli=5)) ).latest('Fecha') #obtengo la ultima solicitud por fecha    
                 solicitud.Id=solicitud.Id    
             serialized_data =  serialize("json", [ solicitud])
         except Exception: 
@@ -679,7 +679,7 @@ def obtener_historial(request):
     id = request.GET['idCliente']
     historial = []
     try:
-        lista_solicitudes = sol.objects.filter(Q(IdPerfil=id) & Q(Q(EstadoSoli=4) | Q(EstadoSoli=6) | Q(EstadoSoli=7) ) )##agregar 6 y 7
+        lista_solicitudes = sol.objects.filter(Q(IdPerfil=id) & Q(Q(EstadoSoli=4) | Q(EstadoSoli=6) | Q(EstadoSoli=7) | Q(EstadoSoli=5) ) )##agregar 6 y 7
         datos = []
         for item in lista_solicitudes:
 
@@ -705,7 +705,7 @@ def completar_solicitud(request):
     completa = 'si'
     
     try:
-        solicitud = sol.objects.filter(Q(IdPerfil=id_cliente) & ( Q(EstadoSoli=2)) ).latest('Fecha') #obtengo la ultima solicitud por fecha    
+        solicitud = sol.objects.filter(Q(IdPerfil=id_cliente) & ( Q(EstadoSoli=2) | Q(EstadoSoli=5)) ).latest('Fecha') #obtengo la ultima solicitud por fecha    
         if(solicitud.Tipo=="micro"):
             try:            
                 balance = BalanceSituMic.objects.get(Estado="1",IdPerfil=id_cliente)           
@@ -848,7 +848,7 @@ def completar_solicitud_base(request):
         perfil.save()
 
         #solicitud = sol.objects.filter(Q(IdPerfil=id) & (Q(EstadoSoli=4) | Q(EstadoSoli=6) | Q(EstadoSoli=3)) ).latest('Fecha') 
-        solicitud = sol.objects.filter(Q(IdPerfil=id) & ( Q(EstadoSoli=2)) ).latest('Fecha') #obtengo la ultima solicitud por fecha  
+        solicitud = sol.objects.filter(Q(IdPerfil=id) & ( Q(EstadoSoli=2) | Q(EstadoSoli=5)) ).latest('Fecha') #obtengo la ultima solicitud por fecha  
         solicitud.EstadoSoli=3
         solicitud.save()
     except Exception: 
