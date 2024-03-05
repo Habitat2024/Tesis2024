@@ -496,7 +496,7 @@ function cambiarUrlNatural(estado) {
                     }
 
                     if (response[3] == "-0") {
-                        btnConozClienteFiador.href = "../../../NaturalApp/listarSNC/ccliente/" + response[1]
+                        btnConozClienteFiador.href = "../../../NaturalApp/listarSNC/cclientedgf/" + response[1]
 
                     } else {
                         btnConozClienteFiador.href = "../../../ConozcaClienteApp/listaCC/editarCliente/" + response[3]
