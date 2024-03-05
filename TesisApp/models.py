@@ -1,4 +1,5 @@
 
+from tkinter import CASCADE
 from email.policy import default
 from tabnanny import verbose
 from django.db import models
@@ -36,6 +37,7 @@ class Usuario(AbstractBaseUser):
     agencia=models.ForeignKey(Agencia, on_delete=models.CASCADE)
     usuario_administrador=models.BooleanField(default= False)
     token=models.UUIDField(primary_key=False, editable=False, null=True, blank=True)
+    estado=models.BooleanField(default=0) #Usuario inactivo
     objects = UsuarioManager()
    
     USERNAME_FIELD='username'  #Inicio de sesion del administrador de django

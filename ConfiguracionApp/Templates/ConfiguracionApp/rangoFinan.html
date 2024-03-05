@@ -13,7 +13,7 @@
           <h4>Linea de Financiamiento</h4>
           <div class="col-md-12 col-sm-9 ">
               <select class="form-text" id="alternativas" name="alternativas" onchange="actMini()" required >
-                  <option value="0">Seleccione la Linea de Financiamiento</option>
+                  <option selected disabled>Seleccione la Linea de Financiamiento</option>
                   {% for d in alternativa %}
                   <option value="{{d.Id}}"> {{d.Alternativa}} - {{d.IdTasaInte.Interes}}%</option>
                   {% endfor %} 
@@ -21,26 +21,26 @@
           </div>
           <span class="bar"></span>
       </div>
-  </div>
-  <div class="col-md-6 col-sm-12 col-xs-12">
-    <div class="form-group form-animate-text " style="margin-top:5px !important;">
+    </div>
+    <div class="col-md-6 col-sm-12 col-xs-12">
+      <div class="form-group form-animate-text " style="margin-top:5px !important;">
         <h4>Salarios</h4>
         <div class="col-md-12 col-sm-9 ">
             <select class="form-text" id="salario" name="salario" required >
-                <option value="0">Seleccine el Salario</option>
+                <option selected disabled >Seleccione el Salario</option>
                 {% for s in salario %}
                 <option value="{{s.Id}}"> {{s.TipoSala}}</option>
                 {% endfor %} 
             </select>
         </div>
         <span class="bar"></span>
+      </div>
     </div>
-</div>
       
   </div>
   <div>
     <br>
-   </div>
+  </div>
   <div class="row">
     <div class="col-md-6 col-sm-12 col-xs-12">
       <div class="form-group form-animate-text " style="margin-top:5px !important;">
@@ -55,7 +55,7 @@
             <input type="number" class="form-text"   id="montomaximo" name="montomaximo" oninput="vecesfinan()" onchange="valorMax()" required>
             <span class="bar"></span>
 
-      </div>
+        </div>
     </div>
     <div class="col-md-6 col-sm-12 col-xs-12">
       <div class="form-group form-animate-text " style="margin-top:5px !important;">
@@ -63,8 +63,8 @@
           <input type="number" class="form-text"   id="vecesFin" name="vecesFin" readonly="true" required>
           <span class="bar"></span>
 
+      </div>
     </div>
-  </div>
   </div>
  
  <div>
@@ -78,7 +78,7 @@
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <button class="btn btn-warning" style="width:200px; height:40px;">Cancelar</button>
     </div>
-</div>
+  </div>
 
 </form>
 {% endblock %}
@@ -145,22 +145,20 @@ $("#rangoFin").validate({
       
 
     },
-    alternativa:{
+    alternativas:{
       required: true
       
-
-    }
+    },
   },
   messages: {
      montominimo:{
         required : "<h2>Debe ingresar el monto minimo de credito </h2>",
         minlength : "<h2>EL nombre debe tener un minimo de 3 numeros</h2>"
     },
-    alternativa:{
-      minlength:"<h2>Debe tener un minimo de 4 caracteres</h2>",
-      required: "<h2>Debe ingresar el dato</h2>",
-      maxlength:"<h2>Debe tener un maximo de 100 caracteres</h2>"
 
+    alternativas:{
+      required: "<h2>Debe seleccionar la alternativa</h2>"
+     
     },
      montomaximo:{
       minlength:"<h2>Debe tener un minimo de 3 caracteres</h2>",
@@ -168,9 +166,9 @@ $("#rangoFin").validate({
 
     },
     salario:{
-      required: "<h2>Debe ingresar el dato</h2>",
+      required: "<h2>Debe seleccionar el salario</h2>",
 
-    }
+    },
   },
 });// fin del form contact 
 
@@ -180,14 +178,8 @@ if($("#rangoFin").valid()){
    
 
     }else{
-Swal.fire({
-  icon: 'error',
-  title: 'Oops...',
-  text: 'DEBE REGISTRAR DATOS!',
-  imageUrl: "{% static 'TesisApp/images/iconHabiE.png' %}",
-  imageWidth: 200,
-  imageHeight: 100
-}) 
+      alertE("Debe Registrar Datos Validos!");
+      return false; 
     }
 });// fin de btnguardar
  

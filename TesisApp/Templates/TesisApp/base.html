@@ -132,6 +132,9 @@
                 {% elif request.user.cargo == 4 %}<!-- Menu para oficiales de credito -->
                 {% include 'TesisApp/menuO.html' with menuO=object %}
                 {% elif request.user.cargo == 5 %}<!-- Menu para Tecnicos -->
+                {% include 'TesisApp/menuT.html' with menuO=object %}
+                {% elif request.user.cargo == 6 %}<!-- Menu para Tecnicos -->
+                {% include 'TesisApp/menuT.html' with menuO=object %}
                 {% else %}
                   {% include 'TesisApp/menu.html' with menuprincipal=object %}
               {% endif %}
