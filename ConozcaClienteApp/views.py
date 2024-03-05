@@ -13,7 +13,7 @@ from TesisApp.views import registroBit
 
 def ccliente(request, id):
     sol= ClienteDatoGen.objects.filter(IdSolicitud=id).exists() # comprueba si en la tabla existe el registro de la solicitud
-    if sol == True:
+    if sol == '':
         solv= ClienteDatoGen.objects.get(IdSolicitud=id)
     
         return redirect('editarCliente', id=solv.Id)

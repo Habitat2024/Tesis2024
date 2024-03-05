@@ -405,7 +405,6 @@ function validarSalarioGPFN(salario) {
             if (response != "-0"){
               montoMinNat = response[0].fields.MontoMini 
               montoMaxNat = response[0].fields.MontoMaxi
-              alert(montoMinNat+ " - "+montoMaxNat)
             }
                 
           
