@@ -795,12 +795,20 @@ function consultaTipoSolicitud() {
                     panelFormularios.classList.add("active")                   
                     ActualizarNombresFormularios()                   
                     cambiarUrlNatural(response[0].fields.EstadoSoli)
+                    if(response[0].fields.EstadoSoli == 5){
+                        titulo.textContent = "Solicitud con observaciones"
+                        descipcion.textContent =response[0].fields.Observaciones 
+                    }
                 } else {   
                     idSoli = response[0].pk
                     roleFormularios.classList.add("active")
                     panelFormularios.classList.remove("fade")
-                    panelFormularios.classList.add("active")                    
+                    panelFormularios.classList.add("active")                                       
                     cambiarUrlMicro(response[0].fields.EstadoSoli)
+                    if(response[0].fields.EstadoSoli == 5){
+                        titulo.textContent = "Solicitud con observaciones"
+                        descipcion.textContent =response[0].fields.Observaciones 
+                    }
                 }
                
             }
