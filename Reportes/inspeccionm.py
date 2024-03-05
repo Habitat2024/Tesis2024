@@ -96,7 +96,7 @@ class InspeccionMV(FPDF):
         pdf.add_page()
         
             
-        pdf.image('TesisApp\static\TesisApp\images\logohabib.png', x=7, y=1, w=40, h=28)#, link=url)
+        pdf.image('TesisApp/static/TesisApp/images/logohabib.png', x=7, y=1, w=40, h=28)#, link=url)
         pdf.set_font('Arial', 'B', 9)      
         pdf.set_x(50)
         pdf.set_fill_color(207,188,188) # 1  

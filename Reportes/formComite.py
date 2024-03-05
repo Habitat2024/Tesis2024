@@ -83,7 +83,7 @@ class formularioC(FPDF):
         pdf.cell(w=0,h=5,txt='ASOCIACIÓN HPH EL SALVADOR ', border='',  align='C', fill=False, ln=1)
         pdf.set_font('Arial', 'B', 8)
         pdf.cell(w=0,h=5,txt='Formulario de Comite de Crédito', border='',  align='C', fill=False, ln=1)
-        pdf.image('TesisApp\static\TesisApp\images\logohabib.png', x=9, y=6, w=55, h=20)
+        pdf.image('TesisApp/static/TesisApp/images/logohabib.png', x=9, y=6, w=55, h=20)
         pdf.cell(w=0,h=5,txt='', border='',  align='C', fill=False, ln=1)
         
         pdf.cell(w=98,h=5,txt='     Datos del Solicitante:', border=0, align='L', fill=False)

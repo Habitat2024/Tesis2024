@@ -14,7 +14,7 @@ class SolicitudMicro(FPDF):
     
     def soliMicro(request, ids, idp):
 
-        locale.setlocale(locale.LC_TIME, 'es_ES')
+        locale.setlocale(locale.LC_TIME, '')
         fecha=date.today()
         try:
             sol=Solicitud.objects.get(Id=ids)
@@ -86,7 +86,7 @@ class SolicitudMicro(FPDF):
         pdf=FPDF(orientation='P', unit='mm', format='Letter')
         pdf.add_page()
         
-        pdf.image('TesisApp\static\TesisApp\images\logohabib.png', x=5, y=5, w=40, h=30)#, link=url)
+        pdf.image('TesisApp/static/TesisApp/images/logohabib.png', x=5, y=5, w=40, h=30)#, link=url)
 
         pdf.set_font('Arial', 'B', 12)
         pdf.set_text_color(r,g,b)

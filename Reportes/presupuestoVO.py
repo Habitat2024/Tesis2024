@@ -65,7 +65,7 @@ class presupuestoVvO(FPDF):
         pdf=FPDF(orientation='P', unit='mm', format='Letter')
         pdf.add_page()
         
-        pdf.image('TesisApp\static\TesisApp\images\logohabib.png', x=10, y=12, w=55, h=30)
+        pdf.image('TesisApp/static/TesisApp/images/logohabib.png', x=10, y=12, w=55, h=30)
         pdf.set_font('Arial', 'B', 10)
         pdf.cell(w=0,h=8,txt='PRESUPUESTO DE OBRAS ADICIONALES', border=1,  align='C', fill=False, ln=1)
         pdf.cell(w=0,h=1,txt='', border='',  align='C', fill=False, ln=1)

@@ -63,7 +63,7 @@ class solObs(FPDF):
         pdf.set_font('Arial', 'B', 10)
         pdf.cell(w=0,h=5,txt="Datos de Solicitud Observada ", border='',  align='C', fill=False, ln=1)
         pdf.set_font('Arial', '', 9)
-        pdf.image('TesisApp\static\TesisApp\images\logohabib.png', x=15, y=15, w=55, h=20)
+        pdf.image('TesisApp/static/TesisApp/images/logohabib.png', x=15, y=15, w=55, h=20)
         pdf.cell(w=0,h=10,txt='', border='',  align='C', fill=False, ln=1)
 
         pdf.cell(w=0,h=5,txt=s.Fecha.strftime("%A, %d de %B de %Y") if hasattr(s, 'Fecha') else '', border='', align='R', fill=False, ln=1)

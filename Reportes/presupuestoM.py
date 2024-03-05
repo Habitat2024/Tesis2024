@@ -86,7 +86,7 @@ class presupuestoMj(FPDF):
         pdf=FPDF(orientation='P', unit='mm', format='Letter')
         pdf.add_page()
         
-        pdf.image('TesisApp\static\TesisApp\images\logohabitat.jpg', x=20, y=4, w=40, h=25)    
+        pdf.image('TesisApp/static/TesisApp/images/logohabitat.jpg', x=20, y=4, w=40, h=25)    
         pdf.set_font('Arial', 'B', 10)
         pdf.cell(w=65,h=9,txt='', border=0, align='C', fill=False)
         pdf.cell(w=0,h=9,txt=' PRESUPUESTO DE MEJORAMIENTO DE VIVIENDA', border=1,  align='C', fill=False, ln=1)

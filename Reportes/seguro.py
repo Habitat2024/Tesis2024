@@ -70,7 +70,7 @@ class Seguro(FPDF):
         pdf=FPDF(orientation='P', unit='mm', format='Letter')
         pdf.add_page()
         
-        pdf.image('TesisApp\static\TesisApp\images\segu.png', x=10, y=10, w=20, h=10)#, link=url)
+        pdf.image('TesisApp/static/TesisApp/images/segu.png', x=10, y=10, w=20, h=10)#, link=url)
 
         #pdf.set_font('Arial', 'B', 12)
         #pdf.text(x=40, y=30, txt='AUTORIZACIÓN PARA CONSULTAR Y COMPARTIR INFORMACIÓN.')

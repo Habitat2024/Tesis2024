@@ -27,7 +27,7 @@ class perN(FPDF):
         pdf.cell(w=0,h=5,txt='ASOCIACIÓN HPH EL SALVADOR ', border='',  align='C', fill=False, ln=1)  
         pdf.set_font('Arial', '', 9)
         pdf.cell(w=0,h=5,txt=p.IdAgencia.Departamento if hasattr(p, 'IdAgencia') else '', border='',  align='C', fill=False, ln=1)
-        pdf.image('TesisApp\static\TesisApp\images\logohabib.png', x=15, y=15, w=55, h=20)
+        pdf.image('TesisApp/static/TesisApp/images/logohabib.png', x=15, y=15, w=55, h=20)
         pdf.cell(w=0,h=5,txt='Datos del Solicitante que No Aplica', border='',  align='C', fill=False, ln=1)
         pdf.cell(w=0,h=10,txt='', border='',  align='C', fill=False, ln=1)
 

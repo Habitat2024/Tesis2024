@@ -859,7 +859,7 @@ def listaSolicitudesDen(request):
 
     return render(request, "NaturalApp/listaSDenegadas.html", {"solicitudes":listperpa})
 
-def obtenerRango(request):
+def obtenerRangoNat(request):
     id = request.GET['id']   
     alternativa = "-0"
     if request.is_ajax():  

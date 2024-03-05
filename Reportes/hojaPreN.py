@@ -58,7 +58,7 @@ class hojaPN(FPDF):
         pdf.cell(w=0,h=5,txt='         ASOCIACIÓN HPH EL SALVADOR EL SALVADOR', border='',  align='C', fill=False, ln=1)
         pdf.cell(w=0,h=5,txt='AGENCIA  '+ s.IdPerfil.IdAgencia.Nombre if hasattr(s, 'IdPerfil') else '', border='',  align='C', fill=False, ln=1)
         pdf.cell(w=0,h=5,txt='HOJA DE PRE-APROBACIÓN DE CRÉDITO', border='',  align='C', fill=False, ln=1)
-        pdf.image('TesisApp\static\TesisApp\images\logohabib.png', x=9, y=9, w=45, h=20)
+        pdf.image('TesisApp/static/TesisApp/images/logohabib.png', x=9, y=9, w=45, h=20)
         pdf.cell(w=0,h=5,txt='', border='',  align='C', fill=False, ln=1)
 
         pdf.set_font('Arial', '', 9)

@@ -62,7 +62,7 @@ class pinsplr(FPDF):
         except:
             pass
 
-        pdf.image('TesisApp\static\TesisApp\images\logohabib.png', x=7, y=6, w=43, h=28)
+        pdf.image('TesisApp/static/TesisApp/images/logohabib.png', x=7, y=6, w=43, h=28)
         pdf.set_font('Arial', 'B', 10)
         pdf.cell(w=45,h=8,txt='', border=0, align='C', fill=False)
         pdf.cell(w=0,h=8,txt='REPORTE FOTOGRAFICO DEL IMNUEBLE', border=1,  align='C', fill=False, ln=1)

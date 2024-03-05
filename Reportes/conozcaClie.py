@@ -12,7 +12,7 @@ from ConozcaClienteApp.models import *
 class ConozcaC(FPDF):
     
     def conozcaClie(request, id ):
-        locale.setlocale(locale.LC_TIME, 'es_ES')
+        locale.setlocale(locale.LC_TIME, '')
         fecha=date.today()
         
         try:    

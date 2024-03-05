@@ -9,7 +9,7 @@ from EvaluacionMicroApp.models import *
 class evaluacionIM(FPDF):
     
     def evaluacionMc(request, id ):
-        locale.setlocale(locale.LC_TIME, 'es_ES')
+        locale.setlocale(locale.LC_TIME, '')
         fecha=date.today()
 
         ide=int(id)
@@ -61,7 +61,7 @@ class evaluacionIM(FPDF):
         pdf.set_font('Arial', 'B', 12)
         #pdf.set_fill_color(r,g,b)
         #pdf.set_text_color(255,255,255)
-        pdf.image('TesisApp\static\TesisApp\images\logohabitat.jpg', x=8, y=5, w=45, h=30)#, link=url) 
+        pdf.image('TesisApp/static/TesisApp/images/logohabitat.jpg', x=8, y=5, w=45, h=30)#, link=url) 
         pdf.set_font('Arial', 'B', 12)
         pdf.set_y(30)
         pdf.set_left_margin(10)       

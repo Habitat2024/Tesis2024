@@ -49,7 +49,7 @@ class pinspmr(FPDF):
         except:
             pass
 
-        pdf.image('TesisApp\static\TesisApp\images\logohabitat.jpg', x=20, y=4, w=40, h=25)    
+        pdf.image('TesisApp/static/TesisApp/images/logohabitat.jpg', x=20, y=4, w=40, h=25)    
         pdf.set_font('Arial', 'B', 10)
         pdf.cell(w=65,h=9,txt='', border=0, align='C', fill=False)
         pdf.cell(w=0,h=9,txt=pim.NumeroInsp + ' INSPECCIÓN', border=1,  align='C', fill=False, ln=1)

@@ -13,7 +13,7 @@ class HistorialC(FPDF):
     
     pdf=FPDF(orientation='P', unit='mm', format='Letter')
     pdf.add_page()
-    pdf.image('TesisApp\static\TesisApp\images\Equifax_logo.png', x=20, y=10, w=40, h=10)#, link=url)
+    pdf.image('TesisApp/static/TesisApp/images/Equifax_logo.png', x=20, y=10, w=40, h=10)#, link=url)
 
     pdf.set_font('Arial', 'B', 12)
     #pdf.text(x=40, y=30, txt='AUTORIZACIÓN PARA CONSULTAR Y COMPARTIR INFORMACIÓN.')

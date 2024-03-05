@@ -32,7 +32,7 @@ class listaCheq(FPDF):
         #pdf.set_text_color(255,255,255)
         pdf.cell(w=0,h=5,txt='LISTA DE CHEQUEO PARA SOLICITUDES DE CRÉDITO', border='',  align='C', fill=False, ln=1)
         pdf.cell(w=0,h=5,txt='', border='',  align='C', fill=False, ln=1)
-        pdf.image('TesisApp\static\TesisApp\images\logohabib.png', x=4, y=3, w=55, h=20)
+        pdf.image('TesisApp/static/TesisApp/images/logohabib.png', x=4, y=3, w=55, h=20)
         pdf.cell(w=0,h=3,txt='', border='',  align='C', fill=False, ln=1)
 
         pdf.set_font('Arial', 'B', 10)

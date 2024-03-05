@@ -13,7 +13,7 @@ class solicitudPer(FPDF):
     def soliPer(request, ids):
         
 
-        locale.setlocale(locale.LC_TIME, 'es_ES')
+        locale.setlocale(locale.LC_TIME, '')
         fecha=date.today()
         
         print(fecha)
@@ -87,7 +87,7 @@ class solicitudPer(FPDF):
         pdf=FPDF(orientation='P', unit='mm', format='Letter')
         pdf.add_page()
         
-        pdf.image('TesisApp\static\TesisApp\images\logohabib.png', x=5, y=2, w=35, h=25)#, link=url)
+        pdf.image('TesisApp/static/TesisApp/images/logohabib.png', x=5, y=2, w=35, h=25)#, link=url)
         
 
         pdf.set_font('Arial', 'B', 12)

@@ -14,7 +14,7 @@ class Declaracion(FPDF):
     
     def declaJur(request,id,idp):
 
-        locale.setlocale(locale.LC_TIME, 'es_ES')
+        locale.setlocale(locale.LC_TIME, '')
         fecha=date.today()
         
         print(fecha)
@@ -56,7 +56,7 @@ class Declaracion(FPDF):
         pdf=FPDF(orientation='P', unit='mm', format='Letter')
         pdf.add_page()
         pdf.set_draw_color(r,g,b)
-        pdf.image('TesisApp\static\TesisApp\images\logohabib.png', x=8, y=5, w=40, h=30)#, link=url)  
+        pdf.image('TesisApp/static/TesisApp/images/logohabib.png', x=8, y=5, w=40, h=30)#, link=url)  
         
         pdf.set_font('Arial', 'B', 12)
         pdf.set_text_color(r,g,b)
