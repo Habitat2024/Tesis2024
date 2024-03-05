@@ -56,7 +56,7 @@ urlpatterns = [
     path('listaSolicitudesDen/solDen/<id>', viewsnat.solicDen, name="solDen"), 
     path('listaSolicitudesDen/evaluarSolDen/<id>', viewsS.evaluarSolDen),
 
-    path('obtenerRango/' ,views.obtenerRango, name='obtenerRango'),
+    path('obtenerRangoNat/' ,views.obtenerRangoNat, name='obtenerRangoNat'),
      
 
 ]
