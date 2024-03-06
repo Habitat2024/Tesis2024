@@ -15,6 +15,7 @@ urlpatterns = [
     path('',views.perfil, name="perfil"),# apunta a la raiz 
     path('perfil/',views.perfilc, name="perfilc"),
     path('registrarPerfil/',views.registrarPerfil),   
+    path('registrarPerfilc/',views.registrarPerfilc),   
     path('listaPerfil/', views.listaPerfil, name="listaPerfil"),
     path('listaPerfil/eliminarPerfil/<id>', views.eliminar),
     path('listaPerfil/editarPerfil/<id>', views.editarPerfil),
@@ -29,11 +30,14 @@ urlpatterns = [
     #para evaluacion de ingresos vs egresos Microempresarios   
     path('listaPerfil/evaluacionm/<id>',viewseiem.evaluacionm),
 
-    
     # para administracion de perfil
-    path('listaClientes/', views.listaClienets, name="listaClientes"),
-    path('agenc/',views.agenc),
+    path('listaClientes/<id>', views.listaClienets, name="listaClientes"), 
     path('listaClientes/administrarPerfil/<id>', views.administrarPerfil, name='administrarPerfil'),
+    
+    # para el administrador
+    path('listaClientesAdmin/', views.listaClientesAdmin, name="listaClientesAdmin"),
+    path('agenc/',views.agenc),
+    path('listaClientesAdmin/administrarPerfil/<id>', views.administrarPerfil, name='administrarPerfil'),
 
     #para solicitud micro
     path('consultaEvaluacionMicro/', views.consulta_evaliacion_micro, name='consultaEvaluacionMicro'),
@@ -47,10 +51,14 @@ urlpatterns = [
    # path('solicitudMicro/', views1.registroSolicitudMicro, name='solicitudMicro'),
 
     # para perfiles que no aplican
-    path('listaPerfilNA/', views.listaPerfilNA, name="listaPerfilNA"),
+    path('listaPerfilNA/<id>', views.listaPerfilNA, name="listaPerfilNA"),
     # reporte de perfiles que no aplican
     path('listaPerfilNA/pelfilNA/<id>', viewsnat.perfilNA, name="pelfilNA"), 
-
+    # para el administrador
+    path('listaPerfilNAAdmin/', views.listaPerfilNAAdmin, name="listaPerfilNAAdmin"),
+    path('agencNA/',views.agencNA),
+    # reporte de perfiles que no aplican
+    path('listaPerfilNAAdmin/pelfilNA/<id>', viewsnat.perfilNA, name="pelfilNA"), 
    
 ]
 if settings.DEBUG: 
