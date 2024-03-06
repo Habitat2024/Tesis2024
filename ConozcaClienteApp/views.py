@@ -12,8 +12,8 @@ from TesisApp.views import registroBit
 # Create your views here.
 
 def ccliente(request, id):
-    sol= ClienteDatoGen.objects.filter(IdSolicitud=id).exists() # comprueba si en la tabla existe el registro de la solicitud
-    if sol == True:
+    sol= ClienteDatoGen.objects.filter(IdSolicitud=id,CalidadActu="Cliente").exists() # comprueba si en la tabla existe el registro de la solicitud
+    if sol == True :
         solv= ClienteDatoGen.objects.get(IdSolicitud=id)
     
         return redirect('editarCliente', id=solv.Id)
@@ -52,18 +52,23 @@ def ccliente(request, id):
 
 def cclientedgf(request): # carga la vista para completar el formulario codeudor
     id=request.GET['idsol']
+    fsol= ClienteDatoGen.objects.filter(IdSolicitud=id,CalidadActu="Fiador").exists() 
+    if fsol == True :
+        solv= ClienteDatoGen.objects.get(IdSolicitud=id)
+    
+        return redirect('editarCliente', id=solv.Id)
+    else:
+        try:
+            d=  Domicilio.objects.get(IdSolicitud=id, Tipo="codeudor")
+        except Domicilio.DoesNotExist:
+            d=""
 
-    try:
-        d=  Domicilio.objects.get(IdSolicitud=id, Tipo="codeudor")
-    except Domicilio.DoesNotExist:
-        d=""
-
-    try:
-        dp=DatosPersFia.objects.get(IdSolicitud=id, Tipo="codeudor")
-    except DatosPersFia.DoesNotExist:
-        dp=""
-  
-    return render(request, "ConozcaClienteApp/cclientedgf.html",{"d":d,"dp":dp}) 
+        try:
+            dp=DatosPersFia.objects.get(IdSolicitud=id, Tipo="codeudor")
+        except DatosPersFia.DoesNotExist:
+            dp=""
+    
+        return render(request, "ConozcaClienteApp/cclientedgf.html",{"d":d,"dp":dp}) 
 
 
 def registrarD(request): 

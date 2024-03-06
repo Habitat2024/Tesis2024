@@ -194,14 +194,14 @@
                 <div class="col-md-6 col-sm-12 col-xs-12">
                     <div class="form-group form-animate-text " style="margin-top:5px !important;">
                         <h4>Latitud</h4>
-                        <input type="text" class="form-text" id="latitudm" name="latitudm" onkeypress="return event.charCode>=48 && event.charCode<=57 || event.charCode==46 " required>
+                        <input type="text" class="form-text" id="latitudm" name="latitudm"  required>
                         <span class="bar"></span>
                     </div>
                 </div>
                 <div class="col-md-6 col-sm-12 col-xs-12">
                   <div class="form-group form-animate-text " style="margin-top:5px !important;">
                       <h4>Longitud</h4>
-                      <input type="text" class="form-text" id="longitudm" name="longitudm" onkeypress="return event.charCode>=48 && event.charCode<=57 || event.charCode==46 " required>
+                      <input type="text" class="form-text" id="longitudm" name="longitudm"  required>
                       <span class="bar"></span>
                   </div>
               </div> 
@@ -659,9 +659,14 @@ function validarD() {
 $.validator.addMethod("numero", function (value, element) {
       return /^[0-9,.]*$/i.test(value);
     }, "<h2>Ingrese sólo numero y puntos  </h2>");
+
     $.validator.addMethod("numerosp", function (value, element) {
       return /^[0-9]*$/i.test(value);
     }, "<h2>Ingrese sólo numero  </h2>");
+
+    $.validator.addMethod("numerom", function (value, element) {
+      return /^[-+]?[0-9.,]*$/i.test(value);
+    }, "<h2>Ingrese sólo numero, signos + o - y puntos  </h2>");
 
     $.validator.addMethod("letrasn", function(value, element) {
       return /^(?!.*(.)\1{2})[ a-zA-Záéíóúüñ0-9,ºª.]*$/i.test(value);
@@ -718,13 +723,13 @@ $.validator.addMethod("numero", function (value, element) {
         latitudm: {
           minlength: 1,
           required: true,
-          numero: true,
+          numerom: true,
           maxlength: 100
         },
         longitudm: {
           minlength: 1,
           required: true,
-          numero: true,
+          numerom: true,
           maxlength: 100
         },
         comentariosrl: {

@@ -174,7 +174,7 @@
           <div class="col-md-6 col-sm-12 col-xs-12">
             <div class="form-group form-animate-text " style="margin-top:5px !important;">
               <h4>Latitud</h4>
-              <input type="text" class="form-text" id="latitud" name="latitud" value="{{ipl.Latitud}}" onkeypress="return event.charCode>=48 && event.charCode<=57 || event.charCode==46 "  required>
+              <input type="text" class="form-text" id="latitud" name="latitud" value="{{ipl.Latitud}}"  required>
               <span class="bar"></span>
             </div>
           </div>
@@ -184,7 +184,7 @@
           <div class="col-md-6 col-sm-12 col-xs-12">
             <div class="form-group form-animate-text " style="margin-top:5px !important;">
               <h4>Longitud</h4>
-              <input type="text" class="form-text" id="longitud" name="longitud" value="{{ipl.Longitud}}" onkeypress="return event.charCode>=48 && event.charCode<=57 || event.charCode==46 "  required>
+              <input type="text" class="form-text" id="longitud" name="longitud" value="{{ipl.Longitud}}"  required>
               <span class="bar"></span>
             </div>
           </div>
@@ -607,9 +607,14 @@ $("#fin").click(function () {
     $.validator.addMethod("numero", function (value, element) {
       return /^[0-9,.]*$/i.test(value);
     }, "<h2>Ingrese sólo numero y puntos  </h2>");
+
     $.validator.addMethod("numerosp", function (value, element) {
       return /^[0-9]*$/i.test(value);
     }, "<h2>Ingrese sólo numero  </h2>");
+
+    $.validator.addMethod("numerom", function (value, element) {
+      return /^[-+]?[0-9.,]*$/i.test(value);
+    }, "<h2>Ingrese sólo numero, signos + o - y puntos  </h2>");
 
     $.validator.addMethod("letrasn", function(value, element) {
       return /^(?!.*(.)\1{2})[ a-zA-Záéíóúüñ0-9,ºª.]*$/i.test(value);
@@ -666,13 +671,13 @@ $("#fin").click(function () {
         latitud: {
           minlength: 1,
           required: true,
-          numero: true,
+          numerom: true,
           maxlength: 100
         },
         longitud: {
           minlength: 1,
           required: true,
-          numero: true,
+          numerom: true,
           maxlength: 100
         },
         anchocv: {

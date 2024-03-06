@@ -68,6 +68,22 @@
                   </div>
                 </div>
               </div>
+            {% elif cdg.CalidadActu == "Fiador" %}
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="form-group form-animate-text " style="margin-top:0px !important;">
+                  <label>Calidad en la que actúa:</label> &nbsp;&nbsp;
+                  Cliente: 
+                  <div class="iradio_flat-green ">
+                    <input type="radio"  name="calidad" id="calidad" value="Cliente"  required>
+                    <ins class="iCheck-helper"></ins>
+                  </div>&nbsp;&nbsp;
+                  Fiador:
+                  <div class="iradio_flat-green ">
+                    <input type="radio" name="calidad" id="calidad" value="Fiador" checked required>
+                    <ins class="iCheck-helper"></ins>
+                  </div>
+                </div>
+              </div>
             {% else %}
             <div class="col-md-6 col-sm-6 col-xs-12">
               <div class="form-group form-animate-text " style="margin-top:0px !important;">
@@ -101,7 +117,7 @@
             <div class="form-group form-animate-text " style="margin-top:5px !important;">
               <h4>Nombre Completo</h4>
               <input type="text" class="form-text" id="nombre" name="nombre"
-                value="{{cdg.IdSolicitud.IdPerfil.Nombres}} {{cdg.IdSolicitud.IdPerfil.Apellidos}}" disabled required>
+                value="{{cdg.NombreConzCli}}" disabled required>
               <span class="bar"></span>
             </div>
           </div>
@@ -128,7 +144,7 @@
             <div class="form-group form-animate-text " style="margin-top:5px !important;">
               <h4>Nacionalidad</h4>
               <input type="text" class="form-text" id="nacionalidad" name="nacionalidad"
-                value="{{cdg.IdSolicitud.IdPerfil.Nacionalidad}}" disabled required>
+                value="{{cdg.Nacionalidad}}" disabled required>
               <span class="bar"></span>
             </div>
           </div>
@@ -138,15 +154,22 @@
           <div class="col-md-6 col-sm-6 col-xs-12"><!-- /comienzo columna  derecha-->
             <div class="form-group form-animate-text " style="margin-top:5px !important;">
               <h4>Lugar de Nacimiento</h4>
+              {% if cdg.CalidadActu == "Cliente" %}
               <input type="text" class="form-text " id="lugarn" name="lugarn" value="{{dp.LugarNaciCli}}" disabled required>
+              {% elif cdg.CalidadActu == "Fiador" %}
+              <input type="text" class="form-text " id="lugarn" name="lugarn" value="{{dpc.LugarNaciFia}}" disabled required>
+              {% endif %}
               <span class="bar"></span>
             </div>
           </div>
           <div class="col-md-6 col-sm-6 col-xs-12"><!-- /comienzo columna  derecha-->
             <div class="form-group form-animate-text " style="margin-top:5px !important;">
               <h4>Fecha de Nacimiento</h4>
-              <input type="date" class="form-text" id="fechan" name="fechan"
-                value="{{cdg.IdSolicitud.IdPerfil.FechaNaci|date:'Y-m-d'}}" disabled required>
+              {% if cdg.CalidadActu == "Cliente" %}
+              <input type="text" class="form-text" id="fechan" name="fechan" value="{{cdg.IdSolicitud.IdPerfil.FechaNaci|date:'d-m-Y'}} " disabled required>
+              {% elif cdg.CalidadActu == "Fiador" %}
+              <input type="text" class="form-text" id="fechan" name="fechan" value="{{dpc.FechaNaciFia|date:'d-m-Y'}} " disabled required>
+              {% endif %}
               <span class="bar"></span>
             </div>
           </div>
@@ -227,7 +250,7 @@
             <div class="form-group form-animate-text " style="margin-top:5px !important;">
               <h4>Ocupación o actividad actual</h4>
               <input type="text" class="form-text" id="ocupacion" name="ocupacion"
-                value="{{cdg.IdSolicitud.IdPerfil.IdOcupacion.Nombre}}" disabled required>
+                value="{{cdg.OcupacionActiAct}}" disabled required>
               <span class="bar"></span>
             </div>
           </div>
@@ -238,7 +261,7 @@
             <div class="form-group form-animate-text " style="margin-top:5px !important;">
               <h4>Dirección domicilio</h4>
               <input type="text" class="form-text" id="direcciond" name="direcciond"
-                value="{{cdg.IdSolicitud.IdPerfil.Direccion}}" disabled required>
+                value="{{cdg.DireccionDomi}}" disabled required>
               <span class="bar"></span>
             </div>
           </div>
@@ -254,7 +277,7 @@
           <div class="col-md-6 col-sm-12 col-xs-12"><!-- /comienzo columna  derecha-->
             <div class="form-group form-animate-text " style="margin-top:5px !important;">
               <h4>Correo electrónico</h4>
-              <input type="text" class="form-text" id="correo" name="correo" value="{{cdg.IdSolicitud.IdPerfil.Correo}}" disabled
+              <input type="text" class="form-text" id="correo" name="correo" value="{{cdg.CorreoElec}}" disabled
                 required>
               <span class="bar"></span>
             </div>
@@ -263,7 +286,7 @@
             <div class="form-group form-animate-text " style="margin-top:5px !important;">
               <h4>Teléfono celular</h4>
               <input type="text" class="form-text" id="telefonoc" name="telefonoc"
-                value="{{cdg.IdSolicitud.IdPerfil.Telefono}}"
+                value="{{cdg.TelefonoCelu}}"
                 disabled maxlength="9"
                 minlength="9" required>
               <span class="bar"></span>
