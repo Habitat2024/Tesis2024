@@ -4,7 +4,7 @@ from django.core.serializers import serialize
 from django.shortcuts import render,redirect, HttpResponse
 from ClienteApp.models import *
 from django.contrib import messages
-from ConfiguracionApp.models import Alternativa, ModeloVivi
+from ConfiguracionApp.models import Alternativa, ModeloVivi, Agencia
 from ListaChequeoApp.models import ListaCheq
 from NaturalApp.models import *
 from SolicitudesApp.models import *
@@ -317,6 +317,11 @@ def registroSolicitudN(request):
 def listarSNC(request): 
     listSolinc = Solicitud.objects.filter(Estado="Completado", Tipo="natural")
     return render(request, "NaturalApp/listarSNC.html", {"solicitudes":listSolinc})
+
+def listarSNCA(request, id): # solicitudes completas por agencia
+    listSoli = Solicitud.objects.filter(Q(Estado="Completado") & Q(Tipo="natural")& Q(IdPerfil__IdAgencia=id))
+    return render(request, "NaturalApp/listarSNC.html", {"solicitudes":listSoli})
+
 
 def listarSN(request): 
     listSolin = Solicitud.objects.filter(Estado="Incompleto",Tipo="natural")
@@ -837,29 +842,127 @@ def modSoliNatural(request):
     return redirect('administrarPerfil', id=soli.IdPerfil.Id)  # id de perfil 
 
 # lista de reportes para el comite
-def listaRF(request):
-    listSoli = Solicitud.objects.filter(Estado="Completado", Tipo="natural")
+def listaRF(request,id):
+    listSoli = Solicitud.objects.filter(Estado="Completado", Tipo="natural", IdPerfil__IdAgencia=id)
     return render(request, "NaturalApp/listaReportesF.html", {"solicitudes":listSoli})
+
+def listaRFAdmin(request):
+    listaAg=Agencia.objects.all()
+    return render(request, "NaturalApp/listaReportesFAdmin.html", {"agencia":listaAg})
+
+def agencRFA(request):
+    id=request.GET['id']
+    lista_agenciaC=[]
+    listperpa=""
+    if request.is_ajax():
+        try:
+            listperpa = Solicitud.objects.filter(Estado="Completado", Tipo="natural", IdPerfil__IdAgencia=id)
+            for item in listperpa:
+                lista_agenciaC.append({"id":item.Id,"dui":item.IdPerfil.Dui, "nombre":item.IdPerfil.Nombres, "apellido":item.IdPerfil.Apellidos,"telefono":item.IdPerfil.Telefono, "agencia":item.IdPerfil.IdAgencia.Nombre})
+        except Exception:
+            None
+        serialized_data = json.dumps(lista_agenciaC,default=str)
+        return HttpResponse(serialized_data, content_type="application/json")
 
 #########################################################
 #lista de solicitudes pendientes de aprobacion 
-def listaSolicitudesPA(request): 
-    listperpa = Solicitud.objects.filter(Tipo="natural",EstadoSoli=3, IdPerfil__EstadoSoli=11, IdPerfil__Estado='activo')
+def listaSolicitudesPA(request,id): 
+    listperpa = Solicitud.objects.filter(Tipo="natural",EstadoSoli=3, IdPerfil__EstadoSoli=11, IdPerfil__Estado='activo', IdPerfil__IdAgencia=id)
     return render(request, "NaturalApp/listaSolicitudPA.html", {"solicitudes":listperpa})
 
-#lista de solicitudes observadas= 5
-def listaSolicitudesObs(request): 
-    listperpa = Solicitud.objects.filter(Tipo="natural",EstadoSoli=5, IdPerfil__Estado='activo')
+#lista de solicitudes pendientes de aprobacion  Admin
+def listaSolicitudesPAAdmin(request): 
+    listaAg=Agencia.objects.all()
+    return render(request, "NaturalApp/listaSolicitudPAAdmin.html", {"agencia":listaAg})
 
+def agencPAA(request):
+    id=request.GET['id']
+    lista_agenciaC=[]
+    listperpa=""
+    if request.is_ajax():
+        try:
+            listperpa = Solicitud.objects.filter(Tipo="natural",EstadoSoli=3, IdPerfil__EstadoSoli=11, IdPerfil__Estado='activo', IdPerfil__IdAgencia=id)
+            for item in listperpa:
+                lista_agenciaC.append({"id":item.Id,"dui":item.IdPerfil.Dui, "nombre":item.IdPerfil.Nombres, "apellido":item.IdPerfil.Apellidos,"telefono":item.IdPerfil.Telefono, "agencia":item.IdPerfil.IdAgencia.Nombre})
+        except Exception:
+            None
+        serialized_data = json.dumps(lista_agenciaC,default=str)
+        return HttpResponse(serialized_data, content_type="application/json")
+    
+
+#lista de solicitudes aprobadas
+def listaSolicitudesApr(request,id): 
+    listperpa = Solicitud.objects.filter(Tipo="natural",EstadoSoli=4, IdPerfil__EstadoSoli=11, IdPerfil__Estado='activo', IdPerfil__IdAgencia=id)
+    return render(request, "NaturalApp/listaSAprobadas.html", {"solicitudes":listperpa})
+
+#lista de solicitudes aprobadas Admin
+def listaSolicitudesAprAdmin(request): 
+    listaAg=Agencia.objects.all()
+    return render(request, "NaturalApp/listaSAprobadasAdmin.html", {"agencia":listaAg})
+
+def agencAA(request):
+    id=request.GET['id']
+    lista_agenciaC=[]
+    listperpa=""
+    if request.is_ajax():
+        try:
+            listperpa = Solicitud.objects.filter(Tipo="natural",EstadoSoli=4, IdPerfil__EstadoSoli=11, IdPerfil__Estado='activo', IdPerfil__IdAgencia=id)
+            for item in listperpa:
+                lista_agenciaC.append({"id":item.Id,"dui":item.IdPerfil.Dui, "nombre":item.IdPerfil.Nombres, "apellido":item.IdPerfil.Apellidos,"telefono":item.IdPerfil.Telefono, "agencia":item.IdPerfil.IdAgencia.Nombre})
+        except Exception:
+            None
+        serialized_data = json.dumps(lista_agenciaC,default=str)
+        return HttpResponse(serialized_data, content_type="application/json")
+    
+#lista de solicitudes observadas= 5
+def listaSolicitudesObs(request,id): 
+    listperpa = Solicitud.objects.filter(Tipo="natural",EstadoSoli=5, IdPerfil__Estado='activo', IdPerfil__IdAgencia=id)
     return render(request, "NaturalApp/listaSObservadas.html", {"solicitudes":listperpa})
 
-#lista de solicitudes  denegadas=6
-def listaSolicitudesDen(request): 
-    listperpa = Solicitud.objects.filter(Tipo="natural",EstadoSoli=6, IdPerfil__Estado='activo')
+#lista de solicitudes observadas  Admin
+def listaSolicitudesObsAdmin(request): 
+    listaAg=Agencia.objects.all()
+    return render(request, "NaturalApp/listaSObservadasAdmin.html", {"agencia":listaAg})
 
+def agencOA(request):
+    id=request.GET['id']
+    lista_agenciaC=[]
+    listperpa=""
+    if request.is_ajax():
+        try:
+            listperpa = Solicitud.objects.filter(Tipo="natural",EstadoSoli=5, IdPerfil__Estado='activo', IdPerfil__IdAgencia=id)
+            for item in listperpa:
+                lista_agenciaC.append({"id":item.Id,"dui":item.IdPerfil.Dui, "nombre":item.IdPerfil.Nombres, "apellido":item.IdPerfil.Apellidos,"telefono":item.IdPerfil.Telefono, "agencia":item.IdPerfil.IdAgencia.Nombre})
+        except Exception:
+            None
+        serialized_data = json.dumps(lista_agenciaC,default=str)
+        return HttpResponse(serialized_data, content_type="application/json")
+
+#lista de solicitudes  denegadas=6
+def listaSolicitudesDen(request,id): 
+    listperpa = Solicitud.objects.filter(Tipo="natural",EstadoSoli=6, IdPerfil__Estado='activo', IdPerfil__IdAgencia=id)
     return render(request, "NaturalApp/listaSDenegadas.html", {"solicitudes":listperpa})
 
-def obtenerRangoNat(request):
+#lista de solicitudes denegadas  Admin
+def listaSolicitudesDenAdmin(request): 
+    listaAg=Agencia.objects.all()
+    return render(request, "NaturalApp/listaSDenegadasAdmin.html", {"agencia":listaAg})
+
+def agencDA(request):
+    id=request.GET['id']
+    lista_agenciaC=[]
+    listperpa=""
+    if request.is_ajax():
+        try:
+            listperpa = Solicitud.objects.filter(Tipo="natural",EstadoSoli=6, IdPerfil__Estado='activo', IdPerfil__IdAgencia=id)
+            for item in listperpa:
+                lista_agenciaC.append({"id":item.Id,"dui":item.IdPerfil.Dui, "nombre":item.IdPerfil.Nombres, "apellido":item.IdPerfil.Apellidos,"telefono":item.IdPerfil.Telefono, "agencia":item.IdPerfil.IdAgencia.Nombre})
+        except Exception:
+            None
+        serialized_data = json.dumps(lista_agenciaC,default=str)
+        return HttpResponse(serialized_data, content_type="application/json")
+
+def obtenerRango(request):
     id = request.GET['id']   
     alternativa = "-0"
     if request.is_ajax():  

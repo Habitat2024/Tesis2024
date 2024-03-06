@@ -542,12 +542,12 @@
         console.log("cargarMaterialMod", response);
         console.log(response[0].fields)
         document.getElementById("idmat").value = mat
-        document.getElementById("nombm").value = response[0].fields.nombre
-        document.getElementById("descripcionm").value = response[0].fields.descripcion
-        document.getElementById("unidadm").value = response[0].fields.unidad
+        document.getElementById("nombm").value = response[0].fields.Nombre
+        document.getElementById("descripcionm").value = response[0].fields.Descripcion
+        document.getElementById("unidadm").value = response[0].fields.Unidad
         document.getElementById("preciom").value = precio
         document.getElementById("cantidadm").value = cantidad
-        document.getElementById("nombrem").value = response[0].fields.nombre
+        document.getElementById("nombrem").value = response[0].fields.Nombre
         button.innerText = button.textContent = 'Actualizar';
 
       },

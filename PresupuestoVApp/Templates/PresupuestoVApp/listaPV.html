@@ -19,8 +19,6 @@
                           <th>Modelo</th>
                           <th>Costo Total</th>
                           <th>Opción</th>
-                          <th>Opción</th>
-                          <th>Opción</th>
                          
                         </tr>
                       </thead>
@@ -33,9 +31,7 @@
                           <td>{{pv.IdPresupuestoViviDatGen.IdSolicitud.IdPerfil.Dui}} </td>                        
                           <td>{{pv.IdPresupuestoViviDatGen.IdSolicitud.IdPerfil.Nombres}} {{ pv.idp.IdSolicitud.IdPerfil.Apellidos}}</td>
                           <td>{{pv.IdPresupuestoViviDatGen.Modelo}}</td>
-                          <td>{{pv.IdPresupuestoViviDatGen.CostoTotaViv}}</td>
-                          <td><a href="editarPV/{{pv.IdPresupuestoViviDatGen.Id}}" class="btn btn-info">Editar</a></td> 
-                          <td><a href="presupuestovoa/{{pv.IdPresupuestoViviDatGen.Id}}" class="btn btn-warning">Obras Adic</a></td> 
+                          <td>{{pv.IdPresupuestoViviDatGen.CostoTotaViv}}</td> 
                           <td><a href="presupuestoVv/{{pv.IdPresupuestoViviDatGen.Id}}" class="btn btn-info">Reporte</a></td>
                         </tr>
                         {% endfor %}

@@ -47,14 +47,11 @@ def perfil(request):
         mensaje="Debe Asignar Distritos"
         messages.error(request, mensaje)
    
-
     try:
         salario = Salario.objects.filter(Estado="activo")
     except Salario.DoesNotExist:
         mensaje="Debe Registrar Salarios"
         messages.error(request, mensaje)
-
-    
 
     try:
         listao=Ocupacion.objects.filter(Estado="activo")
@@ -77,9 +74,41 @@ def perfil(request):
     return render(request,"ClienteApp/perfil.html", {"ocupaciones":listao,"Departamento":listarDepto, "lper_json": lper_json})
 
 def perfilc(request):
-    listao=Ocupacion.objects.all()
-    listarDepto=Departamento.objects.all()
-    return render(request,"ClienteApp/perfilc.html", {"ocupaciones":listao,"Departamento":listarDepto})
+    try:
+        distrito = Distrito.objects.filter(Estado=2).exists()
+    except Distrito.DoesNotExist:
+        distrito =""
+        
+    if distrito == True:
+        pass  
+    else:
+        mensaje="Debe Asignar Distritos"
+        messages.error(request, mensaje)
+   
+    try:
+        salario = Salario.objects.filter(Estado="activo")
+    except Salario.DoesNotExist:
+        mensaje="Debe Registrar Salarios"
+        messages.error(request, mensaje)
+
+    try:
+        listao=Ocupacion.objects.filter(Estado="activo")
+    except Ocupacion.DoesNotExist:
+        listao=""
+
+    try:
+        listarDepto=Departamento.objects.all()
+    except Departamento.DoesNotExist:
+        listarDepto=""   
+    
+    try:
+        lper = Perfil.objects.all()
+    except Perfil.DoesNotExist:
+        lper=""
+
+     # Convertir la lista a JSON
+    lper_json = json.dumps(list(lper.values()), default=str)  
+    return render(request,"ClienteApp/perfilc.html", {"ocupaciones":listao,"Departamento":listarDepto, "lper_json": lper_json})
 
 def registrarPerfil(request): 
   
@@ -208,6 +237,134 @@ def registrarPerfil(request):
         messages.success(request, mensaje)
 
         return redirect('listaClientes')
+    
+def registrarPerfilc(request): 
+  
+    nombres=request.POST['nombres']
+    apellidos=request.POST['apellidos']
+    dui=request.POST['dui']
+    telefono=request.POST['telefono']
+    nacionalidad=request.POST['nacionalidad']
+    fecha=request.POST['fecha']
+    ocu =request.POST['ocupacion']
+    salario=request.POST['salario']
+    distrito=request.POST['distrito']
+    direccion=request.POST['direccion']
+    correo =request.POST['correo']
+    contrasena=request.POST['contrasena']
+    rcontrasena=request.POST['rcontrasena']
+    estadosoli=1
+
+    fe= datetime.strptime(fecha, '%Y-%m-%d')
+    anio= fe.year
+    mes =fe.month
+    dia= fe.day
+
+    anioa= date.today().year
+    mesa= date.today().month
+    diaa= date.today().day
+
+    ed= anioa - anio
+
+    edad= ed
+
+    if anio >= anioa:
+        mensaje="ingrese un año valido"
+        messages.warning(request, mensaje)
+        return redirect('/ClienteApp/')
+    elif mes >= mesa  and dia > diaa:
+        edad= ed-1
+    else:
+        edad= ed
+
+    sal=float(salario)
+    ls=Salario.objects.filter(Estado="activo")
+    des=""
+    for sala in ls:
+        if sal>= sala.SalarioMini and sal<=sala.SalarioMaxi:
+            min= sala.SalarioMini
+            max=sala.SalarioMaxi
+            des=sala.TipoSala
+            break
+        else:
+            des=""
+    print(des)
+    try:
+        vDist=Distrito.objects.filter(Id=distrito,Estado=2).exists()
+    except Distrito.DoesNotExist:
+        vDist =""
+    
+
+    if vDist == True:
+        pass  
+    else:
+        mensaje="Debe Asignar el Distritos"
+        messages.error(request, mensaje)
+
+    idocu=Ocupacion.objects.get(Id=ocu)
+    idocu.Id=ocu
+    
+    muni=Distrito.objects.get(Id=distrito)
+    muni_zona=muni.Id
+
+   
+    #########agreagado para guardar a que zona pertenece el cliente
+    try:
+        zona=Zona.objects.get(IdDistrito=muni_zona)
+    except Zona.DoesNotExist:
+        zona=""
+    if zona == "":
+        mensaje="Debe Asignar el Distritos"
+        messages.error(request, mensaje)       
+    else:
+        zona.IdDistrito=muni
+        zo=zona.IdZonaAgen.IdAgencia
+    #print(zo)
+    #############################
+
+    du=Perfil.objects.filter(Dui=dui).exists()
+    if du == True:
+        mensaje="Usted ya esta registrado"
+        messages.warning(request, mensaje)
+        return redirect( '/')
+
+    elif des=="" :
+        observacion="Salario fuera de los rangos establecidos"
+        perfilna=PerfilNoApl.objects.create(Nombres=nombres,Apellidos=apellidos,Dui=dui,Telefono=telefono,Nacionalidad=nacionalidad,Fecha=fecha,Edad=edad,Salario=sal,Direccion=direccion,IdAgencia=zo,Observaciones=observacion)
+        mensaje="Lo sentimos, su solicitud no puede ser aceptada ya que no cumple los requisitos de salario"
+        messages.error(request, mensaje)
+        return redirect('perfilc')
+    elif nacionalidad!="salvadoreño" :
+        observacion="Nacionalidad no aceptada"
+        perfilna=PerfilNoApl.objects.create(Nombres=nombres,Apellidos=apellidos,Dui=dui,Telefono=telefono,Nacionalidad=nacionalidad,Fecha=fecha,Edad=edad,Salario=sal,Direccion=direccion,IdAgencia=zo,Observaciones=observacion)
+        mensaje="Lo sentimos, su solicitud no puede ser aceptada ya que la nacionalidad no es aceptada"
+        messages.error(request, mensaje)
+        return redirect('perfilc')
+    elif edad< 18 or edad > 65:
+        observacion="Edad fuera del rango establecido"
+        perfilna=PerfilNoApl.objects.create(Nombres=nombres,Apellidos=apellidos,Dui=dui,Telefono=telefono,Nacionalidad=nacionalidad,Fecha=fecha,Edad=edad,Salario=sal,Direccion=direccion,IdAgencia=zo,Observaciones=observacion)
+        mensaje="Lo sentimos, su solicitud no puede ser aceptada ya que la edad no es aceptada"
+        messages.error(request, mensaje)
+        return redirect('perfilc')
+    elif zona == "":
+        mensaje="Debe Asignar el Distritos"
+        messages.error(request, mensaje)  
+        return redirect('perfilc')
+    else:
+        esta="activo"
+        cont = make_password(contrasena)
+        rcont = make_password(rcontrasena)
+        test_str=correo
+        username=test_str.split('@')[0]
+        perfil=Perfil.objects.create(Nombres=nombres,Apellidos=apellidos,Dui=dui,Telefono=telefono,Nacionalidad=nacionalidad,FechaNaci=fecha,Edad=edad,IdOcupacion=idocu,Salario=sal,IdDistrito=muni,Direccion=direccion,Correo=correo,Contrasena=cont,ContrasenaVeri=rcont,Estado=esta,IdAgencia=zo,EstadoSoli=estadosoli)
+        #registroBit(request, "Registro de perfil" + nombres + " " + apellidos + " DUI " + dui, "Registro")
+        ####### Registrar cliente para que pueda iniciar sesion
+        
+        login=Usuario.objects.create(username=username, nombre=nombres,apellido=apellidos, cargo=3, email=correo, password=cont, agencia=zo)
+        mensaje="Datos guardados"
+        messages.success(request, mensaje)
+
+        return redirect('perfilc')   
 
 
 def eliminar(request, id):
@@ -380,9 +537,13 @@ def solicitudmMicroempresa(request, id):
 
 
 #########################################################
-def listaClienets(request): 
+def listaClienets(request, id): 
+    listper=Perfil.objects.filter(Estado="activo",IdAgencia=id)
+    return render(request, "ClienteApp/listaClientes.html", {"perfil":listper})
+
+def listaClientesAdmin(request): #lista filtrada por agencias
     listaAg=Agencia.objects.all()
-    return render(request, "ClienteApp/listaClientes.html", {"agencia":listaAg})
+    return render(request, "ClienteApp/listaClientesAdmin.html", {"agencia":listaAg})
 
 def agenc(request):
     id=request.GET['id']
@@ -419,7 +580,7 @@ def consulta_evaliacion_micro(request):
             listaId.append("-0") 
 
         try:
-            solicitud=sol.objects.filter(Q(IdPerfil=id) & (Q(EstadoSoli=1)  | Q(EstadoSoli=2) | Q(EstadoSoli=3)  | Q(EstadoSoli=4) | Q(EstadoSoli=5)) ).latest('Fecha') #obtengo la ultima solicitud por fecha 
+            solicitud=sol.objects.filter(Q(IdPerfil=id) & (Q(EstadoSoli=1)  | Q(EstadoSoli=2) | Q(EstadoSoli=3)  | Q(EstadoSoli=4)) ).latest('Fecha') #obtengo la ultima solicitud por fecha 
             listaId.append(solicitud.Id)
         except Exception:
            listaId.append("-0") 
@@ -537,20 +698,15 @@ def consulta_evaliacion_natural(request):
             listaId.append("-0") 
 
         try:
-            solicitud=sol.objects.filter(Q(IdPerfil=id) & (Q(EstadoSoli=1)  | Q(EstadoSoli=2) | Q(EstadoSoli=3)  | Q(EstadoSoli=4) | Q(EstadoSoli=5)) ).latest('Fecha') #obtengo la ultima solicitud por fecha 
+            solicitud=sol.objects.filter(Q(IdPerfil=id) & (Q(EstadoSoli=1)  | Q(EstadoSoli=2) | Q(EstadoSoli=3)  | Q(EstadoSoli=4)) ).latest('Fecha') #obtengo la ultima solicitud por fecha 
             listaId.append(solicitud.Id)
         except Exception:
            listaId.append("-0") 
         try:
-            conosca_cliente=ClienteDatoGen.objects.get(IdSolicitud=solicitud.Id,CalidadActu="Cliente")
+            conosca_cliente=ClienteDatoGen.objects.get(IdSolicitud=solicitud.Id)
             listaId.append(conosca_cliente.Id)
         except Exception:
            listaId.append("-0") 
-        try:
-            conosca_cliente_fiador=ClienteDatoGen.objects.get(IdSolicitud=solicitud.Id,CalidadActu="Fiador")
-            listaId.append(conosca_cliente_fiador.Id)
-        except Exception:
-           listaId.append("-0")
         try:
             declaracion=DeclaracionJuraCli.objects.get(IdSolicitud=solicitud.Id)
             listaId.append(declaracion.Id)
@@ -663,7 +819,7 @@ def consulta_tipo_solicitud(request):
                 solicitud.Tipo="natural" 
                 print("natural")
             if(cliente.EstadoSoli >3):                        
-                solicitud = sol.objects.filter(Q(IdPerfil=id) & (Q(EstadoSoli=1) | Q(EstadoSoli=2) | Q(EstadoSoli=3) | Q(EstadoSoli=4) | Q(EstadoSoli=6)| Q(EstadoSoli=5)) ).latest('Fecha') #obtengo la ultima solicitud por fecha    
+                solicitud = sol.objects.filter(Q(IdPerfil=id) & (Q(EstadoSoli=1) | Q(EstadoSoli=2) | Q(EstadoSoli=3) | Q(EstadoSoli=4) | Q(EstadoSoli=6)) ).latest('Fecha') #obtengo la ultima solicitud por fecha    
                 solicitud.Id=solicitud.Id    
             serialized_data =  serialize("json", [ solicitud])
         except Exception: 
@@ -679,7 +835,7 @@ def obtener_historial(request):
     id = request.GET['idCliente']
     historial = []
     try:
-        lista_solicitudes = sol.objects.filter(Q(IdPerfil=id) & Q(Q(EstadoSoli=4) | Q(EstadoSoli=6) | Q(EstadoSoli=7) | Q(EstadoSoli=5) ) )##agregar 6 y 7
+        lista_solicitudes = sol.objects.filter(Q(IdPerfil=id) & Q(Q(EstadoSoli=4) | Q(EstadoSoli=6) | Q(EstadoSoli=7) ) )##agregar 6 y 7
         datos = []
         for item in lista_solicitudes:
 
@@ -705,7 +861,7 @@ def completar_solicitud(request):
     completa = 'si'
     
     try:
-        solicitud = sol.objects.filter(Q(IdPerfil=id_cliente) & ( Q(EstadoSoli=2) | Q(EstadoSoli=5)) ).latest('Fecha') #obtengo la ultima solicitud por fecha    
+        solicitud = sol.objects.filter(Q(IdPerfil=id_cliente) & ( Q(EstadoSoli=2)) ).latest('Fecha') #obtengo la ultima solicitud por fecha    
         if(solicitud.Tipo=="micro"):
             try:            
                 balance = BalanceSituMic.objects.get(Estado="1",IdPerfil=id_cliente)           
@@ -848,7 +1004,7 @@ def completar_solicitud_base(request):
         perfil.save()
 
         #solicitud = sol.objects.filter(Q(IdPerfil=id) & (Q(EstadoSoli=4) | Q(EstadoSoli=6) | Q(EstadoSoli=3)) ).latest('Fecha') 
-        solicitud = sol.objects.filter(Q(IdPerfil=id) & ( Q(EstadoSoli=2) | Q(EstadoSoli=5)) ).latest('Fecha') #obtengo la ultima solicitud por fecha  
+        solicitud = sol.objects.filter(Q(IdPerfil=id) & ( Q(EstadoSoli=2)) ).latest('Fecha') #obtengo la ultima solicitud por fecha  
         solicitud.EstadoSoli=3
         solicitud.save()
     except Exception: 
@@ -902,7 +1058,7 @@ def Registrar_documento(request):
     print(str(idsoli))
     print(nombreD)
     bandera= "paso"
-      
+
     if request.is_ajax():     
         
         try:  
@@ -912,7 +1068,8 @@ def Registrar_documento(request):
                 "NombreDocu":nombreD,
                 "IdSolicitud":idsoli
             }) 
-        
+            print(documento)
+            print(creado)
             if creado:
                 
                 registroBit(request, Actividad="Se guardo archivo "+nombreD, Nivel="Registro")
@@ -1133,7 +1290,7 @@ def Registrar_documento(request):
         except Exception:           
             bandera = "-0"
             serialized_data = json.dumps(bandera, default=str)
-       
+        print(bandera)  
         return HttpResponse(serialized_data, content_type="application/json")
     else:
         listam = Materiales.objects.filter(Estado="activo")
@@ -1142,8 +1299,26 @@ def Registrar_documento(request):
 
 #########################################################
 # Listado de perfil que no aplican
-def listaPerfilNA(request): 
-    listper=PerfilNoApl.objects.all()
+def listaPerfilNA(request, id): 
+    listper=PerfilNoApl.objects.filter(IdAgencia=id)
     return render(request, "ClienteApp/listaperfilNA.html", {"perfil":listper})
+
+def listaPerfilNAAdmin(request): 
+    listaAg=Agencia.objects.all()
+    return render(request, "ClienteApp/listaperfilNAAdmin.html", {"agencia":listaAg})
+
+def agencNA(request):
+    id=request.GET['id']
+    lista_agenciaC=[]
+    clien=""
+    if request.is_ajax():
+        try:
+            clien=PerfilNoApl.objects.filter(IdAgencia=id)
+            for item in clien:
+                lista_agenciaC.append({"id":item.Id,"dui":item.Dui, "nombre":item.Nombres, "apellido":item.Apellidos,"telefono":item.Telefono, "agencia":item.IdAgencia.Nombre,"observaciones":item.Observaciones})
+        except Exception:
+            None
+        serialized_data = json.dumps(lista_agenciaC,default=str)
+        return HttpResponse(serialized_data, content_type="application/json")
     
    

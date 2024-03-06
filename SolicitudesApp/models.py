@@ -41,7 +41,7 @@ class DatosPers(models.Model): # para cliente
 
 class DatosPersFia(models.Model): # para tipo conyuge o codeudor
        Id= models.AutoField(primary_key=True)
-       Tipo=models.CharField(max_length=12)
+       Tipo=models.CharField(max_length=12,null=True)
        NombreFiad= models.CharField(max_length=50)
        ApellidoFiad= models.CharField(max_length=50)
        DuiFiad= models.CharField(max_length=12)

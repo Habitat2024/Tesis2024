@@ -488,6 +488,6 @@ def actualizarPresupuesto(request):
     return redirect('administrarPerfil', id=idsol.IdPerfil.Id)  # id de perfil ")
 
 
-def listaPM(request):
-    listapm = Presupuesto.objects.all()
+def listaPM(request,id):
+    listapm = Presupuesto.objects.filter(IdPresupuestoDatoGen__IdSolicitud__IdPerfil__IdAgencia=id)
     return render(request, "PresupuestoApp/listaPM.html", {"listap": listapm})

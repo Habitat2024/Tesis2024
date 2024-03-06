@@ -19,7 +19,6 @@
                           <th>Monto</th>
                           <th>Plazo Años</th>
                           <th > Opción </th>
-                          <th > Opción </th>
                         </tr>
                       </thead>
 
@@ -31,10 +30,8 @@
                           <td>{{d.IdSolicitud.IdPerfil.Nombres}} {{ d.IdSolicitud.IdPerfil.Apellidos}}</td>
                           <td>{{d.NumeroCred}}</td>
                           <td>{{d.Monto}}</td>
-                          <td>{{d.Plazo}}</td>
-                          
-                          <td><a href="editarDJ/{{d.Id}}" class="btn btn-info">Editar</a></td>
-                          <td><a href="declaracionjc/{{d.Id}}/{{d.IdSolicitud.IdPerfil.Id}}" class="btn btn-info">reporte</a></td>
+                          <td>{{d.Plazo}}</td>                        
+                          <td><a href="declaracionjc/{{d.Id}}/{{d.IdSolicitud.IdPerfil.Id}}" class="btn btn-info">Reporte</a></td>
                         </tr>
                         {% endfor %}
                       </tbody>

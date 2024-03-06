@@ -1,8 +1,9 @@
-from django.shortcuts import render,redirect
+import json
+from django.shortcuts import render,redirect, HttpResponse
 from ClienteApp.models import *
 from email import message
 from django.contrib import messages
-
+from ConfiguracionApp.models import Agencia
 from EvaluacionIvEFApp.models import *
 from SolicitudesApp.models import *
 from TesisApp.views import registroBit
@@ -149,9 +150,29 @@ def registrarEvaluacion(request):
 
     return redirect('administrarPerfil', id=egresosf.IdPerfil.Id)  # id de perfil 
 
-def listaEvaluacion(request):
-    listae=CapacidadPagoFam.objects.filter(Estado="activo")
+def listaEvaluacion(request,id):
+    listae=CapacidadPagoFam.objects.filter(Estado="activo",IdEgresosFami__IdPerfil__IdAgencia=id)
     return render(request, "EvaluacionIvEFApp/listaEvaluacion.html", {"evaluaciones":listae})
+
+def listaEvaluacionAdmin(request):
+    listaAg=Agencia.objects.all()
+    return render(request, "EvaluacionIvEFApp/listaEvaluacionAdmin.html", {"agencia":listaAg})
+
+def agencEF(request):
+    id=request.GET['id']
+    lista_agenciaC=[]
+    listae=""
+    if request.is_ajax():
+        try:
+            listae=CapacidadPagoFam.objects.filter(Estado="activo",IdEgresosFami__IdPerfil__IdAgencia=id)
+            
+            for item in listae:
+                lista_agenciaC.append({"id":item.Id,"nombre":item.IdEgresosFami.IdPerfil.Nombres, "apellido":item.IdEgresosFami.IdPerfil.Apellidos, "disponible":item.Disponible, "cuota":item.Cuota,"ide":item.IdEgresosFami.Id,"idp":item.IdEgresosFami.IdPerfil.Id})
+
+        except Exception:
+            None
+        serialized_data = json.dumps(lista_agenciaC,default=str)
+        return HttpResponse(serialized_data, content_type="application/json")
 
 def editarEvaluacion(request, id):
     ide=int(id)

@@ -9,7 +9,7 @@ urlpatterns = [
 path('',views.inspeccion, name="inspeccion"),
 path('registrarDIM/',views.registrarDIM), 
 path('registrarDIME/',views.registrarDIME), 
-path('listaIM/', views.listaIM, name="listaIM"),
+path('listaIM/<id>', views.listaIM, name="listaIM"),
 path('listaIM/editarIM/<id>', views.editarIM,name='editarIM'),
 path('actualizarIM/', views.actualizarIM),
 # para reporte  
@@ -18,7 +18,7 @@ path('listaIM/inspeccionM/<id>', viewsnat.inspeccionM, name="inspeccionM"),
 # primera inspeccion
 path('listaIM/pinspeccion/<id>/<n>',views.pinspeccion, name="pinspeccion"),
 path('registrarPIM/',views.registrarPIM), 
-path('listaPIM/', views.listaPIM, name="listaPIM"),
+path('listaPIM/<id>', views.listaPIM, name="listaPIM"),
 path('listaPIM/editarPIM/<id>',views.editarPIM), 
 path('modificarPIM/', views.modificarPIM),
 

@@ -12,7 +12,7 @@ from SolicitudesApp.models import *
 from ClienteApp.models import Perfil
 from TesisApp.models import Usuario
 from EvaluacionMicroApp.models import *
-from ConfiguracionApp.models import Alternativa, ModeloVivi
+from ConfiguracionApp.models import Alternativa, ModeloVivi, Agencia
 from django.db.models import Q
 from ListaChequeoApp.models import *
 from TesisApp.views import registroBit
@@ -133,12 +133,8 @@ def listaSC(request):
     return render(request, "SolicitudesApp/listaSCompleta.html", {"solicitudes":listSoli})
 
 
-def listaSCA(request, id):
-    
-    #print("usuaro:"+ id)
-    per=Perfil.objects.filter(Agencia=id)
-    listSoli = Solicitud.objects.filter(Q(Estado="Completado") & Q(Tipo="micro")& Q(perfil__in=per))
-    
+def listaSCA(request, id): # solicitudes completas por agencia
+    listSoli = Solicitud.objects.filter(Q(Estado="Completado") & Q(Tipo="micro")& Q(IdPerfil__IdAgencia=id))
     return render(request, "SolicitudesApp/listaSCompleta.html", {"solicitudes":listSoli})
 
 def listaSolicitud(request):    
@@ -845,18 +841,82 @@ def modSoli(request):
     registroBit(request, "Se actualizo formularSolicitud Microempresa " + soli.IdPerfil.Dui, "Actualizacion")
     return redirect('administrarPerfil', id=soli.IdPerfil.Id)  # id de perfil 
 
-def listaRF(request):
-    listSoli = Solicitud.objects.filter(Estado="Completado", Tipo="micro")
+# lista de reportes para el comite
+def listaRF(request,id):
+    listSoli = Solicitud.objects.filter(Estado="Completado", Tipo="micro", IdPerfil__IdAgencia=id)
     return render(request, "SolicitudesApp/listaReportesF.html", {"solicitudes":listSoli})
+
+def listaRFAdmin(request):
+    listaAg=Agencia.objects.all()
+    return render(request, "SolicitudesApp/listaReportesFAdmin.html", {"agencia":listaAg})
+
+def agencRFA(request):
+    id=request.GET['id']
+    lista_agenciaC=[]
+    listperpa=""
+    if request.is_ajax():
+        try:
+            listperpa = Solicitud.objects.filter(Estado="Completado", Tipo="micro", IdPerfil__IdAgencia=id)
+            for item in listperpa:
+                lista_agenciaC.append({"id":item.Id,"dui":item.IdPerfil.Dui, "nombre":item.IdPerfil.Nombres, "apellido":item.IdPerfil.Apellidos,"telefono":item.IdPerfil.Telefono, "agencia":item.IdPerfil.IdAgencia.Nombre})
+        except Exception:
+            None
+        serialized_data = json.dumps(lista_agenciaC,default=str)
+        return HttpResponse(serialized_data, content_type="application/json")
 
 
 #########################################################
 #lista de solicitudes pendientes de aprobacion 
-def listaSolicitudesPA(request): 
+def listaSolicitudesPA(request,id): 
     # consulta las solicitudes que estan activas y pendientes de aprobacion
-    listperpa = Solicitud.objects.filter(Tipo="micro",EstadoSoli=3, IdPerfil__EstadoSoli=11, IdPerfil__Estado='activo')
+    listperpa = Solicitud.objects.filter(Tipo="micro",EstadoSoli=3, IdPerfil__EstadoSoli=11, IdPerfil__Estado='activo', IdPerfil__IdAgencia=id)
 
     return render(request, "SolicitudesApp/listaSolicitudPA.html", {"solicitudes":listperpa})
+
+#lista de solicitudes pendientes de aprobacion  Admin
+def listaSolicitudesPAAdmin(request): 
+    listaAg=Agencia.objects.all()
+    return render(request, "SolicitudesApp/listaSolicitudPAAdmin.html", {"agencia":listaAg})
+
+def agencPAA(request):
+    id=request.GET['id']
+    lista_agenciaC=[]
+    listperpa=""
+    if request.is_ajax():
+        try:
+            listperpa = Solicitud.objects.filter(Tipo="micro",EstadoSoli=3, IdPerfil__EstadoSoli=11, IdPerfil__Estado='activo', IdPerfil__IdAgencia=id)
+            print(listperpa)
+            for item in listperpa:
+                lista_agenciaC.append({"id":item.Id,"dui":item.IdPerfil.Dui, "nombre":item.IdPerfil.Nombres, "apellido":item.IdPerfil.Apellidos,"telefono":item.IdPerfil.Telefono, "agencia":item.IdPerfil.IdAgencia.Nombre})
+        except Exception:
+            None
+        serialized_data = json.dumps(lista_agenciaC,default=str)
+        return HttpResponse(serialized_data, content_type="application/json")
+
+
+#lista de solicitudes aprobadas
+def listaSolicitudesApr(request,id): 
+    listperpa = Solicitud.objects.filter(Tipo="micro",EstadoSoli=4, IdPerfil__EstadoSoli=11, IdPerfil__Estado='activo', IdPerfil__IdAgencia=id)
+    return render(request, "SolicitudesApp/listaSAprobadas.html", {"solicitudes":listperpa})
+
+#lista de solicitudes aprobadas Admin
+def listaSolicitudesAprAdmin(request): 
+    listaAg=Agencia.objects.all()
+    return render(request, "SolicitudesApp/listaSAprobadasAdmin.html", {"agencia":listaAg})
+
+def agencAA(request):
+    id=request.GET['id']
+    lista_agenciaC=[]
+    listperpa=""
+    if request.is_ajax():
+        try:
+            listperpa = Solicitud.objects.filter(Tipo="micro",EstadoSoli=4, IdPerfil__EstadoSoli=11, IdPerfil__Estado='activo', IdPerfil__IdAgencia=id)
+            for item in listperpa:
+                lista_agenciaC.append({"id":item.Id,"dui":item.IdPerfil.Dui, "nombre":item.IdPerfil.Nombres, "apellido":item.IdPerfil.Apellidos,"telefono":item.IdPerfil.Telefono, "agencia":item.IdPerfil.IdAgencia.Nombre})
+        except Exception:
+            None
+        serialized_data = json.dumps(lista_agenciaC,default=str)
+        return HttpResponse(serialized_data, content_type="application/json")
 
 def evaluarSol(request, id): 
     try:
@@ -869,6 +929,18 @@ def evaluarSol(request, id):
         dt=""
 
     return render(request, "SolicitudesApp/evaluarSolicitud.html", {"s":s,"dt":dt})
+
+def evaluarSolApr(request, id): 
+    try:
+        s = Solicitud.objects.get(Id=id)
+    except Solicitud.DoesNotExist:
+        s=""
+    try:
+        dt=Detalle.objects.get(IdSolicitud=s.Id)
+    except Detalle.DoesNotExist:
+        dt=""
+
+    return render(request, "SolicitudesApp/modificarEvaluarSolicitud.html", {"s":s,"dt":dt})
 
 def evaluarSolObs(request, id): 
     try:
@@ -948,16 +1020,52 @@ def modificarEvaluacion(request):
     return redirect('listaSolicitudesPA')
 
 #lista de solicitudes observadas= 5
-def listaSolicitudesObs(request): 
-    listperpa = Solicitud.objects.filter(Tipo="micro",EstadoSoli=5, IdPerfil__Estado='activo')
-
+def listaSolicitudesObs(request,id): 
+    listperpa = Solicitud.objects.filter(Tipo="micro",EstadoSoli=5, IdPerfil__Estado='activo', IdPerfil__IdAgencia=id)
     return render(request, "SolicitudesApp/listaSObservadas.html", {"solicitudes":listperpa})
 
-#lista de solicitudes  denegadas=6
-def listaSolicitudesDen(request): 
-    listperpa = Solicitud.objects.filter(Tipo="micro",EstadoSoli=6, IdPerfil__Estado='activo')
+#lista de solicitudes observadas  Admin
+def listaSolicitudesObsAdmin(request): 
+    listaAg=Agencia.objects.all()
+    return render(request, "SolicitudesApp/listaSObservadasAdmin.html", {"agencia":listaAg})
 
+def agencOA(request):
+    id=request.GET['id']
+    lista_agenciaC=[]
+    listperpa=""
+    if request.is_ajax():
+        try:
+            listperpa = Solicitud.objects.filter(Tipo="micro",EstadoSoli=5, IdPerfil__Estado='activo', IdPerfil__IdAgencia=id)
+            for item in listperpa:
+                lista_agenciaC.append({"id":item.Id,"dui":item.IdPerfil.Dui, "nombre":item.IdPerfil.Nombres, "apellido":item.IdPerfil.Apellidos,"telefono":item.IdPerfil.Telefono, "agencia":item.IdPerfil.IdAgencia.Nombre})
+        except Exception:
+            None
+        serialized_data = json.dumps(lista_agenciaC,default=str)
+        return HttpResponse(serialized_data, content_type="application/json")
+
+#lista de solicitudes  denegadas=6
+def listaSolicitudesDen(request,id): 
+    listperpa = Solicitud.objects.filter(Tipo="micro",EstadoSoli=6, IdPerfil__Estado='activo', IdPerfil__IdAgencia=id)
     return render(request, "SolicitudesApp/listaSDenegadas.html", {"solicitudes":listperpa})
+
+#lista de solicitudes denegadas  Admin
+def listaSolicitudesDenAdmin(request): 
+    listaAg=Agencia.objects.all()
+    return render(request, "SolicitudesApp/listaSDenegadasAdmin.html", {"agencia":listaAg})
+
+def agencDA(request):
+    id=request.GET['id']
+    lista_agenciaC=[]
+    listperpa=""
+    if request.is_ajax():
+        try:
+            listperpa = Solicitud.objects.filter(Tipo="micro",EstadoSoli=6, IdPerfil__Estado='activo', IdPerfil__IdAgencia=id)
+            for item in listperpa:
+                lista_agenciaC.append({"id":item.Id,"dui":item.IdPerfil.Dui, "nombre":item.IdPerfil.Nombres, "apellido":item.IdPerfil.Apellidos,"telefono":item.IdPerfil.Telefono, "agencia":item.IdPerfil.IdAgencia.Nombre})
+        except Exception:
+            None
+        serialized_data = json.dumps(lista_agenciaC,default=str)
+        return HttpResponse(serialized_data, content_type="application/json")
 
 def obtenerRango(request):
     id = request.GET['id']   

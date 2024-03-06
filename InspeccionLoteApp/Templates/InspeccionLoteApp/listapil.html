@@ -16,9 +16,8 @@
                           <th>Dui</th>
                           <th>Nombre</th>
                           <th>Opción</th>
-                          <th>Reporte</th>
-                          <th>Reporte</th>
-                          <th>Reporte</th>
+                          <th>Opción</th>
+                          <th>Opción</th>
                          
                         </tr>
                       </thead>
@@ -30,10 +29,9 @@
                           <td>{{insp.Fecha|date:'Y-m-d'}}</td>
                           <td>{{insp.IdInspeccionLote.IdSolicitud.IdPerfil.Dui}} </td>                        
                           <td>{{insp.IdInspeccionLote.IdSolicitud.IdPerfil.Nombres}} {{ insp.IdInspeccionLote.IdSolicitud.IdPerfil.Apellidos}}</td>
-                          <td><a href="editarPIL/{{insp.Id}}" class="btn btn-info">Editar</a></td>
-                          <td><a href="pinspl/{{insp.Id}}" class="btn btn-info">Reporte Esq</a></td>
-                          <td><a href="pinsplU/{{insp.Id}}" class="btn btn-info">Reporte Ubi</a></td>
-                          <td><a href="pinsplR/{{insp.Id}}" class="btn btn-info">Reporte Fot</a></td>
+                          <td><a href="pinspl/{{insp.Id}}" class="btn btn-info">Reporte Esquema</a></td>
+                          <td><a href="pinsplU/{{insp.Id}}" class="btn btn-info">Reporte Ubicación</a></td>
+                          <td><a href="pinsplR/{{insp.Id}}" class="btn btn-info">Reporte Fotográfico</a></td>
                         </tr>
                         {% endfor %}
                       </tbody>

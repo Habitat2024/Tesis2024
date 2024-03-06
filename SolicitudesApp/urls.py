@@ -26,11 +26,19 @@ urlpatterns = [
     path('listaSCA/<id>', views.listaSCA, name="listaSCA"),
 
     # para los reportes de formulario de comite de credito y hoja de pre-aprobacion
-    path('listaRF/', views.listaRF, name="listaRF"),
+    path('listaRF/<id>', views.listaRF, name="listaRF"),
     # para reporte formulario de comite de credito
     path('listaRF/formularioC/<id>', viewsnat.formComiteC, name="formularioC"),
     # para reporte hoja de pre-aprobacion
     path('listaRF/hojaP/<id>', viewsnat.hojaPreAprobacion, name="hojaP"),
+
+    # para los reportes de formulario de comite de credito y hoja de pre-aprobacion Admin
+    path('listaRFAdmin/', views.listaRFAdmin, name="listaRFAdmin"),
+    path('agencRFA/',views.agencRFA),
+    # para reporte formulario de comite de credito
+    path('listaRFAdmin/formularioCN/<id>', viewsnat.formComiteCN, name="formularioCN"),
+    # para reporte hoja de pre-aprobacion
+    path('listaRFAdmin/hojaPN/<id>', viewsnat.hojaPreAprobacionN, name="hojaPN"),
     
     # para canozca a su cliente
     path('listaSC/ccliente/<id>', viewscc.ccliente),
@@ -65,23 +73,59 @@ urlpatterns = [
     path('listaSC/presupuestov/<id>', viewspv.presupuestov),
 
     # para  solicitudes pendientes de aprobacion
-    path('listaSolicitudesPA/', views.listaSolicitudesPA, name="listaSolicitudesPA"),
+    path('listaSolicitudesPA/<id>', views.listaSolicitudesPA, name="listaSolicitudesPA"),
     # reporte de solicitudes pendientes de aprobacion
     path('listaSolicitudesPA/solP/<id>', viewsnat.solicPA, name="solP"), 
     path('listaSolicitudesPA/evaluarSol/<id>', views.evaluarSol),
     path('registrarEvaluacion/', views.registrarEvaluacion),
     path('modificarEvaluacion/', views.modificarEvaluacion),
+
+    # para  solicitudes pendientes de aprobacion Administrador
+    path('listaSolicitudesPAAdmin/', views.listaSolicitudesPAAdmin, name="listaSolicitudesPAAdmin"),
+    path('agencPAA/',views.agencPAA),
+    # reporte de solicitudes pendientes de aprobacion
+    path('listaSolicitudesPAAdmin/solP/<id>', viewsnat.solicPA, name="solP"), 
+    path('listaSolicitudesPAAdmin/evaluarSol/<id>', views.evaluarSol),
+
+    # para  solicitudes aprobadas
+    path('listaSolicitudesApr/<id>', views.listaSolicitudesApr, name="listaSolicitudesA"),
+    # reporte de solicitudes aprobadas
+    path('listaSolicitudesApr/solDen/<id>', viewsnat.solicDen, name="solDen"), 
+    path('listaSolicitudesApr/evaluarSolApr/<id>', views.evaluarSolDen),
+
+    # para  solicitudes aprobadas admin
+    path('listaSolicitudesAprAdmin/', views.listaSolicitudesAprAdmin, name="listaSolicitudesAAdmin"),
+    path('agencAA/',views.agencAA),
+    # reporte de solicitudes aprobadas
+    path('listaSolicitudesAprAdmin/evaluarSolApr/<id>', views.evaluarSolApr),
+
     # para  solicitudes observadas
-    path('listaSolicitudesObs/', views.listaSolicitudesObs, name="listaSolicitudesObs"),
+    path('listaSolicitudesObs/<id>', views.listaSolicitudesObs, name="listaSolicitudesObs"),
     # reporte de solicitudes observadas
     path('listaSolicitudesObs/solObs/<id>', viewsnat.solicObs, name="solObs"), 
     path('listaSolicitudesObs/evaluarSolObs/<id>', views.evaluarSolObs),
 
+    # para  solicitudes observadas Admin
+    path('listaSolicitudesObsAdmin/', views.listaSolicitudesObsAdmin, name="listaSolicitudesObsAdmin"),
+    path('agencOA/',views.agencOA),
+    # reporte de solicitudes observadas
+    path('listaSolicitudesObsAdmin/solObs/<id>', viewsnat.solicObs, name="solObs"), 
+    path('listaSolicitudesObsAdmin/evaluarSolObs/<id>', views.evaluarSolObs),
+    path('modificarEvaluacion/', views.modificarEvaluacion),
+
     # para  solicitudes denegadas
-    path('listaSolicitudesDen/', views.listaSolicitudesDen, name="listaSolicitudesDen"),
+    path('listaSolicitudesDen/<id>', views.listaSolicitudesDen, name="listaSolicitudesDen"),
     # reporte de solicitudes denegadas
     path('listaSolicitudesDen/solDen/<id>', viewsnat.solicDen, name="solDen"), 
     path('listaSolicitudesDen/evaluarSolDen/<id>', views.evaluarSolDen),
+
+    # para  solicitudes denegadas Admin
+    path('listaSolicitudesDenAdmin/', views.listaSolicitudesDenAdmin, name="listaSolicitudesDenAdmin"),
+    path('agencDA/',views.agencDA),
+    # reporte de solicitudes denegadas
+    path('listaSolicitudesDenAdmin/solDen/<id>', viewsnat.solicDen, name="solDen"), 
+    path('listaSolicitudesDenAdmin/evaluarSolDen/<id>', views.evaluarSolDen),
+
 
     path('obtenerRango/' ,views.obtenerRango, name='obtenerRango'),
    

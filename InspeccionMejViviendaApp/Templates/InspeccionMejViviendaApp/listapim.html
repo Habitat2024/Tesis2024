@@ -17,23 +17,20 @@
                           <th>Dui</th>
                           <th>Nombre</th>
                           <th>Opción</th>
-                          <th>Reporte</th>
-                          <th>Reporte</th>
+                          <th>Opción</th>
                     
                         </tr>
                       </thead>
-
 
                       <tbody style="color: #27575c;">
                         {% for insp in listapim %}
                         <tr>
                           <td>{{forloop.counter}}</td>
                           <td>{{insp.Fecha|date:'Y-m-d'}}</td>
-                          <td>{{insp.IdInspeccionMejo.IdSolicitud.IdPerfil.dui}} </td>                        
+                          <td>{{insp.IdInspeccionMejo.IdSolicitud.IdPerfil.Dui}} </td>                        
                           <td>{{insp.IdInspeccionMejo.IdSolicitud.IdPerfil.Nombres}} {{ insp.IdInspeccionMejo.IdSolicitud.IdPerfil.Apellidos}}</td>
-                          <td><a href="editarPIM/{{insp.Id}}" class="btn btn-info">Editar</a></td>
-                          <td><a href="pinspmU/{{insp.Id}}" class="btn btn-info">Reporte Ubi</a></td>
-                          <td><a href="pinspmR/{{insp.Id}}" class="btn btn-info">Reporte Fot</a></td>
+                          <td><a href="pinspmU/{{insp.Id}}" class="btn btn-info">Reporte Ubicación</a></td>
+                          <td><a href="pinspmR/{{insp.Id}}" class="btn btn-info">Reporte Fotográfico</a></td>
                         </tr>
                         {% endfor %}
                       </tbody>

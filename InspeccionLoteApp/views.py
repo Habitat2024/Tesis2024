@@ -250,8 +250,8 @@ def registrarDIL(request):
 
     return redirect('administrarPerfil', id=inspeccionl.IdSolicitud.IdPerfil.Id)  # id de perfil 
 
-def listaI(request): 
-    listaI=FactibilidadInsLot.objects.all()
+def listaI(request,id): 
+    listaI=FactibilidadInsLot.objects.filter(IdInspeccionLote__IdSolicitud__IdPerfil__IdAgencia=id)
     return render(request, "InspeccionLoteApp/listail.html", {"listai":listaI})
 
 def editarIL(request, id): #id inspeccion lote
@@ -664,8 +664,8 @@ def registrarPIL(request):
     
     return redirect('administrarPerfil', id=pil.IdInspeccionLote.IdSolicitud.IdPerfil.Id)  # id de perfil 
 
-def listaPIL(request): 
-    listapI=PrimeraInspLot.objects.all()
+def listaPIL(request,id): 
+    listapI=PrimeraInspLot.objects.filter(IdInspeccionLote__IdSolicitud__IdPerfil__IdAgencia=id)
     return render(request, "InspeccionLoteApp/listapil.html", {"listapi":listapI})
 
 def editarPIL(request, id): # id de la tabla PrimeraInspLot

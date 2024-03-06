@@ -19,8 +19,7 @@
                           <th>Nombre</th>
                           <th>Tipo Obra</th>
                           <th>Costo Total</th>
-                          <th>Opción</th>
-                          <th>Opción</th>                  
+                          <th>Opción</th>              
                         </tr>
                       </thead>
 
@@ -33,7 +32,6 @@
                           <td>{{pvo.IdPresupuestoViviDatGen.IdSolicitud.IdPerfil.Nombres}} {{ pvo.IdPresupuestoViviDatGen.IdSolicitud.IdPerfil.Apellidos}}</td>
                           <td>{{pvo.TipoObra}}</td>
                           <td>{{pvo.TotalObraAdi}}</td>
-                          <td><a href="editarPVO/{{pvo.Id}}" class="btn btn-info">Editar</a></td> 
                           <td><a href="presupuestoVvO/{{pvo.Id}}" class="btn btn-info">Reporte</a></td>
                         </tr>
                         {% endfor %}

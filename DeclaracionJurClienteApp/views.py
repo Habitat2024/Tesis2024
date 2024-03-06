@@ -111,8 +111,8 @@ def registrarDj(request):
 
     return redirect('administrarPerfil', id=declaracionjc.IdSolicitud.IdPerfil.Id)  # id de perfil 
 
-def listaDJ(request):
-    listj=  DeclaracionJuraCli.objects.all()
+def listaDJ(request,id):
+    listj=  DeclaracionJuraCli.objects.filter(IdSolicitud__IdPerfil__IdAgencia=id)
     return render(request, "DeclaracionJurClienteApp/listaDJ.html", {"listj":listj})
 
 def editarDJ(request, id):
@@ -141,7 +141,7 @@ def editarDJ(request, id):
     except Detalle.DoesNotExist:
         d=""
 
-    return render(request, "DeclaracionJurClienteApp/editarDeclaracionjc.html", {"s":s,"d":d,"operaciones":listato,"dj":dj,"dja":dja,"djn":djn}) 
+    return render(request, "DeclaracionJurClienteApp/EditarDeclaracionjc.html", {"s":s,"d":d,"operaciones":listato,"dj":dj,"dja":dja,"djn":djn}) 
 
 
 def modificarDJ(request): 

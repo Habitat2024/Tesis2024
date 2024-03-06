@@ -285,8 +285,8 @@ def registrarDIME(request):
     #messages.success(request, mensaje)
     #return redirect('administrarPerfil', id=inspeccionM.ids.perfil.id)  # id de perfil 
 
-def listaIM(request): 
-    listaIm=FactibilidadInsMej.objects.all()
+def listaIM(request,id): 
+    listaIm=FactibilidadInsMej.objects.filter(IdInspeccionMejo__IdSolicitud__IdPerfil__IdAgencia=id)
     return render(request, "InspeccionMejViviendaApp/listaim.html", {"listaim":listaIm})
 
 
@@ -554,10 +554,7 @@ def actualizarIM(request):
      messages.success(request, mensaje)
      return redirect('administrarPerfil', id=idsol.IdPerfil.Id)  # id de perfil 
 
-             
-
 ############  Primera inspeccion
-
 def pinspeccion(request,id,n): # id de la tabla inspeccion
     try:
         inspeccionM=InspeccionMejo.objects.get(Id=id)
@@ -619,8 +616,8 @@ def registrarPIM(request):
     messages.success(request, mensaje)
     return redirect('administrarPerfil', id=pim.IdInspeccionMejo.IdSolicitud.IdPerfil.Id)  # id de perfil 
 
-def listaPIM(request): 
-    listaPIm=PrimeraInspMej.objects.all()
+def listaPIM(request,id): 
+    listaPIm=PrimeraInspMej.objects.filter(IdInspeccionMejo__IdSolicitud__IdPerfil__IdAgencia=id)
     return render(request, "InspeccionMejViviendaApp/listapim.html", {"listapim":listaPIm})
 
 def editarPIM(request,id): # id de la tabla PrimeraInspMej

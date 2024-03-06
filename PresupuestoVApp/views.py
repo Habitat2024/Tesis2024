@@ -192,8 +192,8 @@ def registrarPV(request):
     #return HttpResponse(response_json)
     #return redirect('/SolicitudesApp/listaSoli/presupuesto/1'+)
 
-def listaPV(request): 
-    listapm=PresupuestoViviTot.objects.all()
+def listaPV(request,id): 
+    listapm=PresupuestoViviTot.objects.filter(IdPresupuestoViviDatGen__IdSolicitud__IdPerfil__IdAgencia=id)
     return render(request, "PresupuestoVApp/listaPV.html", {"listap":listapm})
 
 
@@ -520,8 +520,8 @@ def registrarPVObra(request):
     messages.success(request, mensaje)
     return redirect('administrarPerfil', id=presupuestodg.IdPresupuestoViviDatGen.IdSolicitud.IdPerfil.Id)  # id de perfil  
  
-def listaPVO(request): 
-    listapo=PresupuestoViviDatGenObr.objects.all()
+def listaPVO(request,id): 
+    listapo=PresupuestoViviDatGenObr.objects.filter(IdPresupuestoViviDatGen__IdSolicitud__IdPerfil__IdAgencia=id)
     return render(request, "PresupuestoVApp/listaPVO.html", {"listapo":listapo})
 
 def editarPVO(request, id):# id Presupuestovdgobra

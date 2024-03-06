@@ -5,7 +5,7 @@ from Reportes import views as viewsnat
 urlpatterns = [
 path('',views.solicitudI, name="solicitud"),
 path('registrarDs/',views.registrarDs), 
-path('listaIS/', views.listaIs, name="listaIS"),
+path('listaIS/<id>', views.listaIs, name="listaIS"),
 path('listaIS/editarSIS/<id>', views.editarSIS, name="editarSIS"),
 path('modificarSIS/', views.modificarSIS),
 

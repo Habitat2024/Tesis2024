@@ -13,7 +13,7 @@ from TesisApp.views import registroBit
 
 def ccliente(request, id):
     sol= ClienteDatoGen.objects.filter(IdSolicitud=id).exists() # comprueba si en la tabla existe el registro de la solicitud
-    if sol == '':
+    if sol == True:
         solv= ClienteDatoGen.objects.get(IdSolicitud=id)
     
         return redirect('editarCliente', id=solv.Id)
@@ -317,8 +317,8 @@ def registrarD(request):
     return redirect('administrarPerfil', id=clientedg.IdSolicitud.IdPerfil.Id)  # id de perfil 
  
 
-def listaConozcaC(request):
-    listc=  ClienteDatoGen.objects.all()
+def listaConozcaC(request,id):
+    listc=  ClienteDatoGen.objects.filter(IdSolicitud__IdPerfil__IdAgencia=id)
     return render(request, "ConozcaClienteApp/listaCC.html", {"listc":listc})
 
 

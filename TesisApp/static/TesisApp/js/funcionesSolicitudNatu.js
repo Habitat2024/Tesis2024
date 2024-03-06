@@ -397,7 +397,7 @@ function validarSalarioGPFN(salario) {
     if(id=="-0")
       id= document.getElementById("destinoNE").value
     $.ajax({
-        url: "/NaturalApp/obtenerRangoNat/?id=" +  id,
+        url: "/NaturalApp/obtenerRango/?id=" +  id,
         type: "get",
         headers: { "X-CSRFToken": '{{ csrf_token }}' },
         dataType: "json",

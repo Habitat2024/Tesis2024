@@ -19,10 +19,8 @@
                           <th>Calidad</th>
                           <th>Teléfono</th>
                           <th > Opción </th>
-                          <th > Opción </th>
                         </tr>
                       </thead>
-
 
                       <tbody style="color: #27575c;">
                         {% for c in listc %}
@@ -33,8 +31,6 @@
                           <td>{{c.NombreConzCli}} </td>
                           <td>{{c.CalidadActu}}</td>
                           <td>{{c.TelefonoFijo}}</td>
-
-                          <td><a href="editarCliente/{{c.Id}}" class="btn btn-info">Editar</a></td>
                           <td><a href="conozcaC/{{c.Id}}" class="btn btn-info">Reporte</a></td>
                         </tr>
                         {% endfor %}

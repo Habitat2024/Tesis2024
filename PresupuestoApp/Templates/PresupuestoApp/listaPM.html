@@ -17,8 +17,7 @@
                           <th>Nombre</th>
                           <th>Dias Estimados</th>
                           <th>Sub Total</th>
-                          <th>Opción</th>
-                          <th>Opción</th>                
+                          <th>Opción</th>            
                         </tr>
                       </thead>
 
@@ -31,7 +30,6 @@
                           <td>{{pm.IdPresupuestoDatoGen.IdSolicitud.IdPerfil.Nombres}} {{ pm.IdPresupuestoDatoGen.IdSolicitud.IdPerfil.Apellidos}}</td>
                           <td>{{pm.IdPresupuestoDatoGen.DiasEstiCon}}</td>
                           <td>{{pm.SubTota}}</td>
-                          <td><a href="modPresupuesto/{{pm.IdPresupuestoDatoGen.Id}}" class="btn btn-info">Editar</a></td> 
                           <td><a href="presupuestoMj/{{pm.IdPresupuestoDatoGen.Id}}" class="btn btn-info">Reporte</a></td>
                         </tr>
                         {% endfor %}

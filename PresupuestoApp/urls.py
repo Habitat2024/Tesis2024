@@ -8,7 +8,7 @@ urlpatterns = [
     path('presupuesto/',views.presupuesto, name="presupuesto"),# apunta a la raiz 
     path('presupuestos/', views.get, name='presupuestos'),
     path('registrarP/',views.registrarP, name="registrarP"), 
-    path('listaPM/', views.listaPM, name="listaPM"),
+    path('listaPM/<id>', views.listaPM, name="listaPM"),
     path('listaPM/modPresupuesto/<id>',views.modificarPresupuesto, name="modPresupuesto"),
     path('actualizarPresupuesto/',views.actualizarPresupuesto),
 

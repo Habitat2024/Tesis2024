@@ -20,7 +20,7 @@
                           <th>Teléfono</th>
                           <th>Estado</th>
                           <th>Opción</th>
-                          <th>Opción</th>
+      
                         </tr>
                       </thead>
 
@@ -34,8 +34,7 @@
                           <td>{{ins.IdInspeccionMejo.IdSolicitud.IdPerfil.Nombres}} {{ ins.IdInspeccionMejo.IdSolicitud.IdPerfil.Apellidos}}</td>
                           <td>{{ins.IdInspeccionMejo.IdSolicitud.IdPerfil.Telefono}}</td>
                           <td>{{ins.Detalle}}</td>
-                          <td><a href="editarIM/{{ins.IdInspeccionMejo.Id}}" class="btn btn-info">Editar</a></td>
-                          <td><a href="pinspeccion/{{ins.IdInspeccionMejo.Id}}" class="btn btn-warning">P Inspección</a></td>
+                          <td><a href="inspeccionM/{{ins.IdInspeccionMejo.Id}}" class="btn btn-info">Reporte</a></td>
                         </tr>
                         {% endfor %}
                       </tbody>

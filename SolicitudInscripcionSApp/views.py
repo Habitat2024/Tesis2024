@@ -182,8 +182,8 @@ def registrarDs(request):
     return redirect('administrarPerfil', id=solicitudis.IdSolicitud.IdPerfil.Id)  # id de perfil 
  
 
-def listaIs(request):
-    lists=  SolicitudInscSeg.objects.all()
+def listaIs(request,id):
+    lists=  SolicitudInscSeg.objects.filter(IdSolicitud__IdPerfil__IdAgencia=id)
     return render(request, "SolicitudInscripcionSApp/listaIS.html", {"lists":lists})
 
 

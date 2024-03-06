@@ -18,7 +18,6 @@
                           <th>Plazo</th>
                           <th>Garantia</th>
                           <th > Opción </th>
-                          <th > Opción </th>
                         </tr>
                       </thead>
 
@@ -32,8 +31,7 @@
                           <td>{{si.MontoTotaAse}}</td>
                           <td>{{si.Plazo}}</td>
                           <td>{{si.Garantia}}</td>
-                          <td><a href="editarSIS/{{si.Id}}" class="btn btn-info">Editar</a></td>
-                          <td><a href="seguro/{{si.IdSolicitud.Id}}" class="btn btn-info">reporte</a></td>
+                          <td><a href="seguro/{{si.IdSolicitud.Id}}" class="btn btn-info">Reporte</a></td>
                         </tr>
                         {% endfor %}
                       </tbody>

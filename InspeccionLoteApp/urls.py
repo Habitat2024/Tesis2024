@@ -8,7 +8,7 @@ urlpatterns = [
 
 path('',views.inspeccionl, name="inspeccionl"),
 path('registrarDIL/',views.registrarDIL), 
-path('listaI/', views.listaI, name="listaI"),
+path('listaI/<id>', views.listaI, name="listaI"),
 path('listaI/editarIL/<id>', views.editarIL, name="editarIL"),
 path('modificarIL/', views.modificarIL),
 #para reporte
@@ -17,7 +17,7 @@ path('listaI/inspeccionL/<id>', viewsnat.inspeccionL, name="inspeccionL"),
 # primera inspeccion
 path('listaI/pinspeccionl/<id>/<n>',views.pinspeccionl, name="pinspeccionl"),
 path('registrarPIL/',views.registrarPIL), 
-path('listaPIL/', views.listaPIL, name="listaPIL"),
+path('listaPIL/<id>', views.listaPIL, name="listaPIL"),
 path('listaPIL/editarPIL/<id>',views.editarPIL), 
 path('modificarPIL/', views.modificarPIL),
 

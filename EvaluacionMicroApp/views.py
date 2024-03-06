@@ -1,6 +1,8 @@
-from django.shortcuts import render,redirect
+import json
+from django.shortcuts import render,redirect, HttpResponse
 from django.contrib import messages
 from ClienteApp.models import *
+from ConfiguracionApp.models import Agencia
 from EvaluacionMicroApp.models import *
 from SolicitudesApp.models import *
 from TesisApp.views import registroBit
@@ -240,10 +242,30 @@ def registrarEvaluacionm(request):
 
     return redirect('administrarPerfil', id=balancesm.IdPerfil.Id)  # id de perfil 
 
-def listaEvaluacionm(request):
-    listaem=CapacidadPagoMic.objects.filter(Estado="activo")
+def listaEvaluacionm(request,id):
+    listaem=CapacidadPagoMic.objects.filter(Estado="activo",IdEgresoFlujMic__IdBalanceSituMic__IdPerfil__IdAgencia=id)
     return render(request, "EvaluacionMicroApp/listaEvaluacionM.html", {"evaluacionesm":listaem})
 
+def listaEvaluacionmAdmin(request):
+    listaAg=Agencia.objects.all()
+    return render(request, "EvaluacionMicroApp/listaEvaluacionMAdmin.html", {"agencia":listaAg})
+
+def agencEM(request):
+    id=request.GET['id']
+    lista_agenciaC=[]
+    listaem=""
+    if request.is_ajax():
+        try:
+            listaem=CapacidadPagoMic.objects.filter(Estado="activo",IdEgresoFlujMic__IdBalanceSituMic__IdPerfil__IdAgencia=id)
+            
+            for item in listaem:
+                lista_agenciaC.append({"id":item.Id,"nombre":item.IdEgresoFlujMic.IdBalanceSituMic.IdPerfil.Nombres, "apellido":item.IdEgresoFlujMic.IdBalanceSituMic.IdPerfil.Apellidos, "disponible":item.Disponible, "cuota":item.Cuota,"ide":item.IdEgresoFlujMic.Id,"idp":item.IdEgresoFlujMic.IdBalanceSituMic.IdPerfil.Id})
+
+        except Exception:
+            None
+        serialized_data = json.dumps(lista_agenciaC,default=str)
+        return HttpResponse(serialized_data, content_type="application/json")
+    
 def editarEvaluacionm(request, id): # ide de egresos 
     ide=int(id)
     try:    

@@ -19,7 +19,6 @@
                           <th>Teléfono</th>
                           <th>Estado</th>
                           <th>Opción</th>
-                          <th>Opción</th>
                          
                         </tr>
                       </thead>
@@ -33,8 +32,7 @@
                           <td>{{ins.IdInspeccionLote.IdSolicitud.IdPerfil.Nombres}} {{ ins.IdInspeccionLote.IdSolicitud.IdPerfil.Apellidos}}</td>
                           <td>{{ins.IdInspeccionLote.IdSolicitud.IdPerfil.Telefono}}</td>
                           <td>{{ins.Detalle}}</td>
-                          <td><a href="editarIL/{{ins.IdInspeccionLote.Id}}" class="btn btn-info">Editar</a></td>
-                          <td><a href="pinspeccionl/{{ins.IdInspeccionLote.Id}}" class="btn btn-warning">P Inspección</a></td>
+                          <td><a href="inspeccionL/{{ins.IdInspeccionLote.Id}}" class="btn btn-info">Reporte</a></td>
                         </tr>
                         {% endfor %}
                       </tbody>
