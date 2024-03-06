@@ -90,15 +90,15 @@ class pinspl(FPDF):
         pdf.set_font('Arial', 'B', 10)
         pdf.cell(w=40,h=6,txt='MUNICIPIO:', border=1, align='C', fill=False)
         pdf.set_font('Arial', '', 10)
-        pdf.cell(w=0,h=6,txt=inspeccionl.IdSolicitud.IdPerfil.municipio.distri if hasattr(inspeccionl, 'IdSolicitud') else '', border=1,  align='L', fill=False, ln=1)
+        pdf.cell(w=0,h=6,txt=inspeccionl.IdSolicitud.IdPerfil.IdDistrito.Distrito if hasattr(inspeccionl, 'IdSolicitud') else '', border=1,  align='L', fill=False, ln=1)
         pdf.set_font('Arial', 'B', 10)
         pdf.cell(w=65,h=6,txt='DIRECCIÓN DE LA MEJORA:', border=1, align='C', fill=False)
         pdf.set_font('Arial', '', 10)
         pdf.cell(w=50,h=6,txt=do.DireccionExac if hasattr(do, 'DireccionExac') else '', border=1,  align='L', fill=False)
         pdf.set_font('Arial', 'B', 10)
-        pdf.cell(w=40,h=6,txt='TELEFONO:', border=1, align='C', fill=False)
+        pdf.cell(w=40,h=6,txt='TELÉFONO:', border=1, align='C', fill=False)
         pdf.set_font('Arial', '', 10)
-        pdf.cell(w=0,h=6,txt=inspeccionl.IdSolicitud.IdPerfil.telefono if hasattr(inspeccionl, 'IdSolicitud') else '', border=1,  align='L', fill=False, ln=1)
+        pdf.cell(w=0,h=6,txt=inspeccionl.IdSolicitud.IdPerfil.Telefono if hasattr(inspeccionl, 'IdSolicitud') else '', border=1,  align='L', fill=False, ln=1)
         pdf.cell(w=0,h=5,txt='', border='',  align='C', fill=False, ln=1)
         pdf.cell(w=120,h=6,txt='', border='LRT', align='C', fill=False)
         pdf.set_font('Arial', '', 10)
@@ -125,5 +125,5 @@ class pinspl(FPDF):
         
         
 
-        pdf.output('pInspeccionlEsq.pdf', 'F')
-        return FileResponse(open('pInspeccionlEsq.pdf', 'rb'), as_attachment=True, content_type='application/pdf')
+        pdf.output('pInspeccionLoteEsquema.pdf', 'F')
+        return FileResponse(open('pInspeccionLoteEsquema.pdf', 'rb'), as_attachment=True, content_type='application/pdf')

@@ -281,7 +281,7 @@ def registrarPerfilc(request):
     ls=Salario.objects.filter(Estado="activo")
     des=""
     for sala in ls:
-        if sal>= sala.SalarioMini and sal<=sala.SalarioMaxi:
+        if sal == sala.SalarioMini or (sala.SalarioMini < sal < sala.SalarioMaxi) or sal == sala.SalarioMaxi:
             min= sala.SalarioMini
             max=sala.SalarioMaxi
             des=sala.TipoSala

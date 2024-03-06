@@ -36,16 +36,7 @@
   </thead>
 
   <tbody style="color: #27575c;">
-    {% for s in solicitudes %}
-    <tr>
-      <td>{{forloop.counter}}</td>
-      <td>{{s.IdPerfil.Dui}}</td>
-      <td>{{s.IdPerfil.Nombres}} {{s.IdPerfil.Apellidos}}</td>
-      <td><a href="formularioCN/{{s.Id}}" class="btn btn-info">Formulario de Comite</a></td>
-      <td><a href="hojaPN/{{s.Id}}" class="btn btn-info">Hoja de Pre-Aprobación</a></td>
-
-    </tr>
-    {% endfor %}
+  
   </tbody>
 </table>
 {% endblock %}

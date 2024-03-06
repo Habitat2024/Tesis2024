@@ -36,17 +36,7 @@
   </thead>
 
   <tbody style="color: #27575c;">
-    {% for s in solicitudes %}
-    <tr>
-      <td>{{forloop.counter}}</td>
-      <td>{{s.IdPerfil.Dui}}</td>
-      <td>{{s.IdPerfil.Nombres}} {{ s.IdPerfil.Apellidos}}</td>
-      <td>{{s.IdPerfil.Telefono}}</td>
-      <td>{{s.IdPerfil.IdAgencia.Nombre}}</td>
-      <td><a href="solDen/{{s.Id}}" class="btn btn-info">Reporte</a></td>
-      <td><a href="evaluarSolApr/{{s.Id}}" class="btn btn-info">Evaluar</a></td>
-    </tr>
-    {% endfor %}
+
   </tbody>
 </table>
 {% endblock %}
@@ -81,7 +71,7 @@
             "<td>" + listaCli[i].nombre +' '+ listaCli[i].apellido +  "</td>",
             "<td>" + listaCli[i].telefono + "</td>",
             "<td>" + listaCli[i].agencia + "</td>",
-            "<center>" + '<a href="solDen/' + listaCli[i].id +'" class="btn btn-info"></i>Reporte</a>' + "</center>",
+            "<center>" + '<a href="formularioC/' + listaCli[i].id +'" class="btn btn-info"></i>Reporte</a>' + "</center>",
             "<center>" + '<a href="evaluarSolApr/' + listaCli[i].id +'" class="btn btn-info"></i>Evaluar</a>' + "</center>"]
           );
         }

@@ -100,7 +100,7 @@ class pinsplr(FPDF):
         pdf.set_font('Arial', '', 10)
         pdf.cell(w=50,h=6,txt=do.DireccionExac if hasattr(do, 'DireccionExac') else '', border=1,  align='L', fill=False)
         pdf.set_font('Arial', 'B', 10)
-        pdf.cell(w=40,h=6,txt='TELEFONO:', border=1, align='C', fill=False)
+        pdf.cell(w=40,h=6,txt='TELÉFONO:', border=1, align='C', fill=False)
         pdf.set_font('Arial', '', 10)
         pdf.cell(w=0,h=6,txt=inspeccionl.IdSolicitud.IdPerfil.Telefono if hasattr(inspeccionl, 'IdSolicitud') else '', border=1,  align='L', fill=False, ln=1)
         pdf.cell(w=0,h=5,txt='', border='',  align='C', fill=False, ln=1)
@@ -123,5 +123,5 @@ class pinsplr(FPDF):
         
 
 
-        pdf.output('pInspeccionlRepF.pdf', 'F')
-        return FileResponse(open('pInspeccionlRepF.pdf', 'rb'), as_attachment=True, content_type='application/pdf')
+        pdf.output('pInspeccionLoteRepFotografico.pdf', 'F')
+        return FileResponse(open('pInspeccionLoteRepFotografico.pdf', 'rb'), as_attachment=True, content_type='application/pdf')

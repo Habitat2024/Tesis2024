@@ -254,7 +254,7 @@
           minlength: 2,
           required: true,
           letrasn: true,
-          maxlength: 10
+          maxlength: 50
         },
         cantidadv: {
           minlength: 1,
@@ -327,8 +327,8 @@
         },
         dimensionv: {
           required: "<h2>Debe ingresar la la dimención de la vivienda</h2>",
-          minlength: "<h2>La la dimención de la vivienda debe tener un minimo de 2 digitos</h2>",
-          maxlength: "<h2>La la dimención de la vivienda debe tener un maximo de 10 digitos</h2>"
+          minlength: "<h2>La dimención de la vivienda debe tener un minimo de 2 digitos</h2>",
+          maxlength: "<h2>La dimención de la vivienda debe tener un maximo de 50 digitos</h2>"
         },
         cantidadv: {
           required: "<h2>Debe ingresar la cantidad de viviendas</h2>",
@@ -928,7 +928,9 @@ function validarFecha(fecha) {
     if(isNaN(v6)){
         v6=0
     }
-      document.getElementById("totalcd").value = v1 + v2 + v3 + v4 + v5 + v6;
+
+    let ctotal= v1 + v2 + v3 + v4 + v5 + v6
+    document.getElementById("totalcd").value = ctotal.toFixed(2);
 
    
   }

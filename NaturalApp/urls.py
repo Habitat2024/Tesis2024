@@ -63,13 +63,14 @@ urlpatterns = [
     # para  solicitudes aprobadas
     path('listaSolicitudesApr/<id>', views.listaSolicitudesApr, name="listaSolicitudesAN"),
     # reporte de solicitudes aprobadas
-    path('listaSolicitudesApr/solDen/<id>', viewsnat.solicDen, name="solDen"), 
-    path('listaSolicitudesApr/evaluarSolApr/<id>', viewsS.evaluarSolDen),
+    path('listaSolicitudesApr/formularioCN/<id>', viewsnat.formComiteCN, name="formularioCN"),
+    path('listaSolicitudesApr/evaluarSolApr/<id>', viewsS.evaluarSolApr),
 
     # para  solicitudes aprobadas admin
     path('listaSolicitudesAprAdmin/', views.listaSolicitudesAprAdmin, name="listaSolicitudesANAdmin"),
     path('agencAA/',views.agencAA),
     # reporte de solicitudes aprobadas
+    path('listaSolicitudesAprAdmin/formularioCN/<id>', viewsnat.formComiteCN, name="formularioCN"),
     path('listaSolicitudesAprAdmin/evaluarSolApr/<id>', viewsS.evaluarSolApr),
 
     # para  solicitudes observadas

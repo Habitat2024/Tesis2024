@@ -36,9 +36,9 @@ urlpatterns = [
     path('listaRFAdmin/', views.listaRFAdmin, name="listaRFAdmin"),
     path('agencRFA/',views.agencRFA),
     # para reporte formulario de comite de credito
-    path('listaRFAdmin/formularioCN/<id>', viewsnat.formComiteCN, name="formularioCN"),
+    path('listaRFAdmin/formularioC/<id>', viewsnat.formComiteC, name="formularioC"),
     # para reporte hoja de pre-aprobacion
-    path('listaRFAdmin/hojaPN/<id>', viewsnat.hojaPreAprobacionN, name="hojaPN"),
+    path('listaRFAdmin/hojaP/<id>', viewsnat.hojaPreAprobacion, name="hojaP"),
     
     # para canozca a su cliente
     path('listaSC/ccliente/<id>', viewscc.ccliente),
@@ -90,13 +90,14 @@ urlpatterns = [
     # para  solicitudes aprobadas
     path('listaSolicitudesApr/<id>', views.listaSolicitudesApr, name="listaSolicitudesA"),
     # reporte de solicitudes aprobadas
-    path('listaSolicitudesApr/solDen/<id>', viewsnat.solicDen, name="solDen"), 
+    path('listaSolicitudesApr/formularioC/<id>', viewsnat.formComiteC, name="formularioC"),
     path('listaSolicitudesApr/evaluarSolApr/<id>', views.evaluarSolDen),
 
     # para  solicitudes aprobadas admin
     path('listaSolicitudesAprAdmin/', views.listaSolicitudesAprAdmin, name="listaSolicitudesAAdmin"),
     path('agencAA/',views.agencAA),
     # reporte de solicitudes aprobadas
+    path('listaSolicitudesAprAdmin/formularioC/<id>', viewsnat.formComiteC, name="formularioC"),
     path('listaSolicitudesAprAdmin/evaluarSolApr/<id>', views.evaluarSolApr),
 
     # para  solicitudes observadas

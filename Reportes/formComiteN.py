@@ -48,7 +48,7 @@ class formularioCN(FPDF):
             rh=""
         ##############################################3
         try:
-            eg=  EgresosFami.objects.get(IdPerfil=s.IdPerfil.Id)
+            eg=  EgresosFami.objects.get(IdPerfil=s.IdPerfil.Id, Estado="1")
         except EgresosFami.DoesNotExist:
             eg=""
         try:
@@ -203,12 +203,34 @@ class formularioCN(FPDF):
         pdf.cell(w=0,h=3,txt='', border=0, align='C', fill=False, ln=1)  
         pdf.cell(w=35,h=5,txt='', border=0, align='L', fill=False)
         pdf.cell(w=5,h=5,txt='', border=0, align='C', fill=False)
-        pdf.cell(w=7,h=3,txt='', border=1, align='C', fill=False)
-        pdf.cell(w=45,h=5,txt='    Aprobado', border='', align='L', fill=False)
-        pdf.cell(w=7,h=3,txt='', border=1, align='C', fill=False)
-        pdf.cell(w=45,h=5,txt='    Denegado', border='', align='L', fill=False)
-        pdf.cell(w=7,h=3,txt='', border=1, align='C', fill=False)
-        pdf.cell(w=45,h=5,txt='    Observado', border='', align='L', fill=False, ln=1 )
+        if s.EstadoSoli == 4:
+            pdf.cell(w=7,h=3,txt='X', border=1, align='C', fill=False)
+            pdf.cell(w=45,h=5,txt='    Aprobado', border='', align='L', fill=False)
+            pdf.cell(w=7,h=3,txt='', border=1, align='C', fill=False)
+            pdf.cell(w=45,h=5,txt='    Denegado', border='', align='L', fill=False)
+            pdf.cell(w=7,h=3,txt='', border=1, align='C', fill=False)
+            pdf.cell(w=45,h=5,txt='    Observado', border='', align='L', fill=False, ln=1 )
+        elif s.EstadoSoli == 6:
+            pdf.cell(w=7,h=3,txt='', border=1, align='C', fill=False)
+            pdf.cell(w=45,h=5,txt='    Aprobado', border='', align='L', fill=False)
+            pdf.cell(w=7,h=3,txt='X', border=1, align='C', fill=False)
+            pdf.cell(w=45,h=5,txt='    Denegado', border='', align='L', fill=False)
+            pdf.cell(w=7,h=3,txt='', border=1, align='C', fill=False)
+            pdf.cell(w=45,h=5,txt='    Observado', border='', align='L', fill=False, ln=1 )
+        elif s.EstadoSoli == 5:
+            pdf.cell(w=7,h=3,txt='', border=1, align='C', fill=False)
+            pdf.cell(w=45,h=5,txt='    Aprobado', border='', align='L', fill=False)
+            pdf.cell(w=7,h=3,txt='', border=1, align='C', fill=False)
+            pdf.cell(w=45,h=5,txt='    Denegado', border='', align='L', fill=False)
+            pdf.cell(w=7,h=3,txt='X', border=1, align='C', fill=False)
+            pdf.cell(w=45,h=5,txt='    Observado', border='', align='L', fill=False, ln=1 )
+        else:
+            pdf.cell(w=7,h=3,txt='', border=1, align='C', fill=False)
+            pdf.cell(w=45,h=5,txt='    Aprobado', border='', align='L', fill=False)
+            pdf.cell(w=7,h=3,txt='', border=1, align='C', fill=False)
+            pdf.cell(w=45,h=5,txt='    Denegado', border='', align='L', fill=False)
+            pdf.cell(w=7,h=3,txt='', border=1, align='C', fill=False)
+            pdf.cell(w=45,h=5,txt='    Observado', border='', align='L', fill=False, ln=1 )
         pdf.set_font('Arial', '', 8)
 
         pdf.cell(w=0,h=3,txt='', border='', align='C', fill=False, ln=1 )

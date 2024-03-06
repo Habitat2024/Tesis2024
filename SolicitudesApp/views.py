@@ -843,7 +843,7 @@ def modSoli(request):
 
 # lista de reportes para el comite
 def listaRF(request,id):
-    listSoli = Solicitud.objects.filter(Estado="Completado", Tipo="micro", IdPerfil__IdAgencia=id)
+    listSoli = Solicitud.objects.filter(Estado="Completado", Tipo="micro",EstadoSoli=3,IdPerfil__IdAgencia=id)
     return render(request, "SolicitudesApp/listaReportesF.html", {"solicitudes":listSoli})
 
 def listaRFAdmin(request):
@@ -856,7 +856,7 @@ def agencRFA(request):
     listperpa=""
     if request.is_ajax():
         try:
-            listperpa = Solicitud.objects.filter(Estado="Completado", Tipo="micro", IdPerfil__IdAgencia=id)
+            listperpa = Solicitud.objects.filter(Estado="Completado", Tipo="micro",EstadoSoli=3, IdPerfil__IdAgencia=id)
             for item in listperpa:
                 lista_agenciaC.append({"id":item.Id,"dui":item.IdPerfil.Dui, "nombre":item.IdPerfil.Nombres, "apellido":item.IdPerfil.Apellidos,"telefono":item.IdPerfil.Telefono, "agencia":item.IdPerfil.IdAgencia.Nombre})
         except Exception:

@@ -29,7 +29,7 @@ class hojaPN(FPDF):
             med=""
         ##############################################3
         try:
-            eg=  EgresosFami.objects.get(IdPerfil=s.IdPerfil.Id)
+            eg=  EgresosFami.objects.get(IdPerfil=s.IdPerfil.Id, Estado="1")
         except EgresosFami.DoesNotExist:
             eg=""
         try:
@@ -58,7 +58,7 @@ class hojaPN(FPDF):
         pdf.cell(w=0,h=5,txt='         ASOCIACIÓN HPH EL SALVADOR EL SALVADOR', border='',  align='C', fill=False, ln=1)
         pdf.cell(w=0,h=5,txt='AGENCIA  '+ s.IdPerfil.IdAgencia.Nombre if hasattr(s, 'IdPerfil') else '', border='',  align='C', fill=False, ln=1)
         pdf.cell(w=0,h=5,txt='HOJA DE PRE-APROBACIÓN DE CRÉDITO', border='',  align='C', fill=False, ln=1)
-        pdf.image('TesisApp/static/TesisApp/images/logohabib.png', x=9, y=9, w=45, h=20)
+        pdf.image('TesisApp\static\TesisApp\images\logohabib.png', x=9, y=9, w=45, h=20)
         pdf.cell(w=0,h=5,txt='', border='',  align='C', fill=False, ln=1)
 
         pdf.set_font('Arial', '', 9)
@@ -112,7 +112,7 @@ class hojaPN(FPDF):
         pdf.cell(w=0,h=5,txt='', border='',  align='C', fill=False, ln=1)
         pdf.set_text_color(0,0,0)
         pdf.set_font('Arial', 'B', 10)
-        if s.tipoobra =='mejora':
+        if s.TipoObra =='mejora':
             pdf.cell(w=45,h=5,txt='', border='',  align='C', fill=False)
             pdf.cell(w=100,h=5,txt='Mejoramiento de Vivienda', border=1,  align='C', fill=False)
             pdf.cell(w=0,h=5,txt='', border='',  align='C', fill=False, ln=1)
@@ -153,7 +153,7 @@ class hojaPN(FPDF):
 
         pdf.set_text_color(0,0,0)
         pdf.set_font('Arial', 'B', 10)
-        if s.tipoobra =='vivienda':
+        if s.TipoObra =='vivienda':
             pdf.cell(w=45,h=5,txt='', border='',  align='C', fill=False)
             pdf.cell(w=100,h=5,txt='Vivienda', border=1,  align='C', fill=False)
             pdf.cell(w=0,h=5,txt='', border='',  align='C', fill=False, ln=1)

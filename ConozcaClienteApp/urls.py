@@ -9,7 +9,7 @@ path('registrarD/',views.registrarD),
 path('cclientedgf/',views.cclientedgf, name="cclientedgf"),
 
 path('listaCC/<id>', views.listaConozcaC, name="listaCC"),
-path('listaCC/editarCliente/<id>',views.editarCliente),
+path('listaCC/editarCliente/<id>',views.editarCliente, name="editarCliente"),
 path('editarD/', views.editarD),
 
 # para reporte

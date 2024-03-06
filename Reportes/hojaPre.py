@@ -29,7 +29,7 @@ class hojaP(FPDF):
             med=""
         ##############################################3
         try:
-            ba=  BalanceSituMic.objects.get(IdPerfil=s.IdPerfil.Id)
+            ba=  BalanceSituMic.objects.get(IdPerfil=s.IdPerfil.Id,Estado="1")
         except BalanceSituMic.DoesNotExist:
             ba=""
         try:
@@ -50,7 +50,7 @@ class hojaP(FPDF):
         except :
             varp=""
                  
-        locale.setlocale(locale.LC_TIME, 'es_ES')
+        locale.setlocale(locale.LC_TIME, '')
         pdf=FPDF(orientation='P', unit='mm', format='Letter')
         pdf.add_page()
         

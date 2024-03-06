@@ -453,7 +453,7 @@
         },
 
         total: {
-          required: "<h2>Debe ingresar la fecha</h2>",
+          required: "<h2>Debe ingresar un valor</h2>",
         },
         notas: {
           required: "<h2>Debe ingresar las notas</h2>",
@@ -1082,7 +1082,8 @@
     if (isNaN(v6)) {
       v6 = 0
     }
-    document.getElementById("total").value = v1 + v2 + v3 + v4 + v5 + v6;
+    let ctotal=v1 + v2 + v3 + v4 + v5 + v6
+    document.getElementById("total").value =ctotal.toFixed(2);
 
   }
 

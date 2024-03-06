@@ -154,10 +154,10 @@
    
    if($("#declaracionj").valid()){ 
   // if (validarDatosA()) {
-  //   if (validarDatosG()) {
+    if (validarTipo()==true) {
          document.declaracionj.submit()
        
-  //   }
+   }
   // }
  
   }else{
@@ -293,7 +293,7 @@ $("#declaracionj").validate({
       maxlength:20
     },
     fpago:{
-      required: false,
+      required: true,
     },
     
     empleadoen:{
@@ -450,6 +450,20 @@ function HDpa(value) {
       document.getElementById("procedenciaf").disabled = true;
     }
   }
+
+  function validarTipo() {
+      var vtipo = document.getElementById("tipoop").value;
+      var vfpago = document.getElementById("fpago").value;
+
+      if (vtipo=="Seleccione un Tipo" || vfpago =="Seleccione") {
+            alertE("DEBE REGISTRAR DATOS!! ");
+            return false;
+        }
+
+        return true;
+        
+    }
+
 
 
 </script>
