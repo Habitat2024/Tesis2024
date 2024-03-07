@@ -54,7 +54,7 @@ class ClienteDatoNeg(models.Model):
     IdClienteDatoGen= models.ForeignKey (ClienteDatoGen, on_delete=models.CASCADE) 
     NombreNego= models.CharField(max_length=50)
     ProductoServ= models.CharField(max_length=200)
-    DireccionNego= models.CharField(max_length=20)
+    DireccionNego= models.CharField(max_length=50)
     FechaInicAct= models.DateField(null=True, blank=True) #  permitirá que el campo sea nulo en la base de datos y también permitirá que se deje en blanco en los formularios.
     RangoIngrMen=models.CharField(max_length=20)
     OtrosIngrMen= models.CharField(max_length=15)
