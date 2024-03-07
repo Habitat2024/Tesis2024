@@ -232,11 +232,16 @@ def registrarPerfil(request):
         registroBit(request, "Registro de perfil" + nombres + " " + apellidos + " DUI " + dui, "Registro")
         ####### Registrar cliente para que pueda iniciar sesion
         
-        login=Usuario.objects.create(username=username, nombre=nombres,apellido=apellidos, cargo=3, email=correo, password=cont, agencia=zo)
+        login=Usuario.objects.create(username=username, nombre=nombres,apellido=apellidos, cargo=3, email=correo, password=cont, agencia=zo, estado=1)
         mensaje="Datos guardados"
         messages.success(request, mensaje)
-
-        return redirect('listaClientes')
+    usua=request.user.iduser
+    usu=Usuario.objects.get(iduser=usua)
+    if usu.cargo==1 or usu.cargo==6:
+        return redirect('listaClientesAdmin')
+    else:
+        return redirect('listaClientes', usu.agencia.Id)
+        
     
 def registrarPerfilc(request): 
   
@@ -360,10 +365,10 @@ def registrarPerfilc(request):
         #registroBit(request, "Registro de perfil" + nombres + " " + apellidos + " DUI " + dui, "Registro")
         ####### Registrar cliente para que pueda iniciar sesion
         
-        login=Usuario.objects.create(username=username, nombre=nombres,apellido=apellidos, cargo=3, email=correo, password=cont, agencia=zo)
+        login=Usuario.objects.create(username=username, nombre=nombres,apellido=apellidos, cargo=3, email=correo, password=cont, agencia=zo, estado=1)
         mensaje="Datos guardados"
         messages.success(request, mensaje)
-
+        
         return redirect('perfilc')   
 
 

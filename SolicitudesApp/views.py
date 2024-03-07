@@ -980,18 +980,25 @@ def registrarEvaluacion(request):
         evaluar="Aprobo"
     elif eval==5:
         evaluar="Observo"
-    else:
+    elif eval==6:
         evaluar="Denego"
+    else:
+        evaluar="Evaluo"
     msol=Solicitud.objects.get(Id=id)
     msol.EstadoSoli=eval
     msol.Observaciones=obs
     msol.save()
-
+    ida=msol.IdPerfil.IdAgencia
+    ag=ida.Id
     mensaje="Datos guardados"
     registroBit(request, "Se "+ evaluar +" la solicitud " + msol.IdPerfil.Dui, "Evaluacion")
     messages.success(request, mensaje)
-
-    return redirect('listaSolicitudesPA')
+    usua=request.user.iduser
+    usu=Usuario.objects.get(iduser=usua)
+    if usu.cargo==1 or usu.cargo==6:
+        return redirect('listaSolicitudesPAAdmin')
+    else:
+        return redirect('listaSolicitudesPA', ag)
 
 def modificarEvaluacion(request):
     id=request.POST['ids']
@@ -1004,20 +1011,33 @@ def modificarEvaluacion(request):
     evaluar=""
     if eval==4:
         evaluar="Aprobo"
+        mensj="Se "+ evaluar +" la solicitud "
     elif eval==5:
         evaluar="Observo"
-    else:
+        mensj="Se "+ evaluar +" la solicitud "
+    elif eval==6:
         evaluar="Denego"
+        mensj="Se "+ evaluar +" la solicitud "
+    else:
+        evaluar="Evaluo"
+        mensj="Se "+ evaluar +" la solicitud "
     msol=Solicitud.objects.get(Id=id)
     msol.EstadoSoli=eval
     msol.Observaciones=obs
     msol.save()
-
+    ida=msol.IdPerfil.IdAgencia
+    ag=ida.Id
+    
     mensaje="Datos actualizados"
-    registroBit(request, "Se "+ evaluar +" la solicitud " + msol.IdPerfil.Dui, "Evaluacion")
+    registroBit(request, mensj + msol.IdPerfil.Dui, "Evaluacion")
     messages.success(request, mensaje)
-
-    return redirect('listaSolicitudesPA')
+    usua=request.user.iduser
+    usu=Usuario.objects.get(iduser=usua)
+    if usu.cargo==1 or usu.cargo==6:
+        return redirect('listaSolicitudesPAAdmin')
+    else:
+        return redirect('listaSolicitudesPA', ag)
+    
 
 #lista de solicitudes observadas= 5
 def listaSolicitudesObs(request,id): 

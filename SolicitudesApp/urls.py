@@ -91,7 +91,7 @@ urlpatterns = [
     path('listaSolicitudesApr/<id>', views.listaSolicitudesApr, name="listaSolicitudesA"),
     # reporte de solicitudes aprobadas
     path('listaSolicitudesApr/formularioC/<id>', viewsnat.formComiteC, name="formularioC"),
-    path('listaSolicitudesApr/evaluarSolApr/<id>', views.evaluarSolDen),
+    path('listaSolicitudesApr/evaluarSolApr/<id>', views.evaluarSolApr),
 
     # para  solicitudes aprobadas admin
     path('listaSolicitudesAprAdmin/', views.listaSolicitudesAprAdmin, name="listaSolicitudesAAdmin"),
