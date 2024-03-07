@@ -962,7 +962,7 @@ def agencDA(request):
         serialized_data = json.dumps(lista_agenciaC,default=str)
         return HttpResponse(serialized_data, content_type="application/json")
 
-def obtenerRango(request):
+def obtenerRangoNat(request):
     id = request.GET['id']   
     alternativa = "-0"
     if request.is_ajax():  

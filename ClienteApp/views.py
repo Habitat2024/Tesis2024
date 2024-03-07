@@ -389,7 +389,7 @@ def eliminar(request, id):
         mensaje="El perfil tiene solicitud en proceso"
         messages.error(request, mensaje)
     
-    return redirect('/ClienteApp/listaPerfil')
+    return redirect('/ClienteApp/listaperfil')
 
 def editarPerfil(request, id):
     perfil = Perfil.objects.get(Id=id)    
@@ -483,7 +483,7 @@ def modificarPerfil(request):
         perfilna=PerfilNoApl.objects.create(Nombres=nombres,Apellidos=apellidos,Dui=dui,Telefono=telefono,Nacionalidad=nacionalidad,Fecha=fecha,Edad=edad,Salario=sal)
         mensaje="Lo sentimos, su solicitud no puede ser aceptada"
         messages.error(request, mensaje)
-        return redirect('/ClienteApp/listaPerfil/')
+        return redirect('/ClienteApp/listaperfil/')
     else:
         test_str=correo
         username=test_str.split('@')[0]
@@ -532,7 +532,7 @@ def municipio(request):
 #### Listado de perfil por agencia
 def listaPerfil(request): 
     listper=Perfil.objects.filter(Estado="activo")
-    return render(request, "ClienteApp/listaPerfil.html", {"perfil":listper})
+    return render(request, "ClienteApp/listaperfil.html", {"perfil":listper})
 
 
 def solicitudmMicroempresa(request, id):
