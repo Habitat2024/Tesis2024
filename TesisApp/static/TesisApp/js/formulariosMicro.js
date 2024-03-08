@@ -2,7 +2,8 @@ let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
 //botones para formularios
 let btnEvaluacion = document.getElementById("btnEvaliacionMicro")
 let btnSolicitudCredito = document.getElementById("btnSolicitudCredito")
-let btnConozCliente = document.getElementById("btnConozCliente")
+let btnConozCliente = document.getElementById("btnConozCliente")  
+let btnConozClienteFiador = document.getElementById("btnConozClienteFiador")
 let btnDeclaracionJurada = document.getElementById("btnDeclaracionJurada")
 let btnInscripcionSeguro = document.getElementById("btnInscripcionSeguro")
 let btnInspeccionLote = document.getElementById("btnInspeccionLote")
@@ -16,6 +17,7 @@ let btnObrasAdicionales = document.getElementById("btnObrasAdicionales")
 
 //botones para reportes
 let btnConozClienteRepo = document.getElementById("btnConozClienteRepo")
+let btnConozClienteRepoFiador = document.getElementById("btnConozClienteRepoFiador")
 let btnDeclaracionJuradaRepo = document.getElementById("btnDeclaracionJuradaRepo") 
 let btnInscripcionSeguroRepo = document.getElementById("btnInscripcionSeguroRepo")
 let btnInspeccionLoteRepo = document.getElementById("btnInspeccionLoteRepo")
@@ -62,7 +64,8 @@ let progresoSolicitud = document.getElementById("progresoSoli")
 let progresoEvaluacionMicro = document.getElementById("rogresoEvaluacionMicro") 
 let progresoEvaluacionNatural= document.getElementById("rogresoEvaluacionNatural")
 let progresoSoliMicro = document.getElementById("progresoSoliMicro")
-let progresoConozcaCliente = document.getElementById("progresoConozcaCliente")
+let progresoConozcaCliente = document.getElementById("progresoConozcaCliente")  
+let progresoConozcaClienteFiador = document.getElementById("progresoConozcaClienteFiador")
 let progresoDeclaracion = document.getElementById("progresoDeclaracion")
 let progresoSeguro = document.getElementById("progresoSeguro")
 let progresoInspeccion = document.getElementById("progresoInspeccion")
@@ -74,6 +77,7 @@ let progresoObrasAdd = document.getElementById("progresoObrasAdd")
 
 //barra de progreso reportes
 let progresoConozcaClienteRepo = document.getElementById("progresoConozcaClienteRepo") 
+let progresoConozcaClienteRepoFiador = document.getElementById("progresoConozcaClienteRepoFiador") 
 let progresoDeclaracionRepo = document.getElementById("progresoDeclaracionRepo")
 let progresoSeguroRepo = document.getElementById("progresoSeguroRepo")
 let progresoInspeccionRepo = document.getElementById("progresoInspeccionRepo")
@@ -183,7 +187,23 @@ function cambiarUrlMicro(estado) {
                         progresoConozcaCliente.classList.add("progress-bar-success")
                         progresoConozcaClienteRepo.classList.remove("progress-bar-danger")
                         progresoConozcaClienteRepo.classList.add("progress-bar-success")
-                        progreso=progreso+1.66
+                        progreso=progreso+0.83
+                    }
+
+                    if (response[12] == "-0") {
+                        btnConozCliente.href = "../../../SolicitudesApp/listaSC/cclientedgf/" + response[1]
+
+                    } else {
+                        btnConozClienteFiador.href = "../../../ConozcaClienteApp/listaCC/editarCliente/" + response[12]
+                        btnConozClienteRepoFiador.onclick = ""
+                        btnConozClienteRepoFiador.href = "../../../ConozcaClienteApp/listaCC/conozcaC/" + response[12]
+                        descipcion.textContent = "Progreso: formulario conozca a su cliente"
+
+                        progresoConozcaClienteFiador.classList.remove("progress-bar-danger")
+                        progresoConozcaClienteFiador.classList.add("progress-bar-success")
+                        progresoConozcaClienteRepoFiador.classList.remove("progress-bar-danger")
+                        progresoConozcaClienteRepoFiador.classList.add("progress-bar-success")
+                        progreso=progreso+0.83
                     }
 
                     if (response[3] == "-0") {
@@ -473,6 +493,21 @@ function cambiarUrlNatural(estado) {
                         progresoConozcaClienteRepo.classList.remove("progress-bar-dange")
                         progresoConozcaClienteRepo.classList.add("progress-bar-success")
                         progreso=progreso+1.66
+                    }
+                    if (response[12] == "-0") {
+                        btnConozCliente.href = "../../../SolicitudesApp/listaSC/cclientedgf/" + response[1]
+
+                    } else {
+                        btnConozClienteFiador.href = "../../../ConozcaClienteApp/listaCC/editarCliente/" + response[12]
+                        btnConozClienteRepoFiador.onclick = ""
+                        btnConozClienteRepoFiador.href = "../../../ConozcaClienteApp/listaCC/conozcaC/" + response[12]
+                        descipcion.textContent = "Progreso: formulario conozca a su cliente"
+
+                        progresoConozcaClienteFiador.classList.remove("progress-bar-danger")
+                        progresoConozcaClienteFiador.classList.add("progress-bar-success")
+                        progresoConozcaClienteRepoFiador.classList.remove("progress-bar-danger")
+                        progresoConozcaClienteRepoFiador.classList.add("progress-bar-success")
+                        progreso=progreso+0.83
                     }
 
                     if (response[3] == "-0") {
