@@ -149,8 +149,11 @@ def regisPunt(request):
 
         else:# El 65% de su credito al que puede aplicar
             regis=RegistroHist.objects.create(Puntaje=punt, Fecha=fe, IdRango=idhi, IdSolicitud=idpr)
-            idpr.IdPerfil.EstadoSoli=10
-            idpr.IdPerfil.save()
+            if idpr.IdPerfil.EstadoSoli<10:
+                idpr.IdPerfil.EstadoSoli=10
+                idpr.IdPerfil.save()
+            else:
+                idpr.IdPerfil.save()
             mensaje="Puntaje DICOM registrado"
             registroBit(request, "Se registro puntaje DICOM del cliente " + idpr.IdPerfil.Dui, "Registro")
 
@@ -167,7 +170,7 @@ def regisPunt(request):
     lchequo= ListaCheq.objects.get(IdSolicitud=idpr)
     lchequo.InformeDico ="Si"
     lchequo.save()
-    return render(request, "HistorialApp/regisRangoCli.html")
+    return redirect('administrarPerfil', id=idpr.IdPerfil.Id)
 
 
 
@@ -219,8 +222,9 @@ def modificarPuntajeC(request):
         puntC.IdSolicitud.Observaciones='NULL'
         puntC.IdSolicitud.EstadoSoli=3
         puntC.save()
-        puntC.IdSolicitud.IdPerfil.EstadoSoli=10
-        puntC.IdSolicitud.IdPerfil.save()
+        
+        #puntC.IdSolicitud.IdPerfil.EstadoSoli=10
+        #puntC.IdSolicitud.IdPerfil.save()
         eva.Estado=1
         eva.save()
         puntC.Puntaje=puntaje
@@ -234,8 +238,8 @@ def modificarPuntajeC(request):
         puntC.IdSolicitud.Observaciones='Su puntaje de DICOM no aplica para financiamiento'
         puntC.IdSolicitud.EstadoSoli=3
         puntC.save()
-        puntC.IdSolicitud.IdPerfil.EstadoSoli=10
-        puntC.IdSolicitud.IdPerfil.save()
+       # puntC.IdSolicitud.IdPerfil.EstadoSoli=10
+        #puntC.IdSolicitud.IdPerfil.save()
         eva.Estado=2
         eva.save()
         puntC.Puntaje=puntaje
@@ -248,12 +252,12 @@ def modificarPuntajeC(request):
         puntC.Puntaje=puntaje
         puntC.IdRango=ranh
         puntC.save()
-        puntC.IdSolicitud.IdPerfil.EstadoSoli=10
-        puntC.IdSolicitud.IdPerfil.save()
+        #puntC.IdSolicitud.IdPerfil.EstadoSoli=10
+        #puntC.IdSolicitud.IdPerfil.save()
         mensaje="Datos actualizados"
         registroBit(request, "Se actualizó puntaje DICOM del cliente " + puntC.IdSolicitud.IdPerfil.Dui, "Actualización")
     messages.success(request, mensaje)
-    return redirect('listapuntaje')
+    return redirect('administrarPerfil', id=puntC.IdSolicitud.IdPerfil.Id)
 
 
 def con(request):

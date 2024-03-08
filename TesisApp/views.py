@@ -11,6 +11,7 @@ from typing import Any
 from urllib import request
 import uuid
 from django import http
+from django.db.models import Q
 from django.template.loader import render_to_string
 from django.shortcuts import render,redirect,HttpResponse
 from django.contrib import messages
@@ -60,10 +61,10 @@ def admin():
     print(ag)
     if not ag:
         print("usuario")
-        agen=Agencia.objects.create(Nombre="Agencia", Direccion="Central", Telefono="0000-0000", TelefonoDos="0000-0000", Departamento="central", Municipio="central", Distrito="central", Estado=5)
+        agen=Agencia.objects.create(Nombre="Oficina Nacional", Direccion="Cl. Jorge Domínguez, Col. General Arce #H-4 San Salvador, El Salvador", Telefono="2510-6420", TelefonoDos="0000-0000", Departamento="San Salvador", Municipio="San Salvador Centro", Distrito="San Salvador", Estado=5)
         print("hola")
         agen=Agencia.objects.get(Estado=5)
-        cont= make_password("admin")
+        cont= make_password("Habitat$2023")
         usu=Usuario.objects.create(username="admin", nombre="Administrador",apellido="Admin", cargo=1, email="admin@gmial.com", password=cont, agencia=agen)
     
     
@@ -89,6 +90,47 @@ def insertar(request):
     messages.success(request, mensaje)
     return redirect('/')
 
+########Empleado
+def activarEmpleado(request):
+    ######
+    return redirect('/')
+def listaEmpleados(request, id): 
+    cargo_letras = {
+        1: 'Administrador',
+        2: 'Jefe de agencia',
+        3: 'Cliente',
+        4: 'Oficial de credito',
+        5: 'Tecnico de construccion',
+        6: 'Comite de credito',
+        # Añade más mapeos según sea necesario
+    }
+
+    listUsu=Usuario.objects.filter(estado=0,agencia=id).exclude(Q(cargo=1) | Q(cargo=2) | Q(cargo=3))
+    for usuario in listUsu:
+       usuario.cargo = cargo_letras.get(usuario.cargo, 'Desconocido')
+    return render(request, "TesisApp/listaEmpl.html", {"usuario":listUsu})
+
+def empleadoActi(request, id):
+
+    #fecha_actual = timezone.now().date()
+    #print(fecha_actual)
+   
+    estad=0
+    # cambia el estado del salario a inactivo
+    emp= Usuario.objects.get(iduser=id, estado=0)
+    emp.estado=1
+    emp.save()
+    
+
+    mensaje="Empleado activado" 
+    registroBit(request, Actividad=mensaje + emp.nombre +" "+ emp.apellido, Nivel="Activacion")
+    messages.success(request, mensaje)
+    return redirect('listaEmpleados', request.user.iduser)
+
+
+def listaEmpleadosAdmin(request): #lista filtrada por agencias
+    listaAg=Agencia.objects.all()
+    return render(request, "ClienteApp/listaClientesAdmin.html", {"agencia":listaAg})
 #######################################
 
 

@@ -25,10 +25,18 @@ urlpatterns = [
      path('bitacora/', views.listaB, name="listaBit"),
      path('fechas/', views.fechas),
      
+     #Empleados
+     path('listaEmpleados/<id>', views.listaEmpleados, name="listaEmpleados"),
+     path('listaEmpleados/Activar/<id>',login_required(views.empleadoActi)), 
+     #path('listaClientes/administrarPerfil/<id>', views.administrarPerfil, name='administrarPerfil'),
+     
+     # para el administrador
+     #path('listaClientesAdmin/', views.listaClientesAdmin, name="listaClientesAdmin"),
+     #path('agenc/',views.agenc),
 
      path('password_reset/', auth_views.PasswordResetView.as_view(), name='password_reset'),
      path('password_reset/done/', auth_views.PasswordResetDoneView.as_view(), name='password_reset_done'),
      path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
      path('reset/done/', auth_views.PasswordResetCompleteView.as_view(), name='password_reset_complete'),
-
+     
 ]

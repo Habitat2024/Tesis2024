@@ -102,7 +102,12 @@
             <li><a href="{% url 'listaMater'%} " >Lista de Materiales</a></li>
           </ul>
         </li>
-        
+        <!--li><a><i class="fa fa-renren"></i> Empleados <span class="fa fa-chevron-down"></span></a>
+          <ul class="nav child_menu">
+            <li><a href="{% url 'listaEmpleados' id=request.user.agencia.Id%}" >Lista de empleados</a></li>
+            
+          </ul>
+        </li-->
         
         
       </ul>
@@ -111,9 +116,9 @@
     <li><a><i class="fa fa-users"></i> Cliente <span class="fa fa-chevron-down"></span></a>
       <ul class="nav child_menu">
         <li><a href="{% url 'perfil'%}">Perfil de Cliente</a></li>
-        <li><a href="{% url 'listaClientes' id=request.user.agencia.Id%}">Administrar Clientes</a></li>
+        <!--li><a href="{% url 'listaClientes' id=request.user.agencia.Id%}">Administrar Clientes</a></li-->
         <li><a href="{% url 'listaClientesAdmin'%}">Administrar Clientes Admin</a></li>
-        <li><a href="{% url 'listaPerfilNA' id=request.user.agencia.Id%}">Lista de Perfiles NA</a></li> 
+        <!--li><a href="{% url 'listaPerfilNA' id=request.user.agencia.Id%}">Lista de Perfiles NA</a></li--> 
         <li><a href="{% url 'listaPerfilNAAdmin'%}">Lista de Perfiles NA Admin</a></li> 
         
       </ul>
@@ -121,9 +126,9 @@
     
     <li><a><i class="fa fa-list-alt"></i> Flujo de caja <span class="fa fa-chevron-down"></span></a>
       <ul class="nav child_menu">
-        <li><a href="{% url 'listaIvE' id=request.user.agencia.Id %}">Lista IvE Personal</a></li>
+        <!--li><a href="{% url 'listaIvE' id=request.user.agencia.Id %}">Lista IvE Personal</a></li-->
         <li><a href="{% url 'listaIvEAdmin'  %}">Lista IvE Personal Admin</a></li>
-        <li><a href="{% url 'listaMicro' id=request.user.agencia.Id %}">Lista IvE Micro</a></li>
+        <!--li><a href="{% url 'listaMicro' id=request.user.agencia.Id %}">Lista IvE Micro</a></li-->
         <li><a href="{% url 'listaMicroAdmin' %}">Lista IvE Micro Admin</a></li>
       </ul>
     </li>
@@ -132,14 +137,14 @@
       <ul class="nav child_menu">
         <li><a><i class="fa fa-renren"></i> Solicitud Personal <span class="fa fa-chevron-down"></span></a>
           <ul class="nav child_menu">
-            <li><a href="{% url 'listaRFN' id=request.user.agencia.Id%} " >Listado Reportes Comité</a></li>
+            <!--li><a href="{% url 'listaRFN' id=request.user.agencia.Id%} " >Listado Reportes Comité</a></li>
             <li><a href="{% url 'listaSolicitudesAN' id=request.user.agencia.Id%}">Solicitudes Aprobadas</a></li>
             <li><a href="{% url 'listaSolicitudesPAN' id=request.user.agencia.Id%}">Solicitudes Pendientes de Aprobación</a></li>
             <li><a href="{% url 'listaSolicitudesObsN' id=request.user.agencia.Id%}">Solicitudes Observadas</a></li>
-            <li><a href="{% url 'listaSolicitudesDenN' id=request.user.agencia.Id%}">Solicitudes Denegadas</a></li>
+            <li><a href="{% url 'listaSolicitudesDenN' id=request.user.agencia.Id%}">Solicitudes Denegadas</a></li-->
             <li><a href="{% url 'listarSNC'%} " >Listado Solicitudes Completas</a></li>
             <li><a href="{% url 'listarSN'%} " >Listado Solicitudes Incompletas</a></li>
-            <li><a href="{% url 'listarSNCA' id=request.user.agencia.Id%}">Listado Solicitudes por Agencia</a></li> 
+            <!--li><a href="{% url 'listarSNCA' id=request.user.agencia.Id%}">Listado Solicitudes por Agencia</a></li--> 
             <!--li><a href="# " >Listado Solicitudes por Agencia</a></li-->        
             <li><a href="{% url 'listaRFNAdmin' %} " >Listado Reportes Comité Admin</a></li>
             <li><a href="{% url 'listaSolicitudesANAdmin' %}">Solicitudes Aprobadas Admin</a></li>
@@ -150,14 +155,14 @@
         </li>
         <li><a><i class="fa fa-renren"></i> Solicitud Microempresa <span class="fa fa-chevron-down"></span></a>
           <ul class="nav child_menu">
-            <li><a href="{% url 'listaRF' id=request.user.agencia.Id%} " >Listado Reportes Comité</a></li>
+            <!--li><a href="{% url 'listaRF' id=request.user.agencia.Id%} " >Listado Reportes Comité</a></li>
             <li><a href="{% url 'listaSolicitudesPA' id=request.user.agencia.Id%}">Solicitudes Pendientes de Aprobación</a></li>
             <li><a href="{% url 'listaSolicitudesA' id=request.user.agencia.Id%}">Solicitudes Aprobadas</a></l>
             <li><a href="{% url 'listaSolicitudesObs' id=request.user.agencia.Id%}">Solicitudes Observadas</a></li>
-            <li><a href="{% url 'listaSolicitudesDen' id=request.user.agencia.Id%}">Solicitudes Denegadas</a></li>
+            <li><a href="{% url 'listaSolicitudesDen' id=request.user.agencia.Id%}">Solicitudes Denegadas</a></li-->
             <li><a href="{% url 'listaSC'%} " >Listado Solicitudes Completas</a></li>
             <li><a href="{% url 'listaSolicitud'%} " >Listado Solicitudes Incompletas</a></li>
-            <li><a href="{% url 'listaSCA' id=request.user.agencia.Id%}">Listado Solicitudes por Agencia</a></li>   
+            <!--li><a href="{% url 'listaSCA' id=request.user.agencia.Id%}">Listado Solicitudes por Agencia</a></li-->   
             <!--li><a href="# " >Listado Solicitudes por Agencia</a></li--> 
             <li><a href="{% url 'listaRFAdmin' %} " >Listado Reportes Comité Admin</a></li>
             <li><a href="{% url 'listaSolicitudesPAAdmin'%}">Solicitudes Pendientes de Aprobación Admin</a></li>
@@ -175,32 +180,7 @@
         
       </ul>
     </li>
-    <li><a><i class="fa fa-file-o"></i> Reportes <span class="fa fa-chevron-down"></span></a>
-      <ul class="nav child_menu">
-        <li><a href="{% url 'listaHis'%}">Historial</a></li>
-        <li><a href="{% url 'listaCC' id=request.user.agencia.Id %}">Conozca a su Cliente</a></li>
-        <li><a href="{% url 'listaDJ' id=request.user.agencia.Id %}">Declaración Jurada</a></li>
-        <li><a href="{% url 'listaIS' id=request.user.agencia.Id %}">Inscripción Seguro</a></li>
-        <li><a><i class="fa fa-home"></i> Inspección <span class="fa fa-chevron-down"></span></a>
-          <ul class="nav child_menu">
-            <li><a href="{% url 'listaI' id=request.user.agencia.Id%}">Inspeccion Lote</a></li>
-            <li><a href="{% url 'listaPIL' id=request.user.agencia.Id%}">Primera Inspeccion Lote</a></li>
-            <li><a href="{% url 'listaIM' id=request.user.agencia.Id%}">Inspeccion Mejora</a></li>
-            <li><a href="{% url 'listaPIM' id=request.user.agencia.Id%}">Primera Inspeccion Mejora</a></li>
-          </ul>
-        </li>
-        
-        <li><a><i class="fa fa-home"></i> Presupuestos <span class="fa fa-chevron-down"></span></a>
-          <ul class="nav child_menu">
-            <li><a href="{% url 'listaPV' id=request.user.agencia.Id%}">Vivienda</a></li>
-            <li><a href="{% url 'listaPVO' id=request.user.agencia.Id%}">Obras Adicionales</a></li>
-            <li><a href="{% url 'listaPM' id=request.user.agencia.Id%}">Mejora</a></li>
-          </ul>
-        </li>
-      </ul>
-    </li>
- 
-
+    
     <li><a><i class="fa fa-bar-chart-o"></i>Graficas<span class="fa fa-chevron-down"></span></a>
       <ul class="nav child_menu">
         <li><a href="{% url 'grafAgenciaP'%}">Grafica Perfiles por Agencia</a></li>
@@ -210,7 +190,6 @@
         <li><a href="{% url 'graficaASolic'%}">Grafica Agencia Estado Sol</a></li>
         <li><a href="{% url 'grafTipoSol'%}">Grafica Tipo Soli</a></li>
         
-        
       </ul>
     </li>
     <li><a><i class="fa fa-database"></i> Bitacora <span class="fa fa-chevron-down"></span></a>
@@ -219,8 +198,4 @@
         
       </ul>
     </li>
-
-   </ul>
-
- 
-
+  </ul>

@@ -16,6 +16,7 @@ from ConfiguracionApp.models import Alternativa, ModeloVivi, Agencia
 from django.db.models import Q
 from ListaChequeoApp.models import *
 from TesisApp.views import registroBit
+from NaturalApp import views as nat
 
 
 # Create your views here.
@@ -429,6 +430,7 @@ def registroSolicitud(request):
     # fin medio"""
 
     registroBit(request, "Se registro  formulario Solicitud Microempresa" + soli.IdPerfil.Dui, "Registro")
+    
     return redirect('administrarPerfil', id=soli.IdPerfil.Id)  # id de perfil 
     
 
@@ -996,9 +998,15 @@ def registrarEvaluacion(request):
     usua=request.user.iduser
     usu=Usuario.objects.get(iduser=usua)
     if usu.cargo==1 or usu.cargo==6:
-        return redirect('listaSolicitudesPAAdmin')
+        if msol.Tipo=='micro':
+            return redirect('listaSolicitudesPAAdmin')
+        else:   
+            return nat.listaSolicitudesPAAdmin(request)
     else:
-        return redirect('listaSolicitudesPA', ag)
+        if msol.Tipo=='micro':
+            return redirect('listaSolicitudesPA', ag)
+        else:   
+            return nat.listaSolicitudesPA(request, ag)
 
 def modificarEvaluacion(request):
     id=request.POST['ids']
@@ -1034,9 +1042,15 @@ def modificarEvaluacion(request):
     usua=request.user.iduser
     usu=Usuario.objects.get(iduser=usua)
     if usu.cargo==1 or usu.cargo==6:
-        return redirect('listaSolicitudesPAAdmin')
+        if msol.Tipo=='micro':
+            return redirect('listaSolicitudesPAAdmin')
+        else:   
+            return nat.listaSolicitudesPAAdmin(request)
     else:
-        return redirect('listaSolicitudesPA', ag)
+        if msol.Tipo=='micro':
+            return redirect('listaSolicitudesPA', ag)
+        else:   
+            return nat.listaSolicitudesPA(request, ag)
     
 
 #lista de solicitudes observadas= 5
