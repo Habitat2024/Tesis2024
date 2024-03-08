@@ -91,7 +91,7 @@ class InspeccionMV(FPDF):
         except EsquemasInspMej.DoesNotExist:
             eim=""
 
-        locale.setlocale(locale.LC_TIME, 'es_ES')    
+        locale.setlocale(locale.LC_TIME, '')    
         pdf=FPDF(orientation='P', unit='mm', format='Letter')
         pdf.add_page()
         

@@ -108,7 +108,7 @@ class ConozcaC(FPDF):
         pdf.cell(w=0,h=7,txt='CONOZCA A SU CLIENTE', border='LR',  align='C', fill=True, ln=1)
         pdf.set_font('Arial', 'B', 9)
         pdf.cell(w=0,h=5,txt='Estrictamente confidencial', border='BLR',  align='R', fill=True, ln=1)
-        pdf.image('TesisApp\static\TesisApp\images\logohabitatb.png', x=7, y=5, w=40, h=30)#, link=url) 
+        pdf.image('TesisApp/static/TesisApp/images/logohabitatb.png', x=7, y=5, w=40, h=30)#, link=url) 
         pdf.set_font('Arial', '', 10)
         pdf.set_y(30)
         pdf.set_left_margin(10)

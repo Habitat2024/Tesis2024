@@ -18,7 +18,7 @@ class Seguro(FPDF):
 
     def seguro(request, id):
 
-        locale.setlocale(locale.LC_TIME, 'es_ES')
+        locale.setlocale(locale.LC_TIME, '')
         fecha=date.today()
         
         print(fecha)
