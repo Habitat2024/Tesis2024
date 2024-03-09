@@ -420,7 +420,7 @@ function validarSalarioGP(salario) {
 }
 
 function validarMonto(monto){
-  if(monto.value < montoMinMicro || monto.value > montoMaxMicro){
+  if(monto.value > montoMinMicro || monto.value < montoMaxMicro){
     alertA("EL monto tiene que estar dentro del rango de la alternativa seleccionada")
     monto.value = ""
   }
