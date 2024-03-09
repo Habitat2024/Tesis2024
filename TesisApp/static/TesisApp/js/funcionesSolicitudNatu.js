@@ -412,7 +412,7 @@ function validarSalarioGPFN(salario) {
                 alert(document.getElementById('alter').value)
         },
         error: function (error) {
-            alert("no paso")
+            alertE(""+error)
         }
     });
 }

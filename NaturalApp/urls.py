@@ -101,7 +101,7 @@ urlpatterns = [
     path('listaSolicitudesDenAdmin/solDen/<id>', viewsnat.solicDen, name="solDen"), 
     path('listaSolicitudesDenAdmin/evaluarSolDen/<id>', viewsS.evaluarSolDen),
 
-    path('obtenerRango/' ,views.obtenerRangoNat, name='obtenerRango'),
+    path('obtenerRangoNat/' ,views.obtenerRangoNat, name='obtenerRangoNat'),
      
 
 ]
