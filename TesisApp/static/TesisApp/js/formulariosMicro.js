@@ -815,12 +815,28 @@ function consultaTipoSolicitud() {
 }
 
 function aprobada(estado){
-    if( estado == 4){
+    if( estado == 3){
         progresoSolicitud.ariaValueNow = (100) + ""
         progresoSolicitud.style.width = (100) + "%"
 
         titulo.textContent = "Solicitud Completada"
         descipcion.textContent = "Pendiente de aprobación"
+
+        $('#inspecciones').fadeIn();
+        $('#formularios-tab2').fadeOut();
+        roleReporte.classList.add("active")
+        panelReporte.classList.remove("fade")
+        panelReporte.classList.add("active")  
+        panelFormularios.classList.remove("active")
+        panelFormularios.classList.add("fade")
+        return "ok"
+    }
+    if( estado == 4){
+        progresoSolicitud.ariaValueNow = (100) + ""
+        progresoSolicitud.style.width = (100) + "%"
+
+        titulo.textContent = "Solicitud Aprobada"
+        descipcion.textContent = ""
 
         $('#inspecciones').fadeIn();
         $('#formularios-tab2').fadeOut();
