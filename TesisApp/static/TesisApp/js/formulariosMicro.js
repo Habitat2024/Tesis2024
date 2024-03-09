@@ -175,7 +175,7 @@ function cambiarUrlMicro(estado) {
                     progreso=1.7
                     //alert((estadoCliente*10)+"%")
                     if (response[2] == "-0") {
-                        btnConozCliente.href = "../../../SolicitudesApp/listaSC/ccliente/" + response[1]
+                        btnConozCliente.href = "../../../SolicitudesApp/listaSC/ccliente//?idsol=" + response[1]
 
                     } else {
                         btnConozCliente.href = "../../../ConozcaClienteApp/listaCC/editarCliente/" + response[2]
@@ -495,7 +495,7 @@ function cambiarUrlNatural(estado) {
                         progreso=progreso+1.66
                     }
                     if (response[12] == "-0") {
-                        btnConozClienteFiador.href = "../../../ConozcaClienteApp/cclientedgf/" + response[1]
+                        btnConozClienteFiador.href = "../../../ConozcaClienteApp/cclientedgf/?idsol=" + response[1]
 
                     } else {
                         btnConozClienteFiador.href = "../../../ConozcaClienteApp/listaCC/editarCliente/" + response[12]
