@@ -603,7 +603,7 @@ function cambiarUrlNatural(estado) {
                         if (response[6] == "-0") {
                             btnPresupuestoVivienda.href = "../../../SolicitudesApp/listaSC/presupuesto/" + response[1]
                         } else {
-                            btnPresupuestoVivienda.href = "../../../PresupuestoApp/modPresupuesto/" + response[6]
+                            btnPresupuestoVivienda.href = "../../../PresupuestoApp/listaPM/modPresupuesto/" + response[6]
                             descipcion.textContent = "Progreso: Presupuesto "
                             btnPresupuestoViviendaRepo.onclick = ""
                             btnPresupuestoViviendaRepo.href = "../../../PresupuestoApp/listaPM/presupuestoMj/" + response[6] //**** agregar aqui el link del reporte */
