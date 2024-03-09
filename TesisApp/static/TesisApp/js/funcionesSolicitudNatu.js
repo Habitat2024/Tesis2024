@@ -420,7 +420,7 @@ function validarSalarioGPFN(salario) {
 function validarMontoNat(monto){
   let m = parseFloat(monto.value)
   if(m < montoMinNat || m > montoMaxNat){
-    alertA("EL monto tiene que estar dentro del rango de la alternativa seleccionada, "+montoMinNat+"-"+montoMaxNat )
+    alertA("EL monto tiene que estar dentro del rango de la alternativa seleccionada, $"+montoMinNat+" - $"+montoMaxNat )
     monto.value = ""
   }
 }

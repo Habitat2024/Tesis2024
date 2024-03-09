@@ -422,7 +422,7 @@ function validarSalarioGP(salario) {
 function validarMonto(monto){
   let m = parseFloat(monto.value)
   if(m < montoMinMicro || m > montoMaxMicro){
-    alertA("EL monto tiene que estar dentro del rango de la alternativa seleccionada, "+montoMinMicro+' - '+montoMaxMicro)
+    alertA("EL monto tiene que estar dentro del rango de la alternativa seleccionada, $"+montoMinMicro+' - $'+montoMaxMicro)
     monto.value = ""
   }
 }

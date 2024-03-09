@@ -53,7 +53,7 @@ def ccliente(request, id):
 def cclientedgf(request): # carga la vista para completar el formulario codeudor
     id=request.GET['idsol']
     fsol= ClienteDatoGen.objects.filter(IdSolicitud=id,CalidadActu="Fiador").exists() 
-    if fsol == True :
+    if fsol == '' :
         solv= ClienteDatoGen.objects.get(IdSolicitud=id)
     
         return redirect('editarCliente', id=solv.Id)

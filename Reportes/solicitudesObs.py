@@ -50,7 +50,7 @@ class solObs(FPDF):
                 inspl=""
                   
         
-        locale.setlocale(locale.LC_TIME, 'es_ES')
+        locale.setlocale(locale.LC_TIME, '')
         pdf=FPDF(orientation='P', unit='mm', format='Letter')
         pdf.add_page()      
 
