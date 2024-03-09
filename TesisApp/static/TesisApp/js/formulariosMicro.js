@@ -191,13 +191,13 @@ function cambiarUrlMicro(estado) {
                     }
 
                     if (response[12] == "-0") {
-                        btnConozClienteFiador.href = "../../../SolicitudesApp/listaSC/cclientedgf/" + response[1]
+                        btnConozClienteFiador.href = "../../../ConozcaClienteApp/cclientedgf/" + response[1]
 
                     } else {
                         btnConozClienteFiador.href = "../../../ConozcaClienteApp/listaCC/editarCliente/" + response[12]
                         btnConozClienteRepoFiador.onclick = ""
                         btnConozClienteRepoFiador.href = "../../../ConozcaClienteApp/listaCC/conozcaC/" + response[12]
-                        descipcion.textContent = "Progreso: formulario conozca a su cliente"
+                        descipcion.textContent = "Progreso: formulario conozca a su cliente-fiador"
 
                         progresoConozcaClienteFiador.classList.remove("progress-bar-danger")
                         progresoConozcaClienteFiador.classList.add("progress-bar-success")
@@ -495,7 +495,7 @@ function cambiarUrlNatural(estado) {
                         progreso=progreso+1.66
                     }
                     if (response[12] == "-0") {
-                        btnConozClienteFiador.href = "../../../SolicitudesApp/listaSC/cclientedgf/" + response[1]
+                        btnConozClienteFiador.href = "../../../ConozcaClienteApp/cclientedgf/" + response[1]
 
                     } else {
                         btnConozClienteFiador.href = "../../../ConozcaClienteApp/listaCC/editarCliente/" + response[12]
