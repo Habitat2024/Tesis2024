@@ -501,7 +501,10 @@ function cambiarUrlNatural(estado) {
                         progresoConozcaClienteRepo.classList.add("progress-bar-success")
                         progreso=progreso+1.66
                     }
-                    if(response[12]!="-1"){
+                    if(response[12]=="-1"){
+                        $('#trCclienteFiador').fadeOut();
+                        $('#trCclienteFiadorRepo').fadeOut();                     
+                    }else{
                         if (response[12] == "-0") {
                             btnConozClienteFiador.href = "../../../ConozcaClienteApp/cclientedgf/?idsol=" + response[1]
 
@@ -517,9 +520,6 @@ function cambiarUrlNatural(estado) {
                             progresoConozcaClienteRepoFiador.classList.add("progress-bar-success")
                             progreso=progreso+0.83
                         }
-                    }else{
-                        $('#trCclienteFiador').fadeOut();
-                        $('#trCclienteFiadorRepo').fadeOut();
                     }
 
                     if (response[3] == "-0") {
