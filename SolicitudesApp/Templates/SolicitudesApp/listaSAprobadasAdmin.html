@@ -54,11 +54,11 @@
 
   function cargarLista() {
     let id = document.getElementById('id').value;
-    alert("lita aprobad")
+    
     $('#table-SoliAA').dataTable().fnClearTable(true);	//limpio la tabla
 
     $.ajax({
-      url: "/NaturalApp/agencAA/?id=" + id,
+      url: "/SolicitudesApp/agencAA/?id=" + id,
       type: "get",
       headers: { "X-CSRFToken": '{{ csrf_token }}' },
       dataType: "json",
