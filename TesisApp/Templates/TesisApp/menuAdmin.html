@@ -117,58 +117,34 @@
       <ul class="nav child_menu">
         <li><a href="{% url 'perfil'%}">Perfil de Cliente</a></li>
         <!--li><a href="{% url 'listaClientes' id=request.user.agencia.Id%}">Administrar Clientes</a></li-->
-        <li><a href="{% url 'listaClientesAdmin'%}">Administrar Clientes Admin</a></li>
+        <li><a href="{% url 'listaClientesAdmin'%}">Administrar Clientes</a></li>
         <!--li><a href="{% url 'listaPerfilNA' id=request.user.agencia.Id%}">Lista de Perfiles NA</a></li--> 
-        <li><a href="{% url 'listaPerfilNAAdmin'%}">Lista de Perfiles NA Admin</a></li> 
+        <li><a href="{% url 'listaPerfilNAAdmin'%}">Lista de Perfiles N/A</a></li> 
         
       </ul>
     </li>
     
-    <li><a><i class="fa fa-list-alt"></i> Flujo de caja <span class="fa fa-chevron-down"></span></a>
-      <ul class="nav child_menu">
-        <!--li><a href="{% url 'listaIvE' id=request.user.agencia.Id %}">Lista IvE Personal</a></li-->
-        <li><a href="{% url 'listaIvEAdmin'  %}">Lista IvE Personal Admin</a></li>
-        <!--li><a href="{% url 'listaMicro' id=request.user.agencia.Id %}">Lista IvE Micro</a></li-->
-        <li><a href="{% url 'listaMicroAdmin' %}">Lista IvE Micro Admin</a></li>
-      </ul>
-    </li>
     
     <li><a><i class="fa fa-edit"></i> Solicitud <span class="fa fa-chevron-down"></span></a>
       <ul class="nav child_menu">
         <li><a><i class="fa fa-renren"></i> Solicitud Personal <span class="fa fa-chevron-down"></span></a>
           <ul class="nav child_menu">
-            <!--li><a href="{% url 'listaRFN' id=request.user.agencia.Id%} " >Listado Reportes Comité</a></li>
-            <li><a href="{% url 'listaSolicitudesAN' id=request.user.agencia.Id%}">Solicitudes Aprobadas</a></li>
-            <li><a href="{% url 'listaSolicitudesPAN' id=request.user.agencia.Id%}">Solicitudes Pendientes de Aprobación</a></li>
-            <li><a href="{% url 'listaSolicitudesObsN' id=request.user.agencia.Id%}">Solicitudes Observadas</a></li>
-            <li><a href="{% url 'listaSolicitudesDenN' id=request.user.agencia.Id%}">Solicitudes Denegadas</a></li-->
-            <li><a href="{% url 'listarSNC'%} " >Listado Solicitudes Completas</a></li>
-            <li><a href="{% url 'listarSN'%} " >Listado Solicitudes Incompletas</a></li>
-            <!--li><a href="{% url 'listarSNCA' id=request.user.agencia.Id%}">Listado Solicitudes por Agencia</a></li--> 
-            <!--li><a href="# " >Listado Solicitudes por Agencia</a></li-->        
-            <li><a href="{% url 'listaRFNAdmin' %} " >Listado Reportes Comité Admin</a></li>
-            <li><a href="{% url 'listaSolicitudesANAdmin' %}">Solicitudes Aprobadas Admin</a></li>
-            <li><a href="{% url 'listaSolicitudesPANAdmin'%}">Solicitudes Pendientes de Aprobación Admin</a></li>
-            <li><a href="{% url 'listaSolicitudesObsNAdmin' %}">Solicitudes Observadas Admin</a></li>
-            <li><a href="{% url 'listaSolicitudesDenNAdmin'%}">Solicitudes Denegadas Admin</a></li>
+                  
+            <li><a href="{% url 'listaRFNAdmin' %} " >Listado Reportes Comité</a></li>
+            <li><a href="{% url 'listaSolicitudesPANAdmin'%}">Solicitudes Pendientes de Aprobación</a></li>
+            <li><a href="{% url 'listaSolicitudesANAdmin' %}">Solicitudes Aprobadas</a></li>            
+            <li><a href="{% url 'listaSolicitudesObsNAdmin' %}">Solicitudes Observadas</a></li>
+            <li><a href="{% url 'listaSolicitudesDenNAdmin'%}">Solicitudes Denegadas</a></li>
           </ul>
         </li>
         <li><a><i class="fa fa-renren"></i> Solicitud Microempresa <span class="fa fa-chevron-down"></span></a>
           <ul class="nav child_menu">
-            <!--li><a href="{% url 'listaRF' id=request.user.agencia.Id%} " >Listado Reportes Comité</a></li>
-            <li><a href="{% url 'listaSolicitudesPA' id=request.user.agencia.Id%}">Solicitudes Pendientes de Aprobación</a></li>
-            <li><a href="{% url 'listaSolicitudesA' id=request.user.agencia.Id%}">Solicitudes Aprobadas</a></l>
-            <li><a href="{% url 'listaSolicitudesObs' id=request.user.agencia.Id%}">Solicitudes Observadas</a></li>
-            <li><a href="{% url 'listaSolicitudesDen' id=request.user.agencia.Id%}">Solicitudes Denegadas</a></li-->
-            <li><a href="{% url 'listaSC'%} " >Listado Solicitudes Completas</a></li>
-            <li><a href="{% url 'listaSolicitud'%} " >Listado Solicitudes Incompletas</a></li>
-            <!--li><a href="{% url 'listaSCA' id=request.user.agencia.Id%}">Listado Solicitudes por Agencia</a></li-->   
             <!--li><a href="# " >Listado Solicitudes por Agencia</a></li--> 
-            <li><a href="{% url 'listaRFAdmin' %} " >Listado Reportes Comité Admin</a></li>
-            <li><a href="{% url 'listaSolicitudesPAAdmin'%}">Solicitudes Pendientes de Aprobación Admin</a></li>
-            <li><a href="{% url 'listaSolicitudesAAdmin' %}">Solicitudes Aprobadas Admin</a></li>
-            <li><a href="{% url 'listaSolicitudesObsAdmin'%}">Solicitudes Observadas Admin</a></li>
-            <li><a href="{% url 'listaSolicitudesDenAdmin'%}">Solicitudes Denegadas Admin</a></li>     
+            <li><a href="{% url 'listaRFAdmin' %} " >Listado Reportes Comité</a></li>
+            <li><a href="{% url 'listaSolicitudesPAAdmin'%}">Solicitudes Pendientes de Aprobación</a></li>
+            <li><a href="{% url 'listaSolicitudesAAdmin' %}">Solicitudes Aprobadas</a></li>
+            <li><a href="{% url 'listaSolicitudesObsAdmin'%}">Solicitudes Observadas</a></li>
+            <li><a href="{% url 'listaSolicitudesDenAdmin'%}">Solicitudes Denegadas</a></li>     
           </ul>
         </li>
       </ul>
@@ -184,7 +160,7 @@
     <li><a><i class="fa fa-bar-chart-o"></i>Graficas<span class="fa fa-chevron-down"></span></a>
       <ul class="nav child_menu">
         <li><a href="{% url 'grafAgenciaP'%}">Grafica Perfiles por Agencia</a></li>
-        <li><a href="{% url 'grafAgenciaPN'%}">Grafica Perfiles N por Agencia</a></li>
+        <li><a href="{% url 'grafAgenciaPN'%}">Grafica Perfiles N/A por Agencia</a></li>
         <li><a href="{% url 'graficaAT'%}">Grafica Agencia Tipo</a></li>
         <li><a href="{% url 'graficaATS'%}">Grafica Agencia Tipo Sol</a></li>
         <li><a href="{% url 'graficaASolic'%}">Grafica Agencia Estado Sol</a></li>

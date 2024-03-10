@@ -64,20 +64,13 @@
         <li><a href="{% url 'perfil'%}">Perfil de Cliente</a></li>
         <li><a href="{% url 'listaClientes' id=request.user.agencia.Id%}">Administrar Clientes</a></li>
         <li><a href="{% url 'listaClientesAdmin'%}">Administrar Clientes Admin</a></li>
-        <li><a href="{% url 'listaPerfilNA' id=request.user.agencia.Id%}">Lista de Perfiles NA</a></li> 
+        <li><a href="{% url 'listaPerfilNA' id=request.user.agencia.Id%}">Lista de Perfiles N/A</a></li> 
         <li><a href="{% url 'listaPerfilNAAdmin'%}">Lista de Perfiles NA Admin</a></li> 
         
       </ul>
     </li>
     
-    <li><a><i class="fa fa-list-alt"></i> Flujo de caja <span class="fa fa-chevron-down"></span></a>
-      <ul class="nav child_menu">
-        <li><a href="{% url 'listaIvE' id=request.user.agencia.Id %}">Lista IvE Personal</a></li>
-        <li><a href="{% url 'listaIvEAdmin'  %}">Lista IvE Personal Admin</a></li>
-        <li><a href="{% url 'listaMicro' id=request.user.agencia.Id %}">Lista IvE Micro</a></li>
-        <li><a href="{% url 'listaMicroAdmin' %}">Lista IvE Micro Admin</a></li>
-      </ul>
-    </li>
+    
     
     <li><a><i class="fa fa-edit"></i> Solicitud <span class="fa fa-chevron-down"></span></a>
       <ul class="nav child_menu">
@@ -134,7 +127,7 @@
     <li><a><i class="fa fa-bar-chart-o"></i>Graficas<span class="fa fa-chevron-down"></span></a>
       <ul class="nav child_menu">
         <li><a href="{% url 'grafAgenciaP'%}">Grafica Perfiles por Agencia</a></li>
-        <li><a href="{% url 'grafAgenciaPN'%}">Grafica Perfiles N por Agencia</a></li>
+        <li><a href="{% url 'grafAgenciaPN'%}">Grafica Perfiles N/A por Agencia</a></li>
         <li><a href="{% url 'graficaAT'%}">Grafica Agencia Tipo</a></li>
         <li><a href="{% url 'graficaATS'%}">Grafica Agencia Tipo Sol</a></li>
         <li><a href="{% url 'graficaASolic'%}">Grafica Agencia Estado Sol</a></li>
