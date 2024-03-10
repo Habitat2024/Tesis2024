@@ -209,7 +209,7 @@ function cambiarUrlMicro(estado) {
                         }
                     }else{
                         $('#trCclienteFiador').fadeOut();
-                        $('#trCclienteFiadorRepo').fadeFa();
+                        $('#trCclienteFiadorRepo').fadeOut();
                     }
                     
 
@@ -519,7 +519,7 @@ function cambiarUrlNatural(estado) {
                         }
                     }else{
                         $('#trCclienteFiador').fadeOut();
-                        $('#trCclienteFiadorRepo').fadeFa();
+                        $('#trCclienteFiadorRepo').fadeOut();
                     }
 
                     if (response[3] == "-0") {
@@ -866,7 +866,7 @@ function aprobada(estado){
 
         titulo.textContent = "Solicitud Observada"
         descipcion.textContent = observaciones
-
+/*
         $('#inspecciones').fadeIn();
         $('#formularios-tab2').fadeOut();
         roleReporte.classList.add("active")
@@ -874,6 +874,8 @@ function aprobada(estado){
         panelReporte.classList.add("active")  
         panelFormularios.classList.remove("active")
         panelFormularios.classList.add("fade")
+
+        */
         return "ok"
     }
 }
