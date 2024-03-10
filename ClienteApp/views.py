@@ -815,10 +815,17 @@ def consulta_evaliacion_natural(request):
         except Exception:
            listaId.append("-0")
         try:
-            conosca_cliente_fiador=ClienteDatoGen.objects.get(IdSolicitud=solicitud.Id, CalidadActu="Fiador")
-            listaId.append(conosca_cliente_fiador.Id)
+            datos_fiador = DatosPersFia.objects.get(IdSolicitud=solicitud.Id )
+            if(datos_fiador.Tipo == "codeudor"):
+                try:
+                    conosca_cliente_fiador=ClienteDatoGen.objects.get(IdSolicitud=solicitud.Id, CalidadActu="Fiador")
+                    listaId.append(conosca_cliente_fiador.Id)
+                except Exception:
+                    listaId.append("-0")
+            else:
+                listaId.append("-1") 
         except Exception:
-           listaId.append("-0") 
+           listaId.append("-1") 
         print("nat  "+str(listaId)+" p= "+id)
         serialized_data = json.dumps(listaId, default=str)
         return HttpResponse(serialized_data, content_type="application/json")
