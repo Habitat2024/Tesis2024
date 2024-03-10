@@ -206,6 +206,9 @@ function cambiarUrlMicro(estado) {
                             progresoConozcaClienteRepoFiador.classList.add("progress-bar-success")
                             progreso=progreso+0.83
                         }
+                    }else{
+                        $('#trCclienteFiador').fadeOut();
+                        $('#trCclienteFiadorRepo').fadeFa();
                     }
                     
 
@@ -497,20 +500,25 @@ function cambiarUrlNatural(estado) {
                         progresoConozcaClienteRepo.classList.add("progress-bar-success")
                         progreso=progreso+1.66
                     }
-                    if (response[12] == "-0") {
-                        btnConozClienteFiador.href = "../../../ConozcaClienteApp/cclientedgf/?idsol=" + response[1]
+                    if(response[12]!="-1"){
+                        if (response[12] == "-0") {
+                            btnConozClienteFiador.href = "../../../NaturalApp/listarSNC/cclientedgf/?idsol=" + response[1]
 
-                    } else {
-                        btnConozClienteFiador.href = "../../../ConozcaClienteApp/listaCC/editarCliente/" + response[12]
-                        btnConozClienteRepoFiador.onclick = ""
-                        btnConozClienteRepoFiador.href = "../../../ConozcaClienteApp/listaCC/conozcaC/" + response[12]
-                        descipcion.textContent = "Progreso: formulario conozca a su cliente"
+                        } else {
+                            btnConozClienteFiador.href = "../../../ConozcaClienteApp/listaCC/editarCliente/" + response[12]
+                            btnConozClienteRepoFiador.onclick = ""
+                            btnConozClienteRepoFiador.href = "../../../ConozcaClienteApp/listaCC/conozcaC/" + response[12]
+                            descipcion.textContent = "Progreso: formulario conozca a su cliente-fiador"
 
-                        progresoConozcaClienteFiador.classList.remove("progress-bar-danger")
-                        progresoConozcaClienteFiador.classList.add("progress-bar-success")
-                        progresoConozcaClienteRepoFiador.classList.remove("progress-bar-danger")
-                        progresoConozcaClienteRepoFiador.classList.add("progress-bar-success")
-                        progreso=progreso+0.83
+                            progresoConozcaClienteFiador.classList.remove("progress-bar-danger")
+                            progresoConozcaClienteFiador.classList.add("progress-bar-success")
+                            progresoConozcaClienteRepoFiador.classList.remove("progress-bar-danger")
+                            progresoConozcaClienteRepoFiador.classList.add("progress-bar-success")
+                            progreso=progreso+0.83
+                        }
+                    }else{
+                        $('#trCclienteFiador').fadeOut();
+                        $('#trCclienteFiadorRepo').fadeFa();
                     }
 
                     if (response[3] == "-0") {
