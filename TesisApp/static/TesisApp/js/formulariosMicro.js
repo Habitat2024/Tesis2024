@@ -193,7 +193,7 @@ function cambiarUrlMicro(estado) {
 
                     if(response[12]!="-1"){
                         if (response[12] == "-0") {
-                            btnConozClienteFiador.href = "../../../NaturalApp/listarSNC/cclientedgf/?idsol=" + response[1]
+                            btnConozClienteFiador.href = "../../../ConozcaClienteApp/cclientedgf/?idsol=" + response[1]
 
                         } else {
                             btnConozClienteFiador.href = "../../../ConozcaClienteApp/listaCC/editarCliente/" + response[12]
@@ -503,7 +503,7 @@ function cambiarUrlNatural(estado) {
                     }
                     if(response[12]!="-1"){
                         if (response[12] == "-0") {
-                            btnConozClienteFiador.href = "../../../NaturalApp/listarSNC/cclientedgf/?idsol=" + response[1]
+                            btnConozClienteFiador.href = "../../../ConozcaClienteApp/cclientedgf/?idsol=" + response[1]
 
                         } else {
                             btnConozClienteFiador.href = "../../../ConozcaClienteApp/listaCC/editarCliente/" + response[12]
