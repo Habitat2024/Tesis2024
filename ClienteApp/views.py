@@ -590,7 +590,7 @@ def consulta_evaliacion_micro(request):
         except Exception:
            listaId.append("-0") 
         try:
-            conosca_cliente=ClienteDatoGen.objects.get(IdSolicitud=solicitud.Id)
+            conosca_cliente=ClienteDatoGen.objects.get(IdSolicitud=solicitud.Id ,CalidadActu="Cliente")
             listaId.append(conosca_cliente.Id)
         except Exception:
            listaId.append("-0") 
@@ -722,7 +722,7 @@ def consulta_evaliacion_natural(request):
         except Exception:
            listaId.append("-0") 
         try:
-            conosca_cliente=ClienteDatoGen.objects.get(IdSolicitud=solicitud.Id)
+            conosca_cliente=ClienteDatoGen.objects.get(IdSolicitud=solicitud.Id, CalidadActu="Cliente")
             listaId.append(conosca_cliente.Id)
         except Exception:
            listaId.append("-0") 

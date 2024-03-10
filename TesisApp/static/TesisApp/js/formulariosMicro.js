@@ -191,14 +191,14 @@ function cambiarUrlMicro(estado) {
                         progreso=progreso+0.83
                     }
 
-                    if(response[12]!="-1"){
-                        if (response[12] == "-0") {
+                    if(response[13]!="-1"){
+                        if (response[13] == "-0") {
                             btnConozClienteFiador.href = "../../../ConozcaClienteApp/cclientedgf/?idsol=" + response[1]
 
                         } else {
-                            btnConozClienteFiador.href = "../../../ConozcaClienteApp/listaCC/editarCliente/" + response[12]
+                            btnConozClienteFiador.href = "../../../ConozcaClienteApp/listaCC/editarCliente/" + response[13]
                             btnConozClienteRepoFiador.onclick = ""
-                            btnConozClienteRepoFiador.href = "../../../ConozcaClienteApp/listaCC/conozcaC/" + response[12]
+                            btnConozClienteRepoFiador.href = "../../../ConozcaClienteApp/listaCC/conozcaC/" + response[13]
                             descipcion.textContent = "Progreso: formulario conozca a su cliente-fiador"
 
                             progresoConozcaClienteFiador.classList.remove("progress-bar-danger")
@@ -501,17 +501,17 @@ function cambiarUrlNatural(estado) {
                         progresoConozcaClienteRepo.classList.add("progress-bar-success")
                         progreso=progreso+1.66
                     }
-                    if(response[12]=="-1"){
+                    if(response[13]=="-1"){
                         $('#trCclienteFiador').fadeOut();
                         $('#trCclienteFiadorRepo').fadeOut();                     
                     }else{
-                        if (response[12] == "-0") {
+                        if (response[13] == "-0") {
                             btnConozClienteFiador.href = "../../../ConozcaClienteApp/cclientedgf/?idsol=" + response[1]
 
                         } else {
-                            btnConozClienteFiador.href = "../../../ConozcaClienteApp/listaCC/editarCliente/" + response[12]
+                            btnConozClienteFiador.href = "../../../ConozcaClienteApp/listaCC/editarCliente/" + response[13]
                             btnConozClienteRepoFiador.onclick = ""
-                            btnConozClienteRepoFiador.href = "../../../ConozcaClienteApp/listaCC/conozcaC/" + response[12]
+                            btnConozClienteRepoFiador.href = "../../../ConozcaClienteApp/listaCC/conozcaC/" + response[13]
                             descipcion.textContent = "Progreso: formulario conozca a su cliente-fiador"
 
                             progresoConozcaClienteFiador.classList.remove("progress-bar-danger")
