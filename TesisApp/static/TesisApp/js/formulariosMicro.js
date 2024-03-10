@@ -86,6 +86,7 @@ let progresoSolicitudRepo = document.getElementById("progresoSoliRepo")
 let progresoEvaluacionRepo= document.getElementById("rogresoEvaluacionRepo") 
 let progresoObrasAdicionalesRepo= document.getElementById("progresoObrasAdicionalesRepo") 
 let progreso = 1
+let observaciones = ""
 $(document).ready(function () {
     if (estadoCliente == "1") {
         titulo.textContent = "Iniciar nueva solicitud"
@@ -791,6 +792,7 @@ function consultaTipoSolicitud() {
         
                 btnDicom.href = "../../../HistorialApp/editHistCli/" +  response[0].pk
             } else {    
+                observaciones = response[0].fields.Observaciones
                 if(solicitudVencida(response[0].fields.Fecha) == 1){
                     denegarSolicitud(response[0].pk)
                 }
@@ -848,6 +850,22 @@ function aprobada(estado){
 
         titulo.textContent = "Solicitud Aprobada"
         descipcion.textContent = ""
+
+        $('#inspecciones').fadeIn();
+        $('#formularios-tab2').fadeOut();
+        roleReporte.classList.add("active")
+        panelReporte.classList.remove("fade")
+        panelReporte.classList.add("active")  
+        panelFormularios.classList.remove("active")
+        panelFormularios.classList.add("fade")
+        return "ok"
+    }
+    if( estado == 5){
+        progresoSolicitud.ariaValueNow = (100) + ""
+        progresoSolicitud.style.width = (100) + "%"
+
+        titulo.textContent = "Solicitud Observada"
+        descipcion.textContent = observaciones
 
         $('#inspecciones').fadeIn();
         $('#formularios-tab2').fadeOut();
