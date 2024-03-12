@@ -59,5 +59,5 @@ class perN(FPDF):
         pdf.set_font('Arial', '', 10)
         
     
-        pdf.output('perfilesNoAplic.pdf', 'F')
-        return FileResponse(open('perfilesNoAplic.pdf', 'rb'), as_attachment=True, content_type='application/pdf')
+        pdf.output('perfilesNoAplican.pdf', 'F')
+        return FileResponse(open('perfilesNoAplican.pdf', 'rb'), as_attachment=True, content_type='application/pdf')

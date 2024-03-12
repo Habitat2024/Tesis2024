@@ -40,14 +40,14 @@ class ConozcaC(FPDF):
             d=""
 
         try:
-            dpc=DatosPersFia.objects.get(IdSolicitud=idSol, Tipo="conyuge")
-        except DatosPersFia.DoesNotExist:
-            dpc=""
-
-        try:
             dp=DatosPers.objects.get(IdSolicitud=idSol)
         except DatosPers.DoesNotExist:
             dp=""
+
+        try:
+            dpc=DatosPersFia.objects.get(IdSolicitud=idSol,Tipo = "codeudor")
+        except Exception:
+            dpc=""
     ##########################################
 
         try:
@@ -151,7 +151,12 @@ class ConozcaC(FPDF):
         pdf.set_xy(157,56)
         pdf.cell(w=20,h=8,txt='Estado Civil: ', border='LTB', align='L', fill=False)
         pdf.set_text_color(0,0,0)
-        pdf.multi_cell(w=0,h=8,txt= dp.EstadoCiviCli if hasattr(dp, 'EstadoCiviCli') else '', border='RTB', align='L', fill=False)
+        if cdg.CalidadActu == "Cliente":
+            pdf.multi_cell(w=0,h=8,txt= dp.EstadoCiviCli if hasattr(dp, 'EstadoCiviCli') else '', border='RTB', align='L', fill=False)
+        elif cdg.CalidadActu == "Fiador":
+            pdf.multi_cell(w=0,h=8,txt= dpc.EstadoCiviFiad if hasattr(dp, 'EstadoCiviFiad') else '', border='RTB', align='L', fill=False)
+        else:
+            pdf.multi_cell(w=0,h=8,txt= '', border='RTB', align='L', fill=False)
         pdf.set_text_color(r,g,b)
         pdf.cell(w=147,h=5,txt='Conocido por: (Solo si lo dice el DUI)', border='TRL', align='L', fill=False)
         pdf.multi_cell(w=0,h=5,txt='Profesión según DUI:', border='TRL', align='L', fill=False)
@@ -162,8 +167,13 @@ class ConozcaC(FPDF):
         pdf.cell(w=147,h=5,txt='Lugar y fecha de nacimiento:', border='TRL', align='L', fill=False)
         pdf.cell(w=49,h=5,txt='Nacionalidad:', border='TRL', align='L', fill=False , ln=1)
         pdf.set_text_color(0,0,0)
-        pdf.cell(w=147,h=5,txt= (dp.LugarDuiCli if hasattr(dp, 'LugarDuiCli') else '')+', '+ (perf.FechaNaci.strftime("%d/%m/%Y") if hasattr(perf, 'FechaNaci') else ''), border='BLR', align='C', fill=False)
-        pdf.cell(w=49,h=5,txt=perf.Nacionalidad if hasattr(perf, 'Nacionalidad') else '', border='BLR', align='C', fill=False, ln=1 )
+        if cdg.CalidadActu == "Cliente":
+            pdf.cell(w=147,h=5,txt= (dp.LugarDuiCli if hasattr(dp, 'LugarDuiCli') else '')+', '+ (perf.FechaNaci.strftime("%d/%m/%Y") if hasattr(perf, 'FechaNaci') else ''), border='BLR', align='C', fill=False)
+        elif cdg.CalidadActu == "Fiador":
+            pdf.cell(w=147,h=5,txt= (dpc.LugarNaciFia if hasattr(dpc, 'LugarNaciFia') else '')+', '+ (dpc.FechaNaciFia.strftime("%d/%m/%Y") if hasattr(dpc, 'FechaNaciFia') else ''), border='BLR', align='C', fill=False)
+        else:
+            pdf.cell(w=147,h=5,txt= '', border='BLR', align='C', fill=False)
+        pdf.cell(w=49,h=5,txt=cdg.Nacionalidad if hasattr(cdg, 'Nacionalidad') else '', border='BLR', align='C', fill=False, ln=1 )
         pdf.set_text_color(r,g,b)
         pdf.cell(w=45,h=5,txt='Documento de Identidad:', border='TRL', align='L', fill=False)
         pdf.cell(w=43,h=5,txt='No. Documento:', border='TRL', align='L', fill=False)
@@ -228,7 +238,7 @@ class ConozcaC(FPDF):
         pdf.cell(w=22,h=5,txt= perf.Telefono if hasattr(perf, 'Telefono') else '', border='TR', align='L', fill=False , ln=1)
         pdf.cell(w=45,h=5,txt='--------------------', border='BLR', align='C', fill=False)
         pdf.cell(w=43,h=5,txt='--------------------', border='BLR', align='C', fill=False)       
-        pdf.cell(w=59,h=5,txt=perf.Correo if hasattr(perf, 'Correo') else '', border='BLR', align='C', fill=False)
+        pdf.cell(w=59,h=5,txt=cdg.CorreoElec if hasattr(cdg, 'CorreoElec') else '', border='BLR', align='C', fill=False)
         pdf.set_text_color(r,g,b)
         pdf.cell(w=21,h=5,txt='Teléfono Fijo :', border='BL', align='L', fill=False)
         pdf.set_text_color(0,0,0)
@@ -237,7 +247,7 @@ class ConozcaC(FPDF):
         pdf.cell(w=147,h=5,txt='Dirección domicilio:', border='TRL', align='L', fill=False)
         pdf.cell(w=49,h=5,txt='Tiempo de residir en esta dirección:', border='TRL', align='L', fill=False , ln=1)
         pdf.set_text_color(0,0,0)
-        pdf.cell(w=147,h=5,txt=perf.Direccion if hasattr(perf, 'Direccion') else '', border='BLR', align='C', fill=False)
+        pdf.cell(w=147,h=5,txt=cdg.DireccionDomi if hasattr(cdg, 'DireccionDomi') else '', border='BLR', align='C', fill=False)
         pdf.cell(w=49,h=5,txt=d.ResideDesd if hasattr(d, 'ResideDesd') else '', border='BLR', align='C', fill=False, ln=1 )
         pdf.set_text_color(r,g,b)
         pdf.cell(w=37,h=5,txt='Giro, según tarjeta de IVA: ', border='BL', align='L', fill=False)
@@ -1066,5 +1076,5 @@ class ConozcaC(FPDF):
         pdf.cell(w=90,h=5,txt='' , border='LRB', align='L', fill=False)
        
      
-        pdf.output('ConozcaC.pdf', 'F')
-        return FileResponse(open('ConozcaC.pdf', 'rb'), as_attachment=True, content_type='application/pdf')
+        pdf.output('ConozcaCliente.pdf', 'F')
+        return FileResponse(open('ConozcaCliente.pdf', 'rb'), as_attachment=True, content_type='application/pdf')

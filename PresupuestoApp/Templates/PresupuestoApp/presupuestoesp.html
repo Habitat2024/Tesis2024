@@ -22,7 +22,7 @@
                       <input type="text" class="form-text" id="asistenciatc" name="asistenciatc" value="{{pre.AsistenciaTecn}}"
                       oninput="calculartotalp();" 
                       onkeypress="return event.charCode>=48 && event.charCode<=57 || event.charCode==46 " 
-                      placeholder="0" pattern="^\d*(\.\d{0,1})?$"  > 
+                      placeholder="0" pattern="^\d*(\.\d{0,1})?$" required > 
                       <span class="bar"></span>
                   </div>
               </div>
@@ -35,7 +35,7 @@
                           <input type="text" class="form-text" id="comisionot" name="comisionot" value="{{pre.ComisionPorOto}}"
                           oninput="calculartotalp();" 
                           onkeypress="return event.charCode>=48 && event.charCode<=57 || event.charCode==46 " 
-                          placeholder="0" pattern="^\d*(\.\d{0,1})?$" >
+                          placeholder="0" pattern="^\d*(\.\d{0,1})?$" required>
                           <span class="bar"></span>
                       </div>
                   </div>
@@ -45,7 +45,7 @@
                           <input type="text" class="form-text" id="consultabc" name="consultabc" value="{{pre.ConsultaBuroCre}}"
                           oninput="calculartotalp();" 
                           onkeypress="return event.charCode>=48 && event.charCode<=57 || event.charCode==46 "
-                          placeholder="0" pattern="^\d*(\.\d{0,1})?$" >
+                          placeholder="0" pattern="^\d*(\.\d{0,1})?$" required>
                           <span class="bar"></span>
                       </div>
                   </div>
@@ -58,7 +58,7 @@
                             <input type="text" class="form-text" id="cancelarsp" name="cancelarsp" value="{{pre.CancelarSaldPen}}"
                             oninput="calculartotalp();" 
                             onkeypress="return event.charCode>=48 && event.charCode<=57 || event.charCode==46 " 
-                            placeholder="0" pattern="^\d*(\.\d{0,1})?$" >
+                            placeholder="0" pattern="^\d*(\.\d{0,1})?$" required>
                             <span class="bar"></span>
                         </div>
                     </div>
@@ -68,7 +68,7 @@
                             <input type="text" class="form-text" id="primerac" name="primerac" value="{{pre.PrimeraCuot}}"
                             oninput="calculartotalp();" 
                             onkeypress="return event.charCode>=48 && event.charCode<=57 || event.charCode==46 "
-                            placeholder="0" pattern="^\d*(\.\d{0,1})?$" >
+                            placeholder="0" pattern="^\d*(\.\d{0,1})?$" required>
                             <span class="bar"></span>
                         </div>
                     </div>       

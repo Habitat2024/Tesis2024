@@ -40,7 +40,7 @@ def solicitudI(request, id):
             dt=""
             
         try:
-            listae=SolicitudInscSegEnf.objects.filter(Estado="activo")
+            listae=SolicitudInscSegEnf.objects.filter(Estado="activo",Personal="No")
         except SolicitudInscSegEnf.DoesNotExist:
             listae=""
 

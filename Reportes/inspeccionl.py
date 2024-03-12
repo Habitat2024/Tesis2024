@@ -559,6 +559,6 @@ class InspeccionL(FPDF):
         pdf.multi_cell(w=0, h=6, txt='', border=0, align='C')
         
         
-        pdf.output('InspeccionLV.pdf', 'F')
-        return FileResponse(open('InspeccionLV.pdf', 'rb'), as_attachment=True, content_type='application/pdf')
+        pdf.output('InspeccionLote.pdf', 'F')
+        return FileResponse(open('InspeccionLote.pdf', 'rb'), as_attachment=True, content_type='application/pdf')
 

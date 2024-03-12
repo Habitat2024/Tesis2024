@@ -186,5 +186,5 @@ class presupuestoVvO(FPDF):
 
        
 
-        pdf.output('presupuestoVivObra.pdf', 'F')
-        return FileResponse(open('presupuestoVivObra.pdf', 'rb'), as_attachment=True, content_type='application/pdf')
+        pdf.output('presupuestoViviendaObra.pdf', 'F')
+        return FileResponse(open('presupuestoViviendaObra.pdf', 'rb'), as_attachment=True, content_type='application/pdf')

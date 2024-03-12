@@ -61,22 +61,12 @@
                     <input type="radio"  name="calidad" id="calidad" value="Cliente" checked required>
                     <ins class="iCheck-helper"></ins>
                   </div>&nbsp;&nbsp;
-                  Fiador:
-                  <div class="iradio_flat-green ">
-                    <input type="radio" name="calidad" id="calidad" value="Fiador"  required>
-                    <ins class="iCheck-helper"></ins>
-                  </div>
                 </div>
               </div>
             {% elif cdg.CalidadActu == "Fiador" %}
               <div class="col-md-6 col-sm-6 col-xs-12">
                 <div class="form-group form-animate-text " style="margin-top:0px !important;">
                   <label>Calidad en la que actúa:</label> &nbsp;&nbsp;
-                  Cliente: 
-                  <div class="iradio_flat-green ">
-                    <input type="radio"  name="calidad" id="calidad" value="Cliente"  required>
-                    <ins class="iCheck-helper"></ins>
-                  </div>&nbsp;&nbsp;
                   Fiador:
                   <div class="iradio_flat-green ">
                     <input type="radio" name="calidad" id="calidad" value="Fiador" checked required>
@@ -306,7 +296,11 @@
           <div class="col-md-6 col-sm-12 col-xs-12"><!-- /comienzo columna  izquierda-->
             <div class="form-group form-animate-text " style="margin-top:5px !important;">
               <h4>Estado Civil</h4>
+              {% if cdg.CalidadActu == "Cliente" %}
               <input type="text" class="form-text" id="estadocv" name="estadocv" value="{{dp.EstadoCiviCli}}" disabled required>
+              {% elif cdg.CalidadActu == "Fiador" %}
+              <input type="text" class="form-text" id="estadocv" name="estadocv" value="{{dpc.EstadoCiviFiad}}" disabled required>
+              {% endif %}
               <span class="bar"></span>
             </div>
           </div>

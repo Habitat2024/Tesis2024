@@ -81,5 +81,5 @@ class pinspmu(FPDF):
         pdf.text(x=20, y=259, txt='Tec. de Construcción ')
        
 
-        pdf.output('pInspeccionmUbi.pdf', 'F')
-        return FileResponse(open('pInspeccionmUbi.pdf', 'rb'), as_attachment=True, content_type='application/pdf')
+        pdf.output('pInspeccionMejoraUbicacion.pdf', 'F')
+        return FileResponse(open('pInspeccionMejoraUbicacion.pdf', 'rb'), as_attachment=True, content_type='application/pdf')

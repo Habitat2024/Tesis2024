@@ -569,6 +569,6 @@ class InspeccionMV(FPDF):
         #pdf.set_fill_color(0,0,0) # agrega color a la ruedita
         #pdf.ellipse(10,10,5,5, 'F') # x, y, ancho, alto ... con la F toma el color 
             
-        pdf.output('InspeccionMV.pdf', 'F')
-        return FileResponse(open('InspeccionMV.pdf', 'rb'), as_attachment=True, content_type='application/pdf')
+        pdf.output('InspeccionMejora.pdf', 'F')
+        return FileResponse(open('InspeccionMejora.pdf', 'rb'), as_attachment=True, content_type='application/pdf')
 

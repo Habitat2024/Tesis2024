@@ -341,6 +341,6 @@ class evaluacionIM(FPDF):
 
 
      
-        pdf.output('evaluacionIM.pdf', 'F')
-        return FileResponse(open('evaluacionIM.pdf', 'rb'), as_attachment=True, content_type='application/pdf')
+        pdf.output('evaluacionMicroempresa.pdf', 'F')
+        return FileResponse(open('evaluacionMicroempresa.pdf', 'rb'), as_attachment=True, content_type='application/pdf')
         #return redirect("listaSolicitud")

@@ -126,5 +126,5 @@ class solP(FPDF):
 
 
     
-        pdf.output('solicitudesPedientesAp.pdf', 'F')
-        return FileResponse(open('solicitudesPedientesAp.pdf', 'rb'), as_attachment=True, content_type='application/pdf')
+        pdf.output('solicitudesPedientesAprobacion.pdf', 'F')
+        return FileResponse(open('solicitudesPedientesAprobacion.pdf', 'rb'), as_attachment=True, content_type='application/pdf')

@@ -756,6 +756,46 @@ if (value == "DUI") {
     }
   }
 
+  function HDCheckF(checkbox) {
+    // Verifica si el checkbox está marcado
+    if (checkbox.checked) {
+      document.getElementById("nombrecb").value = "";
+      document.getElementById("nombrecb").blur();
+      document.getElementById("nombrecb").disabled = true;
+      document.getElementById("direcpermanente").disabled = true;
+      document.getElementById("direcpermanente").value = "";
+      var rt = document.getElementsByName("tdocumento");
+      for (var i = 0; i < rt.length; i++) {
+        rt[i].disabled = true;
+        rt[i].checked = false;
+      }
+      document.getElementById("ndocumento").disabled = true;
+      document.getElementById("ndocumento").value = "";
+
+      var rb = document.getElementsByName("beneficiariopeps");
+      for (var i = 0; i < rb.length; i++) {
+        rb[i].disabled = true;
+        rb[i].checked = false;
+      }
+    } else {
+      //alert("El checkbox no está seleccionado");
+      document.getElementById("nombrecb").disabled = false;
+      document.getElementById("nombrecb").focus();
+      document.getElementById("direcpermanente").disabled = false;
+      var rt = document.getElementsByName("tdocumento");
+      for (var i = 0; i < rt.length; i++) {
+        rt[i].disabled = false;
+      }
+
+      document.getElementById("ndocumento").disabled = false;
+
+      var rb = document.getElementsByName("beneficiariopeps");
+      for (var i = 0; i < rb.length; i++) {
+        rb[i].disabled = false;
+      }
+    }
+}
+
   function habdesG(value) {
     if (value == "Primero") {
       document.getElementById("pparentesco").disabled = false;

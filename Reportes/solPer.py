@@ -480,6 +480,6 @@ class solicitudPer(FPDF):
         pdf.line(120, 265, 180, 265)
         pdf.text(x=135, y=270, txt='Firma Codeudor ')
         
-        pdf.output('solicitudPer.pdf', 'F')
-        return FileResponse(open('solicitudPer.pdf', 'rb'), as_attachment=True, content_type='application/pdf')
+        pdf.output('solicitudPersonal.pdf', 'F')
+        return FileResponse(open('solicitudPersonal.pdf', 'rb'), as_attachment=True, content_type='application/pdf')
         #return redirect("listaSolicitud")

@@ -250,5 +250,5 @@ class Declaracion(FPDF):
         pdf.set_text_color(r,g,b)
         pdf.multi_cell(w=0, h=7, txt='SE FIRMA ÚNICAMENTE EN PRESENCIA DE UN FUNCIONARIO DE LA ASOCIACIÓN.', border='LBR', align='C', fill=0)
                 
-        pdf.output('declaracionJur.pdf', 'F')
-        return FileResponse(open('declaracionJur.pdf', 'rb'), as_attachment=True, content_type='application/pdf')
+        pdf.output('declaracionJurada.pdf', 'F')
+        return FileResponse(open('declaracionJurada.pdf', 'rb'), as_attachment=True, content_type='application/pdf')

@@ -300,5 +300,5 @@ class presupuestoMj(FPDF):
         pdf.text(x=20, y=y+25, txt='Nombre. ')
         pdf.text(x=20, y=y+30, txt='Dui')
 
-        pdf.output('presupuestoMej.pdf', 'F')
-        return FileResponse(open('presupuestoMej.pdf', 'rb'), as_attachment=True, content_type='application/pdf')
+        pdf.output('presupuestoMejejora.pdf', 'F')
+        return FileResponse(open('presupuestoMejejora.pdf', 'rb'), as_attachment=True, content_type='application/pdf')

@@ -476,6 +476,6 @@ class SolicitudMicro(FPDF):
         pdf.line(120, 265, 180, 265)
         pdf.text(x=135, y=270, txt='Firma Codeudor ')
         
-        pdf.output('solicitudMicro.pdf', 'F')
-        return FileResponse(open('solicitudMicro.pdf', 'rb'), as_attachment=True, content_type='application/pdf')
+        pdf.output('solicitudMicroempresa.pdf', 'F')
+        return FileResponse(open('solicitudMicroempresa.pdf', 'rb'), as_attachment=True, content_type='application/pdf')
         #return redirect("listaSolicitud")

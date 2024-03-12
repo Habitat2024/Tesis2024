@@ -84,5 +84,5 @@ class pinspmr(FPDF):
         pdf.text(x=20, y=259, txt='Tec. de Construcción ')
        
 
-        pdf.output('pInspeccionmRepF.pdf', 'F')
-        return FileResponse(open('pInspeccionmRepF.pdf', 'rb'), as_attachment=True, content_type='application/pdf')
+        pdf.output('pInspeccionMejoraFotografico.pdf', 'F')
+        return FileResponse(open('pInspeccionMejoraFotografico.pdf', 'rb'), as_attachment=True, content_type='application/pdf')

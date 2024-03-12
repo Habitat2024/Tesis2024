@@ -262,5 +262,5 @@ class presupuestoVv(FPDF):
         pdf.text(x=20, y=y+65, txt='Dui')
 
         #tot.txt=str('10')
-        pdf.output('presupuestoViv.pdf', 'F')
-        return FileResponse(open('presupuestoViv.pdf', 'rb'), as_attachment=True, content_type='application/pdf')
+        pdf.output('presupuestoVivienda.pdf', 'F')
+        return FileResponse(open('presupuestoVivienda.pdf', 'rb'), as_attachment=True, content_type='application/pdf')
