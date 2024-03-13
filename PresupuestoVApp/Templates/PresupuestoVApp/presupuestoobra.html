@@ -107,14 +107,14 @@
           <div class="col-md-4 col-sm-12 col-xs-12">
             <div class="form-group form-animate-text " style="margin-top:5px !important;">
               <h4>Costo Obra Adicional</h4>
-              <input type="text" class="form-text" id="costooba" name="costooba" oninput="calculartotal();" pattern="^\d*(\.\d{0,1})?$" onkeypress="return event.charCode>=48 && event.charCode<=57 || event.charCode==46 "   required>
+              <input type="text" class="form-text" id="costooba" name="costooba" value="0" onfocus="limpiarValorN(this)"  oninput="calculartotal();" pattern="^\d*(\.\d{0,1})?$" onkeypress="return event.charCode>=48 && event.charCode<=57 || event.charCode==46 "   required>
               <span class="bar"></span>
             </div>
           </div>
           <div class="col-md-4 col-sm-12 col-xs-12">
             <div class="form-group form-animate-text " style="margin-top:5px !important;">
               <h4>Solucion Sanitaria</h4>
-              <input type="text" class="form-text" id="solucionsa" name="solucionsa" oninput="calculartotal();" pattern="^\d*(\.\d{0,1})?$" onkeypress="return event.charCode>=48 && event.charCode<=57 || event.charCode==46 "  required>
+              <input type="text" class="form-text" id="solucionsa" name="solucionsa" value="0" onfocus="limpiarValorN(this)"  oninput="calculartotal();" pattern="^\d*(\.\d{0,1})?$" onkeypress="return event.charCode>=48 && event.charCode<=57 || event.charCode==46 "  required>
               <span class="bar"></span>
             </div>
           </div>
@@ -776,6 +776,12 @@ function validarFecha(fecha) {
       alertA("Ingrese un numero valido")
       n.value = ""
     }
+  }
+
+  function limpiarValorN(campo) {
+      if (campo.value === "0") {
+          campo.value = "";
+      }
   }
 
 </script>
