@@ -228,14 +228,24 @@ class ConozcaC(FPDF):
         pdf.set_xy(55,89)
         pdf.cell(w=43,h=5,txt=cdg.NumeroDocu if hasattr(cdg, 'NumeroDocu') else '', border='BLR', align='C', fill=False)
         pdf.cell(w=59,h=5,txt=cdg.FechaVencdoc.strftime("%d/%m/%Y") if hasattr(cdg, 'FechaVencdoc') else '', border='BLR', align='C', fill=False)
-        pdf.multi_cell(w=0,h=5,txt=perf.IdOcupacion.Nombre if hasattr(perf, 'IdOcupacion') else '', border='BLR', align='C', fill=False)
+        if cdg.CalidadActu == "Cliente":
+            pdf.multi_cell(w=0,h=5,txt=perf.IdOcupacion.Nombre if hasattr(perf, 'IdOcupacion') else '', border='BLR', align='C', fill=False)
+        elif cdg.CalidadActu == "Fiador":
+            pdf.multi_cell(w=0,h=5,txt=cdg.OcupacionActiAct if hasattr(cdg, 'OcupacionActiAct') else '', border='BLR', align='C', fill=False)
+        else:
+            pdf.multi_cell(w=0,h=5,txt='', border='BLR', align='C', fill=False)
         pdf.set_text_color(r,g,b)
         pdf.cell(w=45,h=5,txt='N° de NIT:', border='TRL', align='L', fill=False)
         pdf.cell(w=43,h=5,txt='No. Registro de IVA:', border='TRL', align='L', fill=False)
         pdf.cell(w=59,h=5,txt='Correo Electrónico:', border='TRL', align='L', fill=False)
         pdf.cell(w=27,h=5,txt='Teléfono de Celular: ', border='TL', align='L', fill=False )
         pdf.set_text_color(0,0,0)
-        pdf.cell(w=22,h=5,txt= perf.Telefono if hasattr(perf, 'Telefono') else '', border='TR', align='L', fill=False , ln=1)
+        if cdg.CalidadActu == "Cliente":
+            pdf.cell(w=22,h=5,txt= perf.Telefono if hasattr(perf, 'Telefono') else '', border='TR', align='L', fill=False , ln=1)
+        elif cdg.CalidadActu == "Fiador":
+            pdf.multi_cell(w=0,h=5,txt=cdg.TelefonoCelu if hasattr(cdg, 'TelefonoCelu') else '', border='BLR', align='C', fill=False)
+        else:
+            pdf.cell(w=22,h=5,txt= '', border='TR', align='L', fill=False , ln=1)
         pdf.cell(w=45,h=5,txt='--------------------', border='BLR', align='C', fill=False)
         pdf.cell(w=43,h=5,txt='--------------------', border='BLR', align='C', fill=False)       
         pdf.cell(w=59,h=5,txt=cdg.CorreoElec if hasattr(cdg, 'CorreoElec') else '', border='BLR', align='C', fill=False)

@@ -560,7 +560,7 @@ function cambiarUrlNatural(estado) {
 
                         } else {
                             btnInspeccionLote.href = "../../../InspeccionMejViviendaApp/listaIM/editarIM/" + response[5]
-                           descipcion.textContent = "Progreso: Inspección vivienda"
+                            descipcion.textContent = "Progreso: Inspección vivienda"
                             progresoInspeccion.classList.remove("progress-bar-dange")
                             progresoInspeccion.classList.add("progress-bar-success")
 
@@ -828,6 +828,7 @@ function consultaTipoSolicitud() {
 }
 
 function aprobada(estado){
+    alert(estado)
     if( estado == 3){
         progresoSolicitud.ariaValueNow = (100) + ""
         progresoSolicitud.style.width = (100) + "%"
