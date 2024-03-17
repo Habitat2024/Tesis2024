@@ -892,7 +892,7 @@ def completar_solicitud(request):
     completa = 'si'
     
     try:
-        solicitud = sol.objects.filter(Q(IdPerfil=id_cliente) & ( Q(EstadoSoli=2) | ( Q(EstadoSoli=5))) ).latest('Fecha') #obtengo la ultima solicitud por fecha    
+        solicitud = sol.objects.filter(Q(IdPerfil=id_cliente) & ( Q(EstadoSoli=2) ) ).latest('Fecha') #obtengo la ultima solicitud por fecha    
         if(solicitud.Tipo=="micro"):
             try:            
                 balance = BalanceSituMic.objects.get(Estado="1",IdPerfil=id_cliente)           
