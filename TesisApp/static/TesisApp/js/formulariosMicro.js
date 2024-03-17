@@ -828,7 +828,6 @@ function consultaTipoSolicitud() {
 }
 
 function aprobada(estado){
-    alert(estado)
     if( estado == 3){
         progresoSolicitud.ariaValueNow = (100) + ""
         progresoSolicitud.style.width = (100) + "%"
