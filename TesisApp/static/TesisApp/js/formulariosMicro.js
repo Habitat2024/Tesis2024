@@ -87,6 +87,7 @@ let progresoEvaluacionRepo= document.getElementById("rogresoEvaluacionRepo")
 let progresoObrasAdicionalesRepo= document.getElementById("progresoObrasAdicionalesRepo") 
 let progreso = 1
 let observaciones = ""
+let btnCompletar = document.getElementById("btnCompleta") 
 $(document).ready(function () {
     if (estadoCliente == "1") {
         titulo.textContent = "Iniciar nueva solicitud"
